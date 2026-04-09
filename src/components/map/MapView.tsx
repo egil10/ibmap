@@ -138,9 +138,10 @@ interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
+  showOffices?: boolean
 }
 
-export default function MapView({ filter, onRegisterFlyTo }: Props) {
+export default function MapView({ filter, onRegisterFlyTo, showOffices = false }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
@@ -230,7 +231,7 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
         ))}
 
         {/* Satellite office markers */}
-        {filteredCompanies.flatMap((company) =>
+        {showOffices && filteredCompanies.flatMap((company) =>
           (company.offices ?? []).map((office, i) => (
             <Marker
               key={`${company.id}-office-${i}`}

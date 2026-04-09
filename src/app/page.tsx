@@ -23,6 +23,7 @@ export type AppView = 'map' | 'companies'
 export default function Home() {
   const [view, setView] = useState<AppView>('map')
   const [filter, setFilter] = useState<FilterCategory>('ALL')
+  const [showOffices, setShowOffices] = useState(false)
   const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
 
   return (
@@ -36,6 +37,8 @@ export default function Home() {
           setView('map')
           flyToRef.current?.(lat, lng, zoom)
         }}
+        showOffices={showOffices}
+        onToggleOffices={() => setShowOffices(s => !s)}
       />
 
       {view === 'map' ? (
@@ -43,6 +46,7 @@ export default function Home() {
           filter={filter}
           onFilterChange={setFilter}
           onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
+          showOffices={showOffices}
         />
       ) : (
         <CompanyTable

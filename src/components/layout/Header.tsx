@@ -40,6 +40,8 @@ interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
   onCitySelect: (lat: number, lng: number, zoom: number) => void
+  showOffices: boolean
+  onToggleOffices: () => void
 }
 
 function useDropdown() {
@@ -55,7 +57,7 @@ function useDropdown() {
   return { open, setOpen, ref }
 }
 
-export default function Header({ view, onViewChange, filter, onFilterChange, onCitySelect }: Props) {
+export default function Header({ view, onViewChange, filter, onFilterChange, onCitySelect, showOffices, onToggleOffices }: Props) {
   const filterDrop = useDropdown()
   const cityDrop = useDropdown()
 
@@ -120,6 +122,22 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
               <span className="hidden sm:inline">Companies</span>
             </button>
           </div>
+
+          {/* HQ / All offices toggle — only visible in map view */}
+          {view === 'map' && (
+            <button
+              onClick={onToggleOffices}
+              className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-150 border ml-1 ${
+                showOffices
+                  ? 'border-slate-300 bg-slate-100 text-slate-800'
+                  : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-100/70'
+              }`}
+              title={showOffices ? 'Showing all offices — click for HQ only' : 'Showing HQ only — click for all offices'}
+            >
+              <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${showOffices ? 'bg-slate-600' : 'bg-slate-300'}`} />
+              <span className="hidden sm:inline">{showOffices ? 'All' : 'HQ'}</span>
+            </button>
+          )}
 
           <div className="flex-1" />
 
