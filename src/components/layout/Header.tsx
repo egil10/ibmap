@@ -1,8 +1,8 @@
 'use client'
 
 import { Map, LayoutList, Github, ChevronDown, Check, Navigation } from 'lucide-react'
-import { useState, useRef, useEffect } from 'react'
-import { FilterCategory, FILTER_CATEGORIES } from '@/data/companies'
+import { useState, useRef, useEffect, useMemo } from 'react'
+import { FilterCategory, FILTER_CATEGORIES, companies } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory } from '@/types'
 import { AppView } from '@/app/page'
 
@@ -14,7 +14,7 @@ interface City {
   zoom: number
 }
 
-const CITIES: City[] = [
+const ALL_CITIES: City[] = [
   { name: 'Oslo',         country: 'Norway',  lat: 59.9139, lng: 10.7522, zoom: 12 },
   { name: 'Bergen',       country: 'Norway',  lat: 60.3913, lng: 5.3221,  zoom: 13 },
   { name: 'Stavanger',    country: 'Norway',  lat: 58.9700, lng: 5.7331,  zoom: 13 },
@@ -24,11 +24,15 @@ const CITIES: City[] = [
   { name: 'Kristiansand', country: 'Norway',  lat: 58.1467, lng: 7.9956,  zoom: 13 },
   { name: 'Sandnes',      country: 'Norway',  lat: 58.8512, lng: 5.7355,  zoom: 13 },
   { name: 'Fornebu',      country: 'Norway',  lat: 59.8958, lng: 10.6212, zoom: 14 },
+  { name: 'Lysaker',      country: 'Norway',  lat: 59.9126, lng: 10.6351, zoom: 14 },
   { name: 'Stockholm',    country: 'Sweden',  lat: 59.3293, lng: 18.0686, zoom: 12 },
   { name: 'Gothenburg',   country: 'Sweden',  lat: 57.7089, lng: 11.9746, zoom: 13 },
   { name: 'Copenhagen',   country: 'Denmark', lat: 55.6761, lng: 12.5683, zoom: 12 },
+  { name: 'Helsinki',     country: 'Finland', lat: 60.1699, lng: 24.9384, zoom: 12 },
   { name: 'Nordic view',  country: '',        lat: 63.5,   lng: 13.5,   zoom: 4  },
 ]
+
+const MIN_COMPANIES = 5
 
 interface Props {
   view: AppView
@@ -57,6 +61,17 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
 
   const activeColors = filter !== 'ALL' ? CATEGORY_COLORS[filter as CompanyCategory] : null
   const activeLabel = filter === 'ALL' ? 'All' : CATEGORY_SHORT[filter as CompanyCategory]
+
+  const cities = useMemo(() => {
+    const counts: Record<string, number> = {}
+    for (const c of companies) {
+      const key = c.city.toLowerCase()
+      counts[key] = (counts[key] ?? 0) + 1
+    }
+    return ALL_CITIES.filter(city =>
+      city.name === 'Nordic view' || (counts[city.name.toLowerCase()] ?? 0) >= MIN_COMPANIES
+    )
+  }, [])
 
   return (
     <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-3xl pointer-events-none">
@@ -136,7 +151,7 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
                 }}
               >
                 <div className="p-1.5">
-                  {CITIES.map((city) => (
+                  {cities.map((city) => (
                     <button
                       key={city.name}
                       onClick={() => {
