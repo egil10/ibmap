@@ -123,21 +123,21 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
             </button>
           </div>
 
-          {/* HQ / All offices toggle — only visible in map view */}
-          {view === 'map' && (
-            <button
-              onClick={onToggleOffices}
-              className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-150 border ml-1 ${
-                showOffices
+          {/* HQ / All offices toggle */}
+          <button
+            onClick={view === 'map' ? onToggleOffices : undefined}
+            className={`flex items-center gap-1 rounded-xl px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-150 border ml-1 ${
+              view !== 'map'
+                ? 'border-transparent text-slate-300 cursor-default'
+                : showOffices
                   ? 'border-slate-300 bg-slate-100 text-slate-800'
                   : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-100/70'
-              }`}
-              title={showOffices ? 'Showing all offices — click for HQ only' : 'Showing HQ only — click for all offices'}
-            >
-              <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${showOffices ? 'bg-slate-600' : 'bg-slate-300'}`} />
-              <span className="hidden sm:inline">{showOffices ? 'All' : 'HQ'}</span>
-            </button>
-          )}
+            }`}
+            title={view !== 'map' ? 'Switch to map view to toggle offices' : showOffices ? 'Showing all offices — click for HQ only' : 'Showing HQ only — click for all offices'}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${view !== 'map' ? 'bg-slate-200' : showOffices ? 'bg-slate-600' : 'bg-slate-300'}`} />
+            <span className="hidden sm:inline">{showOffices ? 'All' : 'HQ'}</span>
+          </button>
 
           <div className="flex-1" />
 

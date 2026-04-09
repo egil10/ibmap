@@ -295,7 +295,6 @@ function CompanyBanner({
         <div className="banner-track" style={{ animationDuration: `${duration}s` }}>
           {doubled.map((company, i) => {
             const isActive = selected?.id === company.id
-            const colors = CATEGORY_COLORS[company.category]
             return (
               <button
                 key={`${company.id}-${i}`}
@@ -311,7 +310,6 @@ function CompanyBanner({
                 <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">
                   {company.name}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
               </button>
             )
           })}
