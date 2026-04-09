@@ -115,11 +115,17 @@ html, body {
   display: flex;
   gap: 8px;
   width: max-content;
-  padding: 4px 16px;
-  animation: banner-scroll 60s linear infinite;
+  padding: 2px 16px;
+  animation: banner-scroll 120s linear infinite;
 }
 
+/* Pause on hover */
 .banner-track-wrap:hover .banner-track {
+  animation-play-state: paused;
+}
+
+/* Pause when a company is pinned (clicked) */
+.banner-track-wrap.banner-pinned .banner-track {
   animation-play-state: paused;
 }
 

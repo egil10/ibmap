@@ -13,14 +13,12 @@ const MAP_STYLE = 'https://tiles.openfreemap.org/styles/positron'
 const INITIAL_VIEW = { longitude: 13.5, latitude: 63.5, zoom: 4.0 }
 const MAX_BOUNDS: [[number, number], [number, number]] = [[-10, 52], [40, 73]]
 
-// World mask: covers entire world except Nordic bounding box
 const WORLD_MASK_GEOJSON = {
   type: 'Feature' as const,
   geometry: {
     type: 'Polygon' as const,
     coordinates: [
       [[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]],
-      // Hole: Nordic area (counter-clockwise)
       [[-10, 52], [-10, 73], [40, 73], [40, 52], [-10, 52]],
     ],
   },
@@ -45,17 +43,16 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
         />
       )}
       <span
-        className="relative flex items-center justify-center overflow-hidden rounded-full bg-white transition-all duration-200 group-hover:scale-125"
+        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125"
         style={{
           width: sz, height: sz,
-          border: isSelected
-            ? `2px solid rgba(0,0,0,0.18)`
-            : `1.5px solid rgba(0,0,0,0.1)`,
+          border: isSelected ? `2px solid rgba(0,0,0,0.18)` : `1.5px solid rgba(0,0,0,0.1)`,
           boxShadow: `0 2px 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08)`,
+          overflow: 'hidden',
         }}
       >
         {attempt < 2 && src ? (
-          <img src={src} alt="" key={attempt} className="h-full w-full object-contain p-[2px]" onError={handleError} />
+          <img src={src} alt="" key={attempt} className="w-full h-full object-contain" style={{ padding: sz > 28 ? 3 : 2 }} onError={handleError} />
         ) : (
           <span className="flex h-full w-full items-center justify-center text-[8px] font-black text-white"
             style={{ backgroundColor: colors.pin }}>
@@ -64,7 +61,6 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
         )}
       </span>
 
-      {/* Name tooltip */}
       <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
         <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
         {company.name}
@@ -80,13 +76,11 @@ interface Props {
 
 export default function MapView({ filter }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
+  const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
 
   const mappedCompanies = companies.filter(c => c.lat != null && c.lng != null)
-
-  const filteredCompanies = mappedCompanies.filter((c) => {
-    return filter === 'ALL' || c.category === filter
-  })
+  const filteredCompanies = mappedCompanies.filter(c => filter === 'ALL' || c.category === filter)
 
   const handleMapLoad = useCallback((e: any) => {
     const map = e.target
@@ -98,33 +92,35 @@ export default function MapView({ filter }: Props) {
         source: 'world-mask',
         paint: { 'fill-color': '#f0f4f8', 'fill-opacity': 0.88 },
       })
-    } catch {
-      // layer may already exist on remount
+    } catch { /* already exists on remount */ }
+  }, [])
+
+  const flyTo = useCallback((company: Company) => {
+    if (company.lat != null && company.lng != null) {
+      mapRef.current?.flyTo({
+        center: [company.lng, company.lat],
+        zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
+        duration: 700,
+        essential: true,
+      })
     }
   }, [])
 
   const handleMarkerClick = useCallback((company: Company) => {
     setSelected(company)
-    if (company.lat != null && company.lng != null) {
-      mapRef.current?.flyTo({
-        center: [company.lng, company.lat],
-        zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
-        duration: 700,
-        essential: true,
-      })
-    }
-  }, [])
+    setBannerPinned(false)
+    flyTo(company)
+  }, [flyTo])
 
   const handleBannerClick = useCallback((company: Company) => {
     setSelected(company)
-    if (company.lat != null && company.lng != null) {
-      mapRef.current?.flyTo({
-        center: [company.lng, company.lat],
-        zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
-        duration: 700,
-        essential: true,
-      })
-    }
+    setBannerPinned(true)
+    flyTo(company)
+  }, [flyTo])
+
+  const handleMapClick = useCallback(() => {
+    setSelected(null)
+    setBannerPinned(false)
   }, [])
 
   return (
@@ -139,7 +135,7 @@ export default function MapView({ filter }: Props) {
         maxBounds={MAX_BOUNDS}
         reuseMaps
         onLoad={handleMapLoad}
-        onClick={() => setSelected(null)}
+        onClick={handleMapClick}
       >
         <NavigationControl position="bottom-right" showCompass={false} />
 
@@ -156,15 +152,14 @@ export default function MapView({ filter }: Props) {
         ))}
       </Map>
 
-      {/* Company Detail Card */}
       {selected && (
-        <CompanyCard company={selected} onClose={() => setSelected(null)} />
+        <CompanyCard company={selected} onClose={() => { setSelected(null); setBannerPinned(false) }} />
       )}
 
-      {/* ── Auto-scrolling company footer ── */}
       <CompanyBanner
         companies={filteredCompanies}
         selected={selected}
+        pinned={bannerPinned}
         onSelect={handleBannerClick}
       />
     </div>
@@ -174,51 +169,55 @@ export default function MapView({ filter }: Props) {
 function CompanyBanner({
   companies: list,
   selected,
+  pinned,
   onSelect,
 }: {
   companies: Company[]
   selected: Company | null
+  pinned: boolean
   onSelect: (c: Company) => void
 }) {
   if (list.length === 0) return null
 
-  // Duplicate for seamless loop
   const doubled = [...list, ...list]
 
   return (
-    <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none overflow-hidden"
+    <div
+      className="absolute bottom-0 left-0 right-0 z-30"
       style={{
-        background: 'linear-gradient(to top, rgba(240,244,248,0.95) 0%, rgba(240,244,248,0.0) 100%)',
-        paddingTop: 32,
+        background: 'rgba(255,255,255,0.94)',
+        backdropFilter: 'blur(16px) saturate(160%)',
+        WebkitBackdropFilter: 'blur(16px) saturate(160%)',
+        borderTop: '1px solid rgba(0,0,0,0.06)',
+        boxShadow: '0 -4px 24px rgba(0,0,0,0.05)',
+        paddingTop: 8,
         paddingBottom: 10,
       }}
     >
-      <div className="pointer-events-auto banner-track-wrap">
+      <div className={`banner-track-wrap${pinned ? ' banner-pinned' : ''}`}>
         <div className="banner-track">
           {doubled.map((company, i) => {
             const colors = CATEGORY_COLORS[company.category]
-            const isActive = selected?.id === company.id && i < list.length
+            const isActive = selected?.id === company.id
             return (
               <button
                 key={`${company.id}-${i}`}
                 onClick={() => onSelect(company)}
-                className={`banner-item flex items-center gap-2 rounded-2xl px-3 py-2 transition-all duration-200 flex-shrink-0 ${
-                  isActive ? 'shadow-lg scale-105' : 'hover:scale-105'
+                className={`banner-item flex items-center gap-2 rounded-2xl px-3 py-1.5 transition-all duration-200 flex-shrink-0 ${
+                  isActive ? 'shadow-md scale-105' : 'hover:scale-105'
                 }`}
                 style={{
                   background: isActive
-                    ? `linear-gradient(135deg, ${colors.pin}18, ${colors.pin}10)`
-                    : 'rgba(255,255,255,0.75)',
-                  backdropFilter: 'blur(24px) saturate(180%)',
-                  WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-                  border: `1.5px solid ${isActive ? colors.pin + '55' : 'rgba(255,255,255,0.7)'}`,
+                    ? `linear-gradient(135deg, ${colors.pin}18, ${colors.pin}0d)`
+                    : 'rgba(248,250,252,0.9)',
+                  border: `1.5px solid ${isActive ? colors.pin + '44' : 'rgba(0,0,0,0.06)'}`,
                   boxShadow: isActive
-                    ? `0 4px 16px ${colors.pin}22, 0 1px 4px rgba(0,0,0,0.06)`
-                    : '0 2px 8px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.04)',
+                    ? `0 4px 16px ${colors.pin}20`
+                    : '0 1px 3px rgba(0,0,0,0.04)',
                 }}
               >
-                <CompanyLogo company={company} size={24} rounded="rounded-lg" />
-                <span className="text-[12px] font-semibold text-slate-800 whitespace-nowrap max-w-[120px] truncate">
+                <CompanyLogo company={company} size={22} rounded="rounded-lg" />
+                <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">
                   {company.name}
                 </span>
               </button>

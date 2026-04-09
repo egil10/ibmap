@@ -59,7 +59,7 @@ export default function CompanyTable({ filter }: Props) {
   ]
 
   return (
-    <div className="absolute inset-0 top-0 flex flex-col pt-28 animate-fade-in" style={{ background: '#f0f4f8' }}>
+    <div className="absolute inset-0 top-0 flex flex-col pt-20 animate-fade-in" style={{ background: '#f0f4f8' }}>
       {/* Stats */}
       <div className="flex items-center justify-between px-5 py-2.5">
         <p className="text-[13px] font-semibold text-slate-500">

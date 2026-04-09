@@ -49,7 +49,7 @@ export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl
       src={src}
       alt={company.name}
       className={`flex-shrink-0 ${rounded} object-contain bg-white`}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size, padding: Math.max(2, Math.round(size * 0.07)) }}
       onError={handleError}
     />
   )
