@@ -250,10 +250,8 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
         <CompanyCard company={selected} onClose={() => { setSelected(null); setBannerPinned(false) }} />
       )}
 
-      {/* Banner always shows ALL mapped companies for consistent scroll speed */}
       <CompanyBanner
-        companies={mappedCompanies}
-        filteredIds={new Set(filteredCompanies.map(c => c.id))}
+        companies={filteredCompanies}
         selected={selected}
         pinned={bannerPinned}
         onSelect={handleBannerClick}
@@ -264,13 +262,11 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
 
 function CompanyBanner({
   companies: list,
-  filteredIds,
   selected,
   pinned,
   onSelect,
 }: {
   companies: Company[]
-  filteredIds: Set<string>
   selected: Company | null
   pinned: boolean
   onSelect: (c: Company) => void
@@ -278,8 +274,7 @@ function CompanyBanner({
   if (list.length === 0) return null
 
   const doubled = [...list, ...list]
-  // Fixed duration based on total list so speed never changes with filter
-  const duration = Math.max(120, list.length * 3)
+  const duration = Math.max(60, list.length * 3)
 
   return (
     <div
@@ -298,7 +293,7 @@ function CompanyBanner({
         <div className="banner-track" style={{ animationDuration: `${duration}s` }}>
           {doubled.map((company, i) => {
             const isActive = selected?.id === company.id
-            const isFiltered = filteredIds.has(company.id)
+            const colors = CATEGORY_COLORS[company.category]
             return (
               <button
                 key={`${company.id}-${i}`}
@@ -308,13 +303,13 @@ function CompanyBanner({
                   background: isActive ? 'rgba(226,232,240,1)' : 'rgba(248,250,252,0.9)',
                   border: `1.5px solid ${isActive ? 'rgba(0,0,0,0.14)' : 'rgba(0,0,0,0.06)'}`,
                   boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.07)' : '0 1px 3px rgba(0,0,0,0.04)',
-                  opacity: filteredIds.size < list.length && !isFiltered ? 0.35 : 1,
                 }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />
                 <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">
                   {company.name}
                 </span>
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
               </button>
             )
           })}
