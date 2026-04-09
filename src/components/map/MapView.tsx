@@ -25,6 +25,8 @@ const WORLD_MASK_GEOJSON = {
 }
 
 // HQ marker
+const MARKER_ACCENT = '#94a3b8' // slate-400 — neutral accent for pulse/tooltip dot
+
 function LogoMarker({ company, isSelected }: { company: Company; isSelected: boolean }) {
   const colors = CATEGORY_COLORS[company.category]
   const short = CATEGORY_SHORT[company.category]
@@ -38,7 +40,7 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
     <div className="group relative flex items-center justify-center cursor-pointer">
       {isSelected && (
         <span className="absolute rounded-full marker-pulse"
-          style={{ width: sz + 10, height: sz + 10, backgroundColor: colors.pin, opacity: 0.3 }} />
+          style={{ width: sz + 10, height: sz + 10, backgroundColor: MARKER_ACCENT, opacity: 0.3 }} />
       )}
       <span
         className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
@@ -58,7 +60,7 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
         )}
       </span>
       <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
-        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
+        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: MARKER_ACCENT }} />
         {company.name}
       </span>
     </div>
@@ -81,7 +83,7 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
         className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
         style={{
           width: sz, height: sz,
-          border: `1.5px dashed ${isSelected ? colors.pin : 'rgba(0,0,0,0.18)'}`,
+          border: `1.5px dashed ${isSelected ? MARKER_ACCENT : 'rgba(0,0,0,0.18)'}`,
           opacity: isSelected ? 1 : 0.78,
         }}
       >
@@ -96,7 +98,7 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
         )}
       </span>
       <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
-        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
+        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: MARKER_ACCENT }} />
         {company.name}
         {office.label && <span className="text-slate-400 font-normal ml-0.5">· {office.city}</span>}
       </span>

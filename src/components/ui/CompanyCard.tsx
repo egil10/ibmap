@@ -1,6 +1,6 @@
 'use client'
 
-import { X, ExternalLink, MapPin, BarChart3, Users, Building2, Globe } from 'lucide-react'
+import { X, ExternalLink, MapPin, BarChart3, Users, Building2 } from 'lucide-react'
 import { Company, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
 
@@ -97,18 +97,21 @@ export default function CompanyCard({ company, onClose }: Props) {
         </div>
 
         {/* CTA */}
-        <div className="px-5 pb-5 pt-2 flex-shrink-0">
-          <a
-            href={company.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-[13px] font-semibold bg-slate-900 text-white transition-all duration-150 hover:bg-slate-700 active:scale-[0.98]"
-          >
-            <Globe size={12} strokeWidth={2.5} />
-            Visit Website
-            <ExternalLink size={11} strokeWidth={2.5} />
-          </a>
-        </div>
+        {company.website && (
+          <div className="px-5 pb-5 pt-2 flex-shrink-0">
+            <a
+              href={company.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-between gap-2 rounded-2xl px-4 py-2.5 text-[13px] font-semibold bg-slate-900 text-white transition-all duration-150 hover:bg-slate-700 active:scale-[0.98]"
+            >
+              <span className="truncate text-slate-300 font-normal text-[12px]">
+                {company.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+              </span>
+              <ExternalLink size={12} strokeWidth={2.5} className="flex-shrink-0" />
+            </a>
+          </div>
+        )}
       </div>
     </div>
   )
