@@ -1,0 +1,602 @@
+{
+  "anna-fund": {
+    "lat": 59.9113,
+    "lng": 10.7642,
+    "address": "Rubina Ranas gate 7",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "blueberry-capital": {
+    "lat": 59.9087,
+    "lng": 10.7568,
+    "address": "Dronning Eufemias gate 8",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "danske-invest": {
+    "lat": 62.3772,
+    "lng": 6.5926,
+    "address": "Gråurvegen 1D",
+    "city": "Sykkylven",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "gabler": {
+    "lat": 60.3782,
+    "lng": 5.3303,
+    "address": "Solheimsgaten 7E",
+    "city": "Bergen",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "landkreditt": {
+    "lat": 59.9146,
+    "lng": 10.7366,
+    "address": "Karl Johans gate 45",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "norse-forvaltning": {
+    "lat": null,
+    "lng": null,
+    "address": "9. etg, Oslo, Norway",
+    "source": "failed"
+  },
+  "nrp-maritime": {
+    "lat": 59.9153,
+    "lng": 10.6996,
+    "address": "Drammensveien 88B",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "nykredit-am": {
+    "lat": 55.6867,
+    "lng": 12.5701,
+    "address": "Copenhagen",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "source": "city-center"
+  },
+  "valhalla-capital": {
+    "lat": 59.9142,
+    "lng": 10.7379,
+    "address": "Karl Johans gate 37",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "mandatum-am": {
+    "lat": 60.1666,
+    "lng": 24.9435,
+    "address": "Helsinki",
+    "city": "Helsinki",
+    "country": "Finland",
+    "source": "city-center"
+  },
+  "agenta": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "lansforsakringar": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "carn-capital": {
+    "lat": 59.9178,
+    "lng": 10.7371,
+    "address": "St. Olavs gate 24",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "storm-capital": {
+    "lat": 59.9127,
+    "lng": 10.7294,
+    "address": "Dronning Mauds gate 3",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "taiga-fund": {
+    "lat": 59.9127,
+    "lng": 10.7294,
+    "address": "Dronning Mauds gate 3",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "tind-am": {
+    "lat": 59.9132,
+    "lng": 10.7344,
+    "address": "Fridtjof Nansens plass 5",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "sissener": {
+    "lat": 59.9099,
+    "lng": 10.7227,
+    "address": "Filipstad brygge 2",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "nordkinn": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o Gernandt & Danielsson, 114 87 Stockholm, Norway",
+    "source": "failed"
+  },
+  "norselab": {
+    "lat": 59.9114,
+    "lng": 10.7416,
+    "address": "Nedre Slottsgate 5",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "oceanic-am": {
+    "lat": 59.9181,
+    "lng": 10.7008,
+    "address": "Erling Skjalgssons gate 6",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "asgard-capital": {
+    "lat": 59.9228,
+    "lng": 10.7236,
+    "address": "Uranienborg terrasse 9",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "caba-capital": {
+    "lat": 59.8683,
+    "lng": 10.483,
+    "address": "Transistorfaret 7",
+    "city": "Billingstad",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "fenja-capital": {
+    "lat": 59.654,
+    "lng": 10.7878,
+    "address": "Brekkeveien 23",
+    "city": "Ås",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "nidaros-capital": {
+    "lat": 59.8444,
+    "lng": 10.4788,
+    "address": "Jørnstadveien 56",
+    "city": "Nesbru",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "gersemi-am": {
+    "lat": 59.9085,
+    "lng": 10.6415,
+    "address": "Strandveien 50",
+    "city": "Lysaker",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "agmentum": {
+    "lat": 62.3772,
+    "lng": 6.5926,
+    "address": "Gråurvegen 1D",
+    "city": "Sykkylven",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "proxy-pr": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o OVG-Prxoy, Dk-1123 København K, Norway",
+    "source": "failed"
+  },
+  "atlant": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "lynx-am": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "norron": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "rhenman": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "rpm": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "tidan": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "priornilsson": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "r2-capital": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "coeli-am": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "accendo": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "excalibur-fm": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "origo-fonder": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "elementa": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "case-am": {
+    "lat": null,
+    "lng": null,
+    "address": "Stockholm, Sweden",
+    "source": "failed"
+  },
+  "meriti": {
+    "lat": 59.3251,
+    "lng": 18.0711,
+    "address": "Stockholm",
+    "city": "Stockholm",
+    "country": "Sweden",
+    "source": "city-center"
+  },
+  "capital-four": {
+    "lat": null,
+    "lng": null,
+    "address": "Bockenheimer Anlage 46, Frankfurt, Denmark",
+    "source": "failed"
+  },
+  "formuepleje": {
+    "lat": null,
+    "lng": null,
+    "address": "S Værkmestergade 25, Aarhus, Denmark",
+    "source": "failed"
+  },
+  "othania": {
+    "lat": 55.6867,
+    "lng": 12.5701,
+    "address": "Copenhagen",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "source": "city-center"
+  },
+  "thyra": {
+    "lat": 55.6867,
+    "lng": 12.5701,
+    "address": "Copenhagen",
+    "city": "Copenhagen",
+    "country": "Denmark",
+    "source": "city-center"
+  },
+  "estlander": {
+    "lat": 60.1666,
+    "lng": 24.9435,
+    "address": "Helsinki",
+    "city": "Helsinki",
+    "country": "Finland",
+    "source": "city-center"
+  },
+  "hcp": {
+    "lat": 60.168,
+    "lng": 24.9509,
+    "address": "Pohjoisesplanadi 19",
+    "city": "Helsinki",
+    "country": "Finland",
+    "source": "web"
+  },
+  "nordnet": {
+    "lat": null,
+    "lng": null,
+    "address": "Gustavslundsvägen 141, Se-167 14 Bromma, Norway",
+    "source": "failed"
+  },
+  "nording-partners": {
+    "lat": 63.4327,
+    "lng": 10.408,
+    "address": "Ferjemannsveien 4",
+    "city": "Trondheim",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "folden-advisory": {
+    "lat": 59.9189,
+    "lng": 10.7316,
+    "address": "Wergelandsveien 7",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "sopra-steria": {
+    "lat": null,
+    "lng": null,
+    "address": "Midtermolen 1,2 th, Dk-2100 København Ø, Norway",
+    "source": "failed"
+  },
+  "ramboll-no": {
+    "lat": null,
+    "lng": null,
+    "address": "Hannemanns Alle 53, Dk-2300 København S, Norway",
+    "source": "failed"
+  },
+  "arkwright-consulting": {
+    "lat": 59.9104,
+    "lng": 10.7278,
+    "address": "Grundingen 2",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "agenda-kaupang": {
+    "lat": 59.9237,
+    "lng": 10.6775,
+    "address": "Hoffsveien 1C",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "cvc": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o Christian Vik, Oslo, Norway",
+    "source": "failed"
+  },
+  "egd-holding": {
+    "lat": 60.3889,
+    "lng": 5.3201,
+    "address": "Sydnesplassen 1",
+    "city": "Bergen",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "equip-capital": {
+    "lat": 59.9135,
+    "lng": 10.7285,
+    "address": "Ruseløkkveien 14",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "explore-equity": {
+    "lat": 59.915,
+    "lng": 10.7178,
+    "address": "Sommerrogata 17",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "fokus-nordic": {
+    "lat": 59.9144,
+    "lng": 10.719,
+    "address": "Henrik Ibsens gate 100",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "hawk-infinity": {
+    "lat": 59.9165,
+    "lng": 10.7124,
+    "address": "Bygdøy allé 23",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "hg-capital": {
+    "lat": 59.6778,
+    "lng": 9.6775,
+    "address": "Vognmannsveien 32",
+    "city": "Kongsberg",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "ik-partners": {
+    "lat": 60.1754,
+    "lng": 10.9859,
+    "address": "Åsvegen 267",
+    "city": "Åsgreina",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "play-capital": {
+    "lat": 59.902,
+    "lng": 10.6023,
+    "address": "Wettergrens vei 2A",
+    "city": "Stabekk",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "aera-capital": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o Sara Kalsnes, Oslo, Norway",
+    "source": "failed"
+  },
+  "uniper": {
+    "lat": null,
+    "lng": null,
+    "address": "Holzstrasse 6, 40221 Düsseldorf, Norway",
+    "source": "failed"
+  },
+  "trade-weather-power": {
+    "lat": 59.9212,
+    "lng": 10.7363,
+    "address": "Holbergs gate 1",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "alliance-ventures": {
+    "lat": 59.9185,
+    "lng": 10.7246,
+    "address": "Parkveien 41B",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "arkwright-x": {
+    "lat": 59.9104,
+    "lng": 10.7278,
+    "address": "Grundingen 2",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "corinthian-vp": {
+    "lat": 59.919,
+    "lng": 10.7355,
+    "address": "Edvard Storms gate 2",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "herkules": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o GWM, Oslo, Norway",
+    "source": "failed"
+  },
+  "idekapital": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o Brandt, Oslo, Norway",
+    "source": "failed"
+  },
+  "katapult": {
+    "lat": 60.2937,
+    "lng": 5.3318,
+    "address": "Øvre Krohnåsen 15",
+    "city": "Rådal",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "pioneer-capital": {
+    "lat": null,
+    "lng": null,
+    "address": "c/o Pioneer Capital Partners AS, Oslo, Norway",
+    "source": "failed"
+  },
+  "proventure": {
+    "lat": null,
+    "lng": null,
+    "address": "Pirsentret, Trondheim, Norway",
+    "source": "failed"
+  },
+  "skyfall-ventures": {
+    "lat": 59.9121,
+    "lng": 10.745,
+    "address": "Karl Johans gate 14",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "sno-ventures": {
+    "lat": 60.8002,
+    "lng": 11.0756,
+    "address": "Hertzbergs gate 34",
+    "city": "Hamar",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "viking-growth": {
+    "lat": 63.4306,
+    "lng": 10.3985,
+    "address": "Kongens gate 8",
+    "city": "Trondheim",
+    "country": "Norway",
+    "source": "brreg"
+  },
+  "ssy": {
+    "lat": 59.9205,
+    "lng": 10.6822,
+    "address": "Sjølyst plass 2",
+    "city": "Oslo",
+    "country": "Norway",
+    "source": "brreg"
+  }
+}

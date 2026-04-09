@@ -40,5 +40,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# scripts
-gen_data.py
+# scripts — runtime artifacts
+scripts/geocode_log.txt
+scripts/geocode_results.json
+scripts/scraped_*.json

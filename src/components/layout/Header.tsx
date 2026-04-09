@@ -9,26 +9,25 @@ import { AppView } from '@/app/page'
 interface City {
   name: string
   country: string
-  flag: string
   lat: number
   lng: number
   zoom: number
 }
 
 const CITIES: City[] = [
-  { name: 'Oslo',          country: 'Norway',  flag: '🇳🇴', lat: 59.9139, lng: 10.7522, zoom: 12 },
-  { name: 'Bergen',        country: 'Norway',  flag: '🇳🇴', lat: 60.3913, lng: 5.3221,  zoom: 13 },
-  { name: 'Stavanger',     country: 'Norway',  flag: '🇳🇴', lat: 58.9700, lng: 5.7331,  zoom: 13 },
-  { name: 'Trondheim',     country: 'Norway',  flag: '🇳🇴', lat: 63.4305, lng: 10.3951, zoom: 13 },
-  { name: 'Tromsø',        country: 'Norway',  flag: '🇳🇴', lat: 69.6492, lng: 18.9553, zoom: 13 },
-  { name: 'Ålesund',       country: 'Norway',  flag: '🇳🇴', lat: 62.4722, lng: 6.1495,  zoom: 13 },
-  { name: 'Kristiansand',  country: 'Norway',  flag: '🇳🇴', lat: 58.1467, lng: 7.9956,  zoom: 13 },
-  { name: 'Sandnes',       country: 'Norway',  flag: '🇳🇴', lat: 58.8512, lng: 5.7355,  zoom: 13 },
-  { name: 'Fornebu',       country: 'Norway',  flag: '🇳🇴', lat: 59.8958, lng: 10.6212, zoom: 14 },
-  { name: 'Stockholm',     country: 'Sweden',  flag: '🇸🇪', lat: 59.3293, lng: 18.0686, zoom: 12 },
-  { name: 'Gothenburg',    country: 'Sweden',  flag: '🇸🇪', lat: 57.7089, lng: 11.9746, zoom: 13 },
-  { name: 'Copenhagen',    country: 'Denmark', flag: '🇩🇰', lat: 55.6761, lng: 12.5683, zoom: 12 },
-  { name: 'Nordic view',   country: '',        flag: '🗺️',  lat: 63.5,   lng: 13.5,   zoom: 4  },
+  { name: 'Oslo',         country: 'Norway',  lat: 59.9139, lng: 10.7522, zoom: 12 },
+  { name: 'Bergen',       country: 'Norway',  lat: 60.3913, lng: 5.3221,  zoom: 13 },
+  { name: 'Stavanger',    country: 'Norway',  lat: 58.9700, lng: 5.7331,  zoom: 13 },
+  { name: 'Trondheim',    country: 'Norway',  lat: 63.4305, lng: 10.3951, zoom: 13 },
+  { name: 'Tromsø',       country: 'Norway',  lat: 69.6492, lng: 18.9553, zoom: 13 },
+  { name: 'Ålesund',      country: 'Norway',  lat: 62.4722, lng: 6.1495,  zoom: 13 },
+  { name: 'Kristiansand', country: 'Norway',  lat: 58.1467, lng: 7.9956,  zoom: 13 },
+  { name: 'Sandnes',      country: 'Norway',  lat: 58.8512, lng: 5.7355,  zoom: 13 },
+  { name: 'Fornebu',      country: 'Norway',  lat: 59.8958, lng: 10.6212, zoom: 14 },
+  { name: 'Stockholm',    country: 'Sweden',  lat: 59.3293, lng: 18.0686, zoom: 12 },
+  { name: 'Gothenburg',   country: 'Sweden',  lat: 57.7089, lng: 11.9746, zoom: 13 },
+  { name: 'Copenhagen',   country: 'Denmark', lat: 55.6761, lng: 12.5683, zoom: 12 },
+  { name: 'Nordic view',  country: '',        lat: 63.5,   lng: 13.5,   zoom: 4  },
 ]
 
 interface Props {
@@ -146,7 +145,6 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
                       }}
                       className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] font-medium transition-all duration-100 text-left text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                     >
-                      <span className="text-base leading-none">{city.flag}</span>
                       <span className="flex-1">{city.name}</span>
                       {city.country && (
                         <span className="text-[10px] text-slate-400 font-normal">{city.country}</span>
