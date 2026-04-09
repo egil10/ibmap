@@ -5,10 +5,10 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'IBMap — Norwegian Finance & Investment Map',
+  title: 'KAPITALKART — Nordic Finance & Investment Map',
   description:
-    'Discover and explore finance and investment companies in Norway — PE, VC, AM, IB, trading firms and more, mapped interactively.',
-  keywords: ['Norway finance', 'Norwegian investment', 'PE', 'VC', 'asset management', 'NHH', 'BI'],
+    'Discover and explore finance and investment companies across the Nordics — PE, VC, AM, hedge funds, trading firms and more, mapped interactively.',
+  keywords: ['Norway finance', 'Nordic investment', 'PE', 'VC', 'asset management', 'hedge fund', 'NHH', 'BI'],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
