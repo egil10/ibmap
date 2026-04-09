@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { ExternalLink, ChevronUp, ChevronDown, MapPin } from 'lucide-react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { companies } from '@/data/companies'
 import { FilterCategory } from '@/data/companies'
 import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
@@ -22,11 +23,10 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
 }
 
 interface Props {
-  search: string
   filter: FilterCategory
 }
 
-export default function CompanyTable({ search, filter }: Props) {
+export default function CompanyTable({ filter }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
@@ -36,16 +36,8 @@ export default function CompanyTable({ search, filter }: Props) {
   }
 
   const filtered = useMemo(() => companies.filter((c) => {
-    const matchFilter = filter === 'ALL' || c.category === filter
-    const q = search.toLowerCase()
-    const matchSearch = !search ||
-      c.name.toLowerCase().includes(q) ||
-      c.city.toLowerCase().includes(q) ||
-      c.country.toLowerCase().includes(q) ||
-      c.category.toLowerCase().includes(q) ||
-      c.description.toLowerCase().includes(q)
-    return matchFilter && matchSearch
-  }), [search, filter])
+    return filter === 'ALL' || c.category === filter
+  }), [filter])
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     const vals: Record<SortKey, [string, string]> = {
@@ -73,7 +65,6 @@ export default function CompanyTable({ search, filter }: Props) {
         <p className="text-[13px] font-semibold text-slate-500">
           <span className="text-slate-900 font-bold">{sorted.length}</span> companies
           {filter !== 'ALL' && <span className="text-slate-400"> · {filter}</span>}
-          {search && <span className="text-slate-400"> · "{search}"</span>}
         </p>
         <p className="text-[11px] text-slate-400 font-medium">
           {sorted.filter(c => c.lat != null).length} with map pin

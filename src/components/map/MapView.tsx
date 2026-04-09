@@ -11,7 +11,20 @@ import CompanyLogo from '@/components/ui/CompanyLogo'
 
 const MAP_STYLE = 'https://tiles.openfreemap.org/styles/positron'
 const INITIAL_VIEW = { longitude: 13.5, latitude: 63.5, zoom: 4.0 }
-const MAX_BOUNDS: [[number, number], [number, number]] = [[-5, 54], [35, 72]]
+const MAX_BOUNDS: [[number, number], [number, number]] = [[-10, 52], [40, 73]]
+
+// World mask: covers entire world except Nordic bounding box
+const WORLD_MASK_GEOJSON = {
+  type: 'Feature' as const,
+  geometry: {
+    type: 'Polygon' as const,
+    coordinates: [
+      [[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]],
+      // Hole: Nordic area (counter-clockwise)
+      [[-10, 52], [-10, 73], [40, 73], [40, 52], [-10, 52]],
+    ],
+  },
+}
 
 function LogoMarker({ company, isSelected }: { company: Company; isSelected: boolean }) {
   const colors = CATEGORY_COLORS[company.category]
@@ -35,8 +48,10 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
         className="relative flex items-center justify-center overflow-hidden rounded-full bg-white transition-all duration-200 group-hover:scale-125"
         style={{
           width: sz, height: sz,
-          border: `2.5px solid ${colors.pin}`,
-          boxShadow: `0 2px 10px ${colors.pin}44, 0 1px 4px rgba(0,0,0,0.1)`,
+          border: isSelected
+            ? `2px solid rgba(0,0,0,0.18)`
+            : `1.5px solid rgba(0,0,0,0.1)`,
+          boxShadow: `0 2px 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08)`,
         }}
       >
         {attempt < 2 && src ? (
@@ -59,26 +74,34 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
 }
 
 interface Props {
-  search: string
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
 }
 
-export default function MapView({ search, filter }: Props) {
+export default function MapView({ filter }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const mapRef = useRef<any>(null)
 
   const mappedCompanies = companies.filter(c => c.lat != null && c.lng != null)
 
   const filteredCompanies = mappedCompanies.filter((c) => {
-    const matchesFilter = filter === 'ALL' || c.category === filter
-    const q = search.toLowerCase()
-    const matchesSearch = !search ||
-      c.name.toLowerCase().includes(q) ||
-      c.city.toLowerCase().includes(q) ||
-      c.category.toLowerCase().includes(q)
-    return matchesFilter && matchesSearch
+    return filter === 'ALL' || c.category === filter
   })
+
+  const handleMapLoad = useCallback((e: any) => {
+    const map = e.target
+    try {
+      map.addSource('world-mask', { type: 'geojson', data: WORLD_MASK_GEOJSON })
+      map.addLayer({
+        id: 'world-mask-fill',
+        type: 'fill',
+        source: 'world-mask',
+        paint: { 'fill-color': '#f0f4f8', 'fill-opacity': 0.88 },
+      })
+    } catch {
+      // layer may already exist on remount
+    }
+  }, [])
 
   const handleMarkerClick = useCallback((company: Company) => {
     setSelected(company)
@@ -115,6 +138,7 @@ export default function MapView({ search, filter }: Props) {
         renderWorldCopies={false}
         maxBounds={MAX_BOUNDS}
         reuseMaps
+        onLoad={handleMapLoad}
         onClick={() => setSelected(null)}
       >
         <NavigationControl position="bottom-right" showCompass={false} />
@@ -137,7 +161,7 @@ export default function MapView({ search, filter }: Props) {
         <CompanyCard company={selected} onClose={() => setSelected(null)} />
       )}
 
-      {/* ── Scrolling company banner ── */}
+      {/* ── Auto-scrolling company footer ── */}
       <CompanyBanner
         companies={filteredCompanies}
         selected={selected}
@@ -158,18 +182,27 @@ function CompanyBanner({
 }) {
   if (list.length === 0) return null
 
+  // Duplicate for seamless loop
+  const doubled = [...list, ...list]
+
   return (
-    <div className="absolute bottom-6 left-0 right-0 z-30 pointer-events-none">
-      <div className="pointer-events-auto overflow-x-auto thin-scroll pb-0.5 px-4">
-        <div className="flex items-center gap-2 w-max mx-auto">
-          {list.map((company) => {
+    <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none overflow-hidden"
+      style={{
+        background: 'linear-gradient(to top, rgba(240,244,248,0.95) 0%, rgba(240,244,248,0.0) 100%)',
+        paddingTop: 32,
+        paddingBottom: 10,
+      }}
+    >
+      <div className="pointer-events-auto banner-track-wrap">
+        <div className="banner-track">
+          {doubled.map((company, i) => {
             const colors = CATEGORY_COLORS[company.category]
-            const isActive = selected?.id === company.id
+            const isActive = selected?.id === company.id && i < list.length
             return (
               <button
-                key={company.id}
+                key={`${company.id}-${i}`}
                 onClick={() => onSelect(company)}
-                className={`flex items-center gap-2 rounded-2xl px-3 py-2 transition-all duration-200 flex-shrink-0 ${
+                className={`banner-item flex items-center gap-2 rounded-2xl px-3 py-2 transition-all duration-200 flex-shrink-0 ${
                   isActive ? 'shadow-lg scale-105' : 'hover:scale-105'
                 }`}
                 style={{

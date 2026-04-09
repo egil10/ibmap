@@ -1,7 +1,6 @@
 'use client'
 
-import { Search, X, Map, LayoutList, Github } from 'lucide-react'
-import { useState } from 'react'
+import { Map, LayoutList, Github } from 'lucide-react'
 import { FilterCategory, FILTER_CATEGORIES } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory } from '@/types'
 import { AppView } from '@/app/page'
@@ -9,104 +8,85 @@ import { AppView } from '@/app/page'
 interface Props {
   view: AppView
   onViewChange: (v: AppView) => void
-  search: string
-  onSearch: (v: string) => void
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
 }
 
-export default function Header({ view, onViewChange, search, onSearch, filter, onFilterChange }: Props) {
-  const [focused, setFocused] = useState(false)
-
+export default function Header({ view, onViewChange, filter, onFilterChange }: Props) {
   return (
-    <div className="absolute top-0 left-0 right-0 z-50 pointer-events-none flex flex-col items-center gap-2 pt-4 px-4">
+    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl pointer-events-none flex flex-col items-center gap-2">
 
-      {/* ── Main floating bar ── */}
-      <div className="pointer-events-auto w-full max-w-2xl">
-        <div
-          className="flex items-center gap-1 rounded-2xl px-2 py-1.5 shadow-lg"
-          style={{
-            background: 'rgba(255,255,255,0.78)',
-            backdropFilter: 'blur(32px) saturate(200%)',
-            WebkitBackdropFilter: 'blur(32px) saturate(200%)',
-            border: '1px solid rgba(255,255,255,0.65)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.9)',
-          }}
-        >
+      {/* ── Main nav ── */}
+      <nav
+        className="pointer-events-auto w-full rounded-2xl shadow-lg shadow-black/20"
+        style={{
+          background: 'rgba(10,12,18,0.82)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.09)',
+        }}
+      >
+        <div className="flex items-center justify-between h-12 px-4 gap-2">
+
           {/* Brand */}
-          <div className="flex items-center gap-2 pl-1.5 pr-3 flex-shrink-0 border-r border-slate-100 mr-1">
-            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-slate-900 flex-shrink-0">
-              <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+          <div className="flex items-center gap-2 shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center">
+              <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
                 <circle cx="6" cy="5" r="2.3" fill="white"/>
                 <path d="M6 11.5 C6 11.5 2 7.8 2 5a4 4 0 0 1 8 0c0 2.8-4 6.5-4 6.5z" stroke="white" strokeWidth="1.1" fill="none"/>
               </svg>
             </div>
             <span
-              className="text-[13px] font-black tracking-[0.1em] text-slate-900 uppercase"
-              style={{ fontFamily: 'var(--font-inter), -apple-system, sans-serif', letterSpacing: '0.12em' }}
+              className="text-[13px] font-black tracking-[0.12em] text-white uppercase hidden sm:inline"
+              style={{ letterSpacing: '0.12em' }}
             >
               Kapitalkart
             </span>
           </div>
 
-          {/* Search */}
-          <div className={`flex flex-1 items-center gap-2 rounded-xl px-3 py-1.5 transition-all duration-200 ${focused ? 'bg-white/80 ring-1 ring-slate-200' : ''}`}>
-            <Search size={13} className={`flex-shrink-0 transition-colors ${focused ? 'text-slate-600' : 'text-slate-400'}`} strokeWidth={2.5} />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => onSearch(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              placeholder="Search firms, cities, categories…"
-              className="flex-1 min-w-0 bg-transparent text-[13px] font-medium text-slate-700 placeholder-slate-400 focus:outline-none"
-            />
-            {search && (
-              <button onClick={() => onSearch('')} className="flex-shrink-0 rounded-full p-0.5 text-slate-400 hover:text-slate-600 transition-colors">
-                <X size={12} strokeWidth={2.5} />
-              </button>
-            )}
-          </div>
-
-          {/* View toggle */}
-          <div className="flex items-center gap-0.5 ml-1 flex-shrink-0">
+          {/* Center nav links */}
+          <div className="flex items-center gap-0.5 flex-1 justify-center">
             <button
               onClick={() => onViewChange('map')}
-              title="Map view"
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
-                view === 'map' ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/60'
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                view === 'map'
+                  ? 'text-white bg-white/12'
+                  : 'text-white/50 hover:text-white hover:bg-white/7'
               }`}
             >
-              <Map size={12} strokeWidth={2.5} />
-              <span className="hidden sm:inline">Map</span>
+              <Map size={13} strokeWidth={2.5} />
+              Map
             </button>
             <button
               onClick={() => onViewChange('companies')}
-              title="Companies list"
-              className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-semibold transition-all duration-200 ${
-                view === 'companies' ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/60'
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                view === 'companies'
+                  ? 'text-white bg-white/12'
+                  : 'text-white/50 hover:text-white hover:bg-white/7'
               }`}
             >
-              <LayoutList size={12} strokeWidth={2.5} />
-              <span className="hidden sm:inline">Companies</span>
+              <LayoutList size={13} strokeWidth={2.5} />
+              Companies
             </button>
           </div>
 
-          {/* GitHub */}
-          <a
-            href="https://github.com/egil10/ibmap"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="View on GitHub"
-            className="ml-1 flex-shrink-0 rounded-xl p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100/60 transition-all duration-150"
-          >
-            <Github size={14} strokeWidth={2} />
-          </a>
+          {/* Right: GitHub */}
+          <div className="flex items-center gap-1 shrink-0">
+            <a
+              href="https://github.com/egil10/ibmap"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="flex items-center justify-center w-8 h-8 rounded-lg text-white/50 hover:text-white hover:bg-white/8 transition-colors"
+            >
+              <Github size={15} strokeWidth={2} />
+            </a>
+          </div>
         </div>
-      </div>
+      </nav>
 
       {/* ── Category filter strip ── */}
-      <div className="pointer-events-auto w-full max-w-2xl overflow-x-auto thin-scroll pb-1">
+      <div className="pointer-events-auto w-full overflow-x-auto thin-scroll pb-1">
         <div className="flex items-center gap-1.5 w-max mx-auto px-1">
           {FILTER_CATEGORIES.map((f) => {
             const isActive = f === filter

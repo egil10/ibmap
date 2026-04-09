@@ -22,7 +22,6 @@ export type AppView = 'map' | 'companies'
 
 export default function Home() {
   const [view, setView] = useState<AppView>('map')
-  const [search, setSearch] = useState('')
   const [filter, setFilter] = useState<FilterCategory>('ALL')
 
   return (
@@ -30,16 +29,14 @@ export default function Home() {
       <Header
         view={view}
         onViewChange={setView}
-        search={search}
-        onSearch={setSearch}
         filter={filter}
         onFilterChange={setFilter}
       />
 
       {view === 'map' ? (
-        <MapView search={search} filter={filter} onFilterChange={setFilter} />
+        <MapView filter={filter} onFilterChange={setFilter} />
       ) : (
-        <CompanyTable search={search} filter={filter} />
+        <CompanyTable filter={filter} />
       )}
     </div>
   )
