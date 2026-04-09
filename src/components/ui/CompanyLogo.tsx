@@ -11,30 +11,19 @@ interface Props {
   company: Company
   size?: number
   rounded?: string
-  wide?: boolean   // use -wide logo variant if available (for cards)
+  wide?: boolean  // kept for API compat, ignored — wide logos removed
 }
 
-/**
- * Logo fallback chain:
- *   wide=true:  /logos/{id}-wide.png → /logos/{id}.png → clearbit → badge
- *   wide=false: /logos/{id}.png → clearbit → badge
- */
-export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl', wide = false }: Props) {
+export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
   const [attempt, setAttempt] = useState(0)
   const domain = getDomain(company.website)
   const colors = CATEGORY_COLORS[company.category]
   const short  = CATEGORY_SHORT[company.category]
 
-  const sources = wide
-    ? [
-        `/logos/${company.id}-wide.png`,
-        `/logos/${company.id}.png`,
-        domain ? `https://logo.clearbit.com/${domain}` : null,
-      ]
-    : [
-        `/logos/${company.id}.png`,
-        domain ? `https://logo.clearbit.com/${domain}` : null,
-      ]
+  const sources = [
+    `/logos/${company.id}.png`,
+    domain ? `https://logo.clearbit.com/${domain}` : null,
+  ]
 
   const src = sources[attempt] ?? null
 
