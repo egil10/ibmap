@@ -91,8 +91,8 @@ export const companies: Company[] = [
     website: "https://dnbam.com/en",
     city: "Oslo",
     country: "Norway",
-    lat: 59.9053,
-    lng: 10.7602,
+    lat: 59.9071,
+    lng: 10.7598,
     offices: [
       { city: "Stockholm", country: "Sweden", lat: 59.3343, lng: 18.0614, label: "Stockholm office" },
     ],
