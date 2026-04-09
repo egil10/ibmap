@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies } from '@/data/companies'
@@ -108,12 +108,19 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
 interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
+  onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
 }
 
-export default function MapView({ filter }: Props) {
+export default function MapView({ filter, onRegisterFlyTo }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
+
+  useEffect(() => {
+    onRegisterFlyTo?.((lat, lng, zoom) => {
+      mapRef.current?.flyTo({ center: [lng, lat], zoom, duration: 900, essential: true })
+    })
+  }, [onRegisterFlyTo])
 
   const mappedCompanies = companies.filter(c => c.lat != null && c.lng != null)
   const filteredCompanies = mappedCompanies.filter(c => filter === 'ALL' || c.category === filter)

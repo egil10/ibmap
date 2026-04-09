@@ -45,6 +45,11 @@ html, body {
   height: 40px !important;
 }
 
+/* Push bottom-right controls above the footer (~58px tall) */
+.maplibregl-ctrl-bottom-right {
+  bottom: 62px !important;
+}
+
 /* Glass surface utility (used by floating panels) */
 .glass {
   background: rgba(255,255,255,0.72);

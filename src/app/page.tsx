@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { FilterCategory } from '@/data/companies'
 import Header from '@/components/layout/Header'
 import CompanyTable from '@/components/ui/CompanyTable'
@@ -23,18 +23,27 @@ export type AppView = 'map' | 'companies'
 export default function Home() {
   const [view, setView] = useState<AppView>('map')
   const [filter, setFilter] = useState<FilterCategory>('ALL')
+  const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
 
   return (
     <div className="h-screen w-screen overflow-hidden" style={{ background: '#f0f4f8' }}>
       <Header
         view={view}
-        onViewChange={setView}
+        onViewChange={(v) => { setView(v) }}
         filter={filter}
         onFilterChange={setFilter}
+        onCitySelect={(lat, lng, zoom) => {
+          setView('map')
+          flyToRef.current?.(lat, lng, zoom)
+        }}
       />
 
       {view === 'map' ? (
-        <MapView filter={filter} onFilterChange={setFilter} />
+        <MapView
+          filter={filter}
+          onFilterChange={setFilter}
+          onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
+        />
       ) : (
         <CompanyTable filter={filter} />
       )}
