@@ -105,6 +105,36 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
   )
 }
 
+// When multiple markers share the exact same coordinates, offset them in a small circle
+function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; lng: number }> {
+  const groups: Record<string, Company[]> = {}
+  for (const c of list) {
+    const key = `${c.lat?.toFixed(5)},${c.lng?.toFixed(5)}`
+    if (!groups[key]) groups[key] = []
+    groups[key].push(c)
+  }
+  const out: Array<{ company: Company; lat: number; lng: number }> = []
+  for (const group of Object.values(groups)) {
+    if (group.length === 1) {
+      out.push({ company: group[0], lat: group[0].lat!, lng: group[0].lng! })
+    } else {
+      const baseLat = group[0].lat!
+      const baseLng = group[0].lng!
+      const r = 0.00042 // ~45m radius
+      const cosLat = Math.cos(baseLat * Math.PI / 180)
+      group.forEach((c, i) => {
+        const angle = (2 * Math.PI * i) / group.length - Math.PI / 2
+        out.push({
+          company: c,
+          lat: baseLat + r * Math.sin(angle),
+          lng: baseLng + (r / cosLat) * Math.cos(angle),
+        })
+      })
+    }
+  }
+  return out
+}
+
 interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
@@ -124,6 +154,7 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
 
   const mappedCompanies = companies.filter(c => c.lat != null && c.lng != null)
   const filteredCompanies = mappedCompanies.filter(c => filter === 'ALL' || c.category === filter)
+  const jitteredFiltered = jitterMarkers(filteredCompanies)
 
   const handleMapLoad = useCallback((e: any) => {
     const map = e.target
@@ -187,11 +218,11 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
         <NavigationControl position="bottom-right" showCompass={false} />
 
         {/* HQ markers */}
-        {filteredCompanies.map((company) => (
+        {jitteredFiltered.map(({ company, lat, lng }) => (
           <Marker
             key={company.id}
-            longitude={company.lng!}
-            latitude={company.lat!}
+            longitude={lng}
+            latitude={lat}
             anchor="center"
             onClick={(e) => { e.originalEvent.stopPropagation(); handleMarkerClick(company) }}
           >
@@ -219,8 +250,10 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
         <CompanyCard company={selected} onClose={() => { setSelected(null); setBannerPinned(false) }} />
       )}
 
+      {/* Banner always shows ALL mapped companies for consistent scroll speed */}
       <CompanyBanner
-        companies={filteredCompanies}
+        companies={mappedCompanies}
+        filteredIds={new Set(filteredCompanies.map(c => c.id))}
         selected={selected}
         pinned={bannerPinned}
         onSelect={handleBannerClick}
@@ -231,11 +264,13 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
 
 function CompanyBanner({
   companies: list,
+  filteredIds,
   selected,
   pinned,
   onSelect,
 }: {
   companies: Company[]
+  filteredIds: Set<string>
   selected: Company | null
   pinned: boolean
   onSelect: (c: Company) => void
@@ -243,8 +278,8 @@ function CompanyBanner({
   if (list.length === 0) return null
 
   const doubled = [...list, ...list]
-  // ~3s per company → consistent pixel speed regardless of filter
-  const duration = Math.max(60, list.length * 3)
+  // Fixed duration based on total list so speed never changes with filter
+  const duration = Math.max(120, list.length * 3)
 
   return (
     <div
@@ -262,21 +297,18 @@ function CompanyBanner({
       <div className={`banner-track-wrap${pinned ? ' banner-pinned' : ''}`}>
         <div className="banner-track" style={{ animationDuration: `${duration}s` }}>
           {doubled.map((company, i) => {
-            const colors = CATEGORY_COLORS[company.category]
             const isActive = selected?.id === company.id
+            const isFiltered = filteredIds.has(company.id)
             return (
               <button
                 key={`${company.id}-${i}`}
                 onClick={() => onSelect(company)}
-                className={`banner-item flex items-center gap-2 rounded-2xl px-3 py-1.5 transition-all duration-200 flex-shrink-0 ${
-                  isActive ? 'shadow-md scale-105' : 'hover:scale-105'
-                }`}
+                className="banner-item flex items-center gap-2 rounded-2xl px-3 py-1.5 transition-all duration-200 flex-shrink-0"
                 style={{
-                  background: isActive
-                    ? `linear-gradient(135deg, ${colors.pin}18, ${colors.pin}0d)`
-                    : 'rgba(248,250,252,0.9)',
-                  border: `1.5px solid ${isActive ? colors.pin + '44' : 'rgba(0,0,0,0.06)'}`,
-                  boxShadow: isActive ? `0 4px 16px ${colors.pin}20` : '0 1px 3px rgba(0,0,0,0.04)',
+                  background: isActive ? 'rgba(226,232,240,1)' : 'rgba(248,250,252,0.9)',
+                  border: `1.5px solid ${isActive ? 'rgba(0,0,0,0.14)' : 'rgba(0,0,0,0.06)'}`,
+                  boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.07)' : '0 1px 3px rgba(0,0,0,0.04)',
+                  opacity: filteredIds.size < list.length && !isFiltered ? 0.35 : 1,
                 }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />

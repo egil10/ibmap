@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react'
 import { ExternalLink, ChevronUp, ChevronDown, MapPin } from 'lucide-react'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { companies } from '@/data/companies'
 import { FilterCategory } from '@/data/companies'
 import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
@@ -24,9 +23,10 @@ function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
 
 interface Props {
   filter: FilterCategory
+  onViewOnMap?: (company: Company) => void
 }
 
-export default function CompanyTable({ filter }: Props) {
+export default function CompanyTable({ filter, onViewOnMap }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
@@ -100,11 +100,11 @@ export default function CompanyTable({ filter }: Props) {
                 <tr>
                   <td colSpan={5} className="px-6 py-20 text-center">
                     <p className="text-sm font-semibold text-slate-400">No companies found</p>
-                    <p className="text-xs text-slate-300 mt-1">Try clearing the search or filter</p>
+                    <p className="text-xs text-slate-300 mt-1">Try clearing the filter</p>
                   </td>
                 </tr>
               ) : sorted.map((company) => (
-                <Row key={company.id} company={company} />
+                <Row key={company.id} company={company} onViewOnMap={onViewOnMap} />
               ))}
             </tbody>
           </table>
@@ -114,10 +114,11 @@ export default function CompanyTable({ filter }: Props) {
   )
 }
 
-function Row({ company }: { company: Company }) {
+function Row({ company, onViewOnMap }: { company: Company; onViewOnMap?: (c: Company) => void }) {
   const [hovered, setHovered] = useState(false)
   const colors = CATEGORY_COLORS[company.category]
   const domain = getDomain(company.website)
+  const hasPIN = company.lat != null
 
   return (
     <tr
@@ -129,12 +130,25 @@ function Row({ company }: { company: Company }) {
         transition: 'background 0.12s',
       }}
     >
-      {/* Company */}
+      {/* Company — clickable to view on map */}
       <td className="px-4 py-3">
-        <div className="flex items-center gap-3">
-          <CompanyLogo company={company} size={34} rounded="rounded-xl" />
+        <div
+          className={`flex items-center gap-3 ${hasPIN && onViewOnMap ? 'cursor-pointer group/name' : ''}`}
+          onClick={() => hasPIN && onViewOnMap?.(company)}
+          title={hasPIN ? 'View on map' : undefined}
+        >
+          <CompanyLogo company={company} size={34} rounded="rounded-xl" wide />
           <div className="min-w-0">
-            <p className="text-[13px] font-semibold text-slate-900 leading-tight truncate max-w-[200px]">{company.name}</p>
+            <p className={`text-[13px] font-semibold leading-tight truncate max-w-[200px] transition-colors ${
+              hasPIN && onViewOnMap ? 'text-slate-900 group-hover/name:text-blue-600' : 'text-slate-900'
+            }`}>
+              {company.name}
+              {hasPIN && onViewOnMap && (
+                <span className="ml-1.5 opacity-0 group-hover/name:opacity-100 text-[10px] font-medium text-blue-500 transition-opacity">
+                  ↗ map
+                </span>
+              )}
+            </p>
             {company.description && (
               <p className="text-[11px] text-slate-400 truncate max-w-[240px] mt-0.5">{company.description}</p>
             )}
@@ -153,7 +167,7 @@ function Row({ company }: { company: Company }) {
       {/* Location */}
       <td className="px-4 py-3">
         <div className="flex items-center gap-1">
-          {company.lat != null && <MapPin size={10} className="text-slate-300 flex-shrink-0" strokeWidth={2} />}
+          {hasPIN && <MapPin size={10} className="text-slate-300 flex-shrink-0" strokeWidth={2} />}
           <span className="text-[12px] font-medium text-slate-600 whitespace-nowrap">
             {company.city}<span className="text-slate-400">, {company.country}</span>
           </span>

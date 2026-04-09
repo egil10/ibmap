@@ -45,7 +45,15 @@ export default function Home() {
           onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
         />
       ) : (
-        <CompanyTable filter={filter} />
+        <CompanyTable
+          filter={filter}
+          onViewOnMap={(company) => {
+            setView('map')
+            if (company.lat != null && company.lng != null) {
+              setTimeout(() => flyToRef.current?.(company.lat!, company.lng!, 15), 100)
+            }
+          }}
+        />
       )}
     </div>
   )
