@@ -1,0 +1,487 @@
+{
+  "adrigo": [
+    59.3351,
+    18.0726,
+    "known"
+  ],
+  "alfred-berg": [
+    59.911,
+    10.7238,
+    "known"
+  ],
+  "amundsen-im": [
+    59.9125,
+    10.7266,
+    "scraped"
+  ],
+  "anna-fund": [
+    59.9065,
+    10.7455,
+    "unchanged-no-result"
+  ],
+  "arctic-am": [
+    59.9138,
+    10.7312,
+    "known"
+  ],
+  "blueberry-capital": [
+    59.9212,
+    10.7402,
+    "unchanged-no-result"
+  ],
+  "borea-am": [
+    60.3924,
+    5.3218,
+    "known"
+  ],
+  "cworldwide": [
+    59.9118,
+    10.7259,
+    "known"
+  ],
+  "carn-capital": [
+    59.9098,
+    10.7412,
+    "unchanged-no-result"
+  ],
+  "danske-invest": [
+    59.9135,
+    10.7508,
+    "unchanged-no-result"
+  ],
+  "dnb-am": [
+    59.9076,
+    10.7601,
+    "known"
+  ],
+  "equinor-am": [
+    58.8928,
+    5.7191,
+    "known"
+  ],
+  "folketrygdfondet": [
+    59.9129,
+    10.7263,
+    "known"
+  ],
+  "fondsfinans": [
+    59.9129,
+    10.7311,
+    "known"
+  ],
+  "fondsforvaltning": [
+    59.9148,
+    10.7572,
+    "unchanged-no-result"
+  ],
+  "gabler": [
+    59.9168,
+    10.7422,
+    "unchanged-no-result"
+  ],
+  "handelsbanken": [
+    59.9082,
+    10.7219,
+    "known"
+  ],
+  "heimdal": [
+    59.9188,
+    10.7502,
+    "unchanged-no-result"
+  ],
+  "holberg": [
+    60.3938,
+    5.3254,
+    "known"
+  ],
+  "klp": [
+    59.9089,
+    10.7248,
+    "known"
+  ],
+  "kraftfinans": [
+    63.4232,
+    10.4655,
+    "known"
+  ],
+  "nordea-am": [
+    59.9288,
+    10.71,
+    "known"
+  ],
+  "nbim": [
+    59.9086,
+    10.7424,
+    "known"
+  ],
+  "norges-investor": [
+    59.9127,
+    10.7294,
+    "known"
+  ],
+  "norse-forvaltning": [
+    59.9052,
+    10.7402,
+    "unchanged-no-result"
+  ],
+  "nrp-maritime": [
+    59.9088,
+    10.7518,
+    "unchanged-no-result"
+  ],
+  "odin": [
+    59.919,
+    10.7195,
+    "known"
+  ],
+  "pareto-am": [
+    59.9127,
+    10.7294,
+    "known"
+  ],
+  "req": [
+    59.915,
+    10.7178,
+    "scraped"
+  ],
+  "salt-capital": [
+    59.9127,
+    10.7294,
+    "known"
+  ],
+  "sector-am": [
+    60.3939,
+    5.3245,
+    "known"
+  ],
+  "storebrand-am": [
+    59.9126,
+    10.6351,
+    "known"
+  ],
+  "storm-capital": [
+    59.9162,
+    10.7395,
+    "unchanged-no-result"
+  ],
+  "taiga-fund": [
+    59.9175,
+    10.7448,
+    "unchanged-no-result"
+  ],
+  "tind-am": [
+    59.9052,
+    10.7538,
+    "unchanged-no-result"
+  ],
+  "protean-funds": [
+    59.3333,
+    18.0723,
+    "known"
+  ],
+  "valhalla-capital": [
+    59.9215,
+    10.7375,
+    "unchanged-no-result"
+  ],
+  "arendals-fossekompani": [
+    58.4678,
+    8.7943,
+    "known"
+  ],
+  "abg": [
+    59.911,
+    10.7238,
+    "known"
+  ],
+  "nording-partners": [
+    59.9195,
+    10.7345,
+    "unchanged-no-result"
+  ],
+  "bcg-oslo": [
+    59.9113,
+    10.7249,
+    "known"
+  ],
+  "bain-oslo": [
+    59.922,
+    10.6855,
+    "known"
+  ],
+  "mckinsey-oslo": [
+    59.9102,
+    10.7228,
+    "known"
+  ],
+  "folden-advisory": [
+    59.9155,
+    10.7395,
+    "unchanged-no-result"
+  ],
+  "argentum": [
+    60.3908,
+    5.3222,
+    "known"
+  ],
+  "bluefront": [
+    59.9151,
+    10.7238,
+    "scraped"
+  ],
+  "credo-partners": [
+    59.9138,
+    10.7312,
+    "known"
+  ],
+  "cubera": [
+    59.9211,
+    10.689,
+    "known"
+  ],
+  "cvc": [
+    59.9142,
+    10.7418,
+    "unchanged-no-result"
+  ],
+  "egd-holding": [
+    59.9228,
+    10.7428,
+    "unchanged-no-result"
+  ],
+  "eqt": [
+    59.3351,
+    18.0726,
+    "known"
+  ],
+  "equip-capital": [
+    59.9052,
+    10.7482,
+    "unchanged-no-result"
+  ],
+  "ev-pe": [
+    58.9727,
+    5.7521,
+    "known"
+  ],
+  "explore-equity": [
+    59.9182,
+    10.7542,
+    "unchanged-no-result"
+  ],
+  "ferd-capital": [
+    59.9085,
+    10.6415,
+    "known"
+  ],
+  "fokus-nordic": [
+    59.9045,
+    10.7512,
+    "unchanged-no-result"
+  ],
+  "fsn-capital": [
+    59.9129,
+    10.7311,
+    "known"
+  ],
+  "hawk-infinity": [
+    59.9202,
+    10.7348,
+    "unchanged-no-result"
+  ],
+  "hitecvision": [
+    58.8928,
+    5.7191,
+    "known"
+  ],
+  "jebsen-am": [
+    60.3942,
+    5.3241,
+    "known"
+  ],
+  "kistefos": [
+    59.9105,
+    10.7285,
+    "known"
+  ],
+  "longship": [
+    59.9133,
+    10.7415,
+    "scraped"
+  ],
+  "nordic-capital": [
+    59.3331,
+    18.0682,
+    "known"
+  ],
+  "norfund": [
+    59.9132,
+    10.7341,
+    "known"
+  ],
+  "norvestor": [
+    59.9138,
+    10.7312,
+    "known"
+  ],
+  "play-capital": [
+    59.9242,
+    10.7482,
+    "unchanged-no-result"
+  ],
+  "reiten-co": [
+    59.911,
+    10.7531,
+    "scraped"
+  ],
+  "summa-equity": [
+    59.9088,
+    10.7228,
+    "known"
+  ],
+  "aera-capital": [
+    59.9168,
+    10.7475,
+    "unchanged-no-result"
+  ],
+  "accelerate-capital": [
+    59.9144,
+    10.719,
+    "scraped"
+  ],
+  "ik-partners": [
+    59.9092,
+    10.7392,
+    "unchanged-no-result"
+  ],
+  "hg-capital": [
+    59.9148,
+    10.7598,
+    "unchanged-no-result"
+  ],
+  "hartree": [
+    59.9099,
+    10.7227,
+    "known"
+  ],
+  "uniper": [
+    59.9138,
+    10.7418,
+    "unchanged-no-result"
+  ],
+  "glencore": [
+    59.9099,
+    10.7227,
+    "known"
+  ],
+  "svelland": [
+    59.9138,
+    10.7312,
+    "known"
+  ],
+  "trafigura": [
+    59.9127,
+    10.7294,
+    "known"
+  ],
+  "ae-energi": [
+    62.4716,
+    6.1607,
+    "known"
+  ],
+  "trade-weather-power": [
+    59.9178,
+    10.7498,
+    "unchanged-no-result"
+  ],
+  "alliance-ventures": [
+    59.9262,
+    10.7365,
+    "unchanged-no-result"
+  ],
+  "antler": [
+    59.9102,
+    10.7228,
+    "known"
+  ],
+  "arkwright-x": [
+    59.9102,
+    10.7438,
+    "unchanged-no-result"
+  ],
+  "corinthian-vp": [
+    59.9078,
+    10.7458,
+    "unchanged-no-result"
+  ],
+  "hadean-ventures": [
+    59.9083,
+    10.6981,
+    "scraped"
+  ],
+  "herkules": [
+    59.9175,
+    10.7368,
+    "unchanged-no-result"
+  ],
+  "idekapital": [
+    59.9128,
+    10.7418,
+    "unchanged-no-result"
+  ],
+  "investinor": [
+    63.4345,
+    10.4038,
+    "known"
+  ],
+  "katapult": [
+    59.9035,
+    10.7428,
+    "unchanged-no-result"
+  ],
+  "pioneer-capital": [
+    59.9248,
+    10.7482,
+    "unchanged-no-result"
+  ],
+  "proventure": [
+    59.9188,
+    10.7478,
+    "unchanged-no-result"
+  ],
+  "sandwater": [
+    59.9165,
+    10.7386,
+    "scraped"
+  ],
+  "skyfall-ventures": [
+    59.9162,
+    10.7418,
+    "unchanged-no-result"
+  ],
+  "sno-ventures": [
+    59.9112,
+    10.7512,
+    "unchanged-no-result"
+  ],
+  "startuplab-fund": [
+    59.9423,
+    10.7167,
+    "known"
+  ],
+  "statkraft-ventures": [
+    59.9154,
+    10.6357,
+    "known"
+  ],
+  "viking-growth": [
+    59.9268,
+    10.7392,
+    "unchanged-no-result"
+  ],
+  "ssy": [
+    59.9092,
+    10.7408,
+    "unchanged-no-result"
+  ]
+}
