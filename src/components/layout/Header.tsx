@@ -73,14 +73,16 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
       >
         <div className="flex items-center h-12 px-3 gap-1">
 
-          {/* Brand */}
+          {/* Brand — click to hard reload */}
           <div className="flex items-center shrink-0 pr-3 mr-1 border-r border-slate-100">
-            <span
-              className="text-[13px] font-black tracking-[0.13em] text-slate-900 uppercase select-none"
-              style={{ letterSpacing: '0.13em' }}
+            <a
+              href="/"
+              onClick={(e) => { e.preventDefault(); window.location.href = '/' }}
+              className="text-[13px] font-black tracking-[0.13em] text-slate-900 uppercase select-none hover:opacity-70 transition-opacity cursor-pointer"
+              style={{ letterSpacing: '0.13em', textDecoration: 'none' }}
             >
               Kapitalkart
-            </span>
+            </a>
           </div>
 
           {/* View toggle */}

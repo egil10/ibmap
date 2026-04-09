@@ -141,8 +141,8 @@ export default function MapView({ filter, onRegisterFlyTo }: Props) {
   const flyTo = useCallback((lat: number, lng: number) => {
     mapRef.current?.flyTo({
       center: [lng, lat],
-      zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
-      duration: 700,
+      zoom: 15,   // ~500m street-level view
+      duration: 900,
       essential: true,
     })
   }, [])

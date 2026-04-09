@@ -9,30 +9,41 @@ function getDomain(url: string): string {
 
 interface Props {
   company: Company
-  size?: number   // px
+  size?: number
   rounded?: string
+  wide?: boolean   // use -wide logo variant if available (for cards)
 }
 
 /**
- * Tries /logos/{id}.png → clearbit → category badge fallback.
+ * Logo fallback chain:
+ *   wide=true:  /logos/{id}-wide.png → /logos/{id}.png → clearbit → badge
+ *   wide=false: /logos/{id}.png → clearbit → badge
  */
-export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
-  const [attempt, setAttempt] = useState(0)   // 0=local, 1=clearbit, 2=failed
+export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl', wide = false }: Props) {
+  const [attempt, setAttempt] = useState(0)
   const domain = getDomain(company.website)
   const colors = CATEGORY_COLORS[company.category]
   const short  = CATEGORY_SHORT[company.category]
 
-  const src =
-    attempt === 0 ? `/logos/${company.id}.png` :
-    attempt === 1 ? (domain ? `https://logo.clearbit.com/${domain}` : '') :
-    null
+  const sources = wide
+    ? [
+        `/logos/${company.id}-wide.png`,
+        `/logos/${company.id}.png`,
+        domain ? `https://logo.clearbit.com/${domain}` : null,
+      ]
+    : [
+        `/logos/${company.id}.png`,
+        domain ? `https://logo.clearbit.com/${domain}` : null,
+      ]
+
+  const src = sources[attempt] ?? null
 
   const handleError = () => {
-    if (attempt === 0 && domain) setAttempt(1)
-    else setAttempt(2)
+    if (attempt < sources.length - 1) setAttempt(a => a + 1)
+    else setAttempt(sources.length)  // triggers badge fallback
   }
 
-  if (attempt === 2 || !src) {
+  if (!src || attempt >= sources.length) {
     return (
       <div
         className={`flex flex-shrink-0 items-center justify-center ${rounded} font-black text-white`}
