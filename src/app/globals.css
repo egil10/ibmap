@@ -1,71 +1,101 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #f0f4f8;
   --foreground: #0f172a;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   height: 100%;
   overflow: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* MapLibre overrides — hide branding, style controls */
-.maplibregl-canvas {
-  outline: none;
-}
+/* Scrollable pages need overflow */
+.page-scroll { overflow: auto; }
 
+/* MapLibre overrides */
+.maplibregl-canvas { outline: none; }
 .maplibregl-ctrl-logo,
-.maplibregl-ctrl-attrib {
-  display: none !important;
-}
+.maplibregl-ctrl-attrib { display: none !important; }
 
 .maplibregl-ctrl-group {
-  border-radius: 14px !important;
+  border-radius: 16px !important;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.6) !important;
-  background: rgba(255,255,255,0.85) !important;
-  backdrop-filter: blur(16px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.5) !important;
+  background: rgba(255,255,255,0.7) !important;
+  backdrop-filter: blur(24px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(200%) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04),
+              inset 0 1px 0 rgba(255,255,255,0.8) !important;
 }
 
 .maplibregl-ctrl-zoom-in,
 .maplibregl-ctrl-zoom-out,
 .maplibregl-ctrl-compass {
-  width: 38px !important;
-  height: 38px !important;
+  width: 40px !important;
+  height: 40px !important;
 }
 
-/* Custom animations */
+/* Glass surface utility (used by floating panels) */
+.glass {
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04),
+              inset 0 1px 0 rgba(255,255,255,0.9);
+}
+
+.glass-dark {
+  background: rgba(15,23,42,0.82);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.24), 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* Thin scrollbar for table */
+.thin-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+.thin-scroll::-webkit-scrollbar-track { background: transparent; }
+.thin-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+.thin-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+/* Animations */
 @keyframes ping {
-  75%, 100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
 }
 
 @keyframes slideInRight {
-  from { transform: translateX(110%); opacity: 0; }
+  from { transform: translateX(112%); opacity: 0; }
   to   { transform: translateX(0);    opacity: 1; }
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes slideInUp {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
 }
 
-.animate-slide-in  { animation: slideInRight 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
-.animate-fade-up   { animation: fadeUp 0.25s ease-out; }
-.marker-pulse      { animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.96); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+.animate-slide-in     { animation: slideInRight 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-slide-up     { animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-fade-in      { animation: fadeIn 0.25s ease-out; }
+.animate-scale-in     { animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.marker-pulse         { animation: ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite; }
