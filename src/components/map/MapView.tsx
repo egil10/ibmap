@@ -18,6 +18,13 @@ const INITIAL_VIEW = {
   zoom: 4.4,
 }
 
+// Constrain panning to the Nordic region — prevents the world from repeating
+// without pins and stops users ending up in the Pacific Ocean.
+const MAX_BOUNDS: [[number, number], [number, number]] = [
+  [-15, 52],  // SW: roughly Iceland SW corner / Danish border
+  [40, 72],   // NE: Finnish/Russian border / top of Norway
+]
+
 export default function MapView() {
   const [selected, setSelected] = useState<Company | null>(null)
   const [filter, setFilter] = useState<FilterCategory>('ALL')
@@ -55,6 +62,8 @@ export default function MapView() {
         style={{ width: '100%', height: '100%' }}
         mapStyle={MAP_STYLE}
         attributionControl={false}
+        renderWorldCopies={false}
+        maxBounds={MAX_BOUNDS}
         reuseMaps
       >
         <NavigationControl position="bottom-right" showCompass={false} />
@@ -95,7 +104,13 @@ export default function MapView() {
                   }}
                 />
                 {/* Label on hover */}
-                <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-lg bg-white/95 backdrop-blur-sm px-2.5 py-1 text-xs font-semibold text-slate-700 shadow-lg border border-white/80 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/95 backdrop-blur-sm pl-1.5 pr-2.5 py-1 text-xs font-semibold text-slate-700 shadow-lg border border-white/80 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+                  <img
+                    src={`https://logo.clearbit.com/${company.website.replace(/https?:\/\/(www\.)?/, '').split('/')[0]}`}
+                    alt=""
+                    className="h-4 w-4 rounded-sm object-contain bg-white"
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none' }}
+                  />
                   {company.name}
                 </span>
               </button>
