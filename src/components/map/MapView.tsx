@@ -41,11 +41,10 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
           style={{ width: sz + 10, height: sz + 10, backgroundColor: colors.pin, opacity: 0.3 }} />
       )}
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125 group-hover:shadow-lg"
+        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
         style={{
           width: sz, height: sz,
           border: isSelected ? `2px solid rgba(0,0,0,0.2)` : `1.5px solid rgba(0,0,0,0.1)`,
-          // No default box-shadow — prevents dark blob when many markers overlap
         }}
       >
         {attempt < 2 && src ? (
@@ -79,7 +78,7 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125 group-hover:shadow-md"
+        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
         style={{
           width: sz, height: sz,
           border: `1.5px dashed ${isSelected ? colors.pin : 'rgba(0,0,0,0.18)'}`,
