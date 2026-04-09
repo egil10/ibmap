@@ -5,7 +5,7 @@ import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies } from '@/data/companies'
 import { FilterCategory } from '@/data/companies'
-import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
+import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
@@ -24,6 +24,7 @@ const WORLD_MASK_GEOJSON = {
   },
 }
 
+// HQ marker
 function LogoMarker({ company, isSelected }: { company: Company; isSelected: boolean }) {
   const colors = CATEGORY_COLORS[company.category]
   const short = CATEGORY_SHORT[company.category]
@@ -31,39 +32,74 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
   const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
   const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
-
   const sz = isSelected ? 34 : 26
 
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
       {isSelected && (
-        <span
-          className="absolute rounded-full marker-pulse"
-          style={{ width: sz + 10, height: sz + 10, backgroundColor: colors.pin, opacity: 0.3 }}
-        />
+        <span className="absolute rounded-full marker-pulse"
+          style={{ width: sz + 10, height: sz + 10, backgroundColor: colors.pin, opacity: 0.3 }} />
       )}
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125"
+        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125 group-hover:shadow-lg"
         style={{
           width: sz, height: sz,
-          border: isSelected ? `2px solid rgba(0,0,0,0.18)` : `1.5px solid rgba(0,0,0,0.1)`,
-          boxShadow: `0 2px 8px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08)`,
-          overflow: 'hidden',
+          border: isSelected ? `2px solid rgba(0,0,0,0.2)` : `1.5px solid rgba(0,0,0,0.1)`,
+          // No default box-shadow — prevents dark blob when many markers overlap
         }}
       >
         {attempt < 2 && src ? (
-          <img src={src} alt="" key={attempt} className="w-full h-full object-contain" style={{ padding: sz > 28 ? 3 : 2 }} onError={handleError} />
+          <img src={src} alt="" key={attempt} className="w-full h-full object-contain" onError={handleError}
+            style={{ padding: sz > 28 ? 3 : 2, overflow: 'hidden', borderRadius: '50%' }} />
         ) : (
-          <span className="flex h-full w-full items-center justify-center text-[8px] font-black text-white"
+          <span className="flex h-full w-full items-center justify-center text-[8px] font-black text-white rounded-full"
             style={{ backgroundColor: colors.pin }}>
             {short}
           </span>
         )}
       </span>
-
       <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
         <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
         {company.name}
+      </span>
+    </div>
+  )
+}
+
+// Satellite office marker — smaller dot with logo
+function OfficeMarker({ company, office, isSelected }: { company: Company; office: CompanyOffice; isSelected: boolean }) {
+  const colors = CATEGORY_COLORS[company.category]
+  const short = CATEGORY_SHORT[company.category]
+  const [attempt, setAttempt] = useState(0)
+  const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
+  const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
+  const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
+  const sz = 20
+
+  return (
+    <div className="group relative flex items-center justify-center cursor-pointer">
+      <span
+        className="relative flex items-center justify-center rounded-full bg-white transition-all duration-200 group-hover:scale-125 group-hover:shadow-md"
+        style={{
+          width: sz, height: sz,
+          border: `1.5px dashed ${isSelected ? colors.pin : 'rgba(0,0,0,0.18)'}`,
+          opacity: isSelected ? 1 : 0.78,
+        }}
+      >
+        {attempt < 2 && src ? (
+          <img src={src} alt="" key={attempt} className="w-full h-full object-contain rounded-full" onError={handleError}
+            style={{ padding: 2 }} />
+        ) : (
+          <span className="flex h-full w-full items-center justify-center text-[6px] font-black text-white rounded-full"
+            style={{ backgroundColor: colors.pin }}>
+            {short}
+          </span>
+        )}
+      </span>
+      <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
+        <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors.pin }} />
+        {company.name}
+        {office.label && <span className="text-slate-400 font-normal ml-0.5">· {office.city}</span>}
       </span>
     </div>
   )
@@ -95,27 +131,31 @@ export default function MapView({ filter }: Props) {
     } catch { /* already exists on remount */ }
   }, [])
 
-  const flyTo = useCallback((company: Company) => {
-    if (company.lat != null && company.lng != null) {
-      mapRef.current?.flyTo({
-        center: [company.lng, company.lat],
-        zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
-        duration: 700,
-        essential: true,
-      })
-    }
+  const flyTo = useCallback((lat: number, lng: number) => {
+    mapRef.current?.flyTo({
+      center: [lng, lat],
+      zoom: Math.max(mapRef.current?.getZoom() ?? 5, 7),
+      duration: 700,
+      essential: true,
+    })
   }, [])
 
   const handleMarkerClick = useCallback((company: Company) => {
     setSelected(company)
     setBannerPinned(false)
-    flyTo(company)
+    if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
+  }, [flyTo])
+
+  const handleOfficeClick = useCallback((company: Company, office: CompanyOffice) => {
+    setSelected(company)
+    setBannerPinned(false)
+    flyTo(office.lat, office.lng)
   }, [flyTo])
 
   const handleBannerClick = useCallback((company: Company) => {
     setSelected(company)
     setBannerPinned(true)
-    flyTo(company)
+    if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
   }, [flyTo])
 
   const handleMapClick = useCallback(() => {
@@ -139,6 +179,7 @@ export default function MapView({ filter }: Props) {
       >
         <NavigationControl position="bottom-right" showCompass={false} />
 
+        {/* HQ markers */}
         {filteredCompanies.map((company) => (
           <Marker
             key={company.id}
@@ -150,6 +191,21 @@ export default function MapView({ filter }: Props) {
             <LogoMarker company={company} isSelected={selected?.id === company.id} />
           </Marker>
         ))}
+
+        {/* Satellite office markers */}
+        {filteredCompanies.flatMap((company) =>
+          (company.offices ?? []).map((office, i) => (
+            <Marker
+              key={`${company.id}-office-${i}`}
+              longitude={office.lng}
+              latitude={office.lat}
+              anchor="center"
+              onClick={(e) => { e.originalEvent.stopPropagation(); handleOfficeClick(company, office) }}
+            >
+              <OfficeMarker company={company} office={office} isSelected={selected?.id === company.id} />
+            </Marker>
+          ))
+        )}
       </Map>
 
       {selected && (
@@ -180,6 +236,8 @@ function CompanyBanner({
   if (list.length === 0) return null
 
   const doubled = [...list, ...list]
+  // ~3s per company → consistent pixel speed regardless of filter
+  const duration = Math.max(60, list.length * 3)
 
   return (
     <div
@@ -195,7 +253,7 @@ function CompanyBanner({
       }}
     >
       <div className={`banner-track-wrap${pinned ? ' banner-pinned' : ''}`}>
-        <div className="banner-track">
+        <div className="banner-track" style={{ animationDuration: `${duration}s` }}>
           {doubled.map((company, i) => {
             const colors = CATEGORY_COLORS[company.category]
             const isActive = selected?.id === company.id
@@ -211,9 +269,7 @@ function CompanyBanner({
                     ? `linear-gradient(135deg, ${colors.pin}18, ${colors.pin}0d)`
                     : 'rgba(248,250,252,0.9)',
                   border: `1.5px solid ${isActive ? colors.pin + '44' : 'rgba(0,0,0,0.06)'}`,
-                  boxShadow: isActive
-                    ? `0 4px 16px ${colors.pin}20`
-                    : '0 1px 3px rgba(0,0,0,0.04)',
+                  boxShadow: isActive ? `0 4px 16px ${colors.pin}20` : '0 1px 3px rgba(0,0,0,0.04)',
                 }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />

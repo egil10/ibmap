@@ -33,6 +33,14 @@ export const CATEGORY_COLORS: Record<CompanyCategory, { bg: string; text: string
   'Shipping':           { bg: 'bg-cyan-50',    text: 'text-cyan-700',    pin: '#0891B2', border: 'border-cyan-200'   },
 }
 
+export interface CompanyOffice {
+  city: string
+  country: string
+  lat: number
+  lng: number
+  label?: string   // e.g. "Stockholm office"
+}
+
 export interface Company {
   id: string
   name: string
@@ -40,8 +48,9 @@ export interface Company {
   website: string
   city: string
   country: string
-  lat?: number
+  lat?: number          // HQ
   lng?: number
+  offices?: CompanyOffice[]  // additional locations
   description: string
   aum?: string
   employees?: string

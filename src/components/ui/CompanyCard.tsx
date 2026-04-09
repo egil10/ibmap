@@ -1,6 +1,6 @@
 'use client'
 
-import { X, ExternalLink, MapPin, BarChart3, Users } from 'lucide-react'
+import { X, ExternalLink, MapPin, BarChart3, Users, Building2 } from 'lucide-react'
 import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
 
@@ -82,6 +82,22 @@ export default function CompanyCard({ company, onClose }: Props) {
               <StatRow icon={<MapPin size={12} />} label="Location" value={`${company.city}, ${company.country}`} pin={colors.pin} />
             )}
           </div>
+
+          {/* Additional offices */}
+          {company.offices && company.offices.length > 0 && (
+            <div className="pt-1">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-300 mb-1.5">Also present in</p>
+              <div className="flex flex-wrap gap-1.5">
+                {company.offices.map((office, i) => (
+                  <span key={i}
+                    className="inline-flex items-center gap-1 rounded-lg bg-slate-50 border border-slate-100 px-2 py-1 text-[11px] font-medium text-slate-600">
+                    <Building2 size={9} className="text-slate-400" />
+                    {office.city}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Category full name */}
           <div className="pt-1">
