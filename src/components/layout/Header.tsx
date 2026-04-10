@@ -29,10 +29,12 @@ const ALL_CITIES: City[] = [
   { name: 'Gothenburg',   country: 'Sweden',  lat: 57.7089, lng: 11.9746, zoom: 13 },
   { name: 'Copenhagen',   country: 'Denmark', lat: 55.6761, lng: 12.5683, zoom: 12 },
   { name: 'Helsinki',     country: 'Finland', lat: 60.1699, lng: 24.9384, zoom: 12 },
-  { name: 'Nordic view',  country: '',        lat: 63.5,    lng: 13.5,    zoom: 4  },
+  { name: 'Reykjavik',    country: 'Iceland', lat: 64.1466, lng: -21.9426, zoom: 12 },
+  { name: 'Nordic view',  country: '',        lat: 64.2,    lng: 8.5,     zoom: 3.45  },
 ]
 
 const MIN_COMPANIES = 5
+const ALWAYS_VISIBLE_CITIES = new Set(['Nordic view', 'Helsinki', 'Reykjavik'])
 
 interface Props {
   view: AppView
@@ -82,7 +84,7 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
       counts[key] = (counts[key] ?? 0) + 1
     }
     return ALL_CITIES.filter(city =>
-      city.name === 'Nordic view' || (counts[city.name.toLowerCase()] ?? 0) >= MIN_COMPANIES
+      ALWAYS_VISIBLE_CITIES.has(city.name) || (counts[city.name.toLowerCase()] ?? 0) >= MIN_COMPANIES
     )
   }, [])
 

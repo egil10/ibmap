@@ -9,8 +9,8 @@ import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT, MapStyleKey, M
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
-const INITIAL_VIEW = { longitude: 13.5, latitude: 63.5, zoom: 4.0 }
-const MAX_BOUNDS: [[number, number], [number, number]] = [[-25, 34], [50, 75]]
+const INITIAL_VIEW = { longitude: 8.5, latitude: 64.2, zoom: 3.45 }
+const MAX_BOUNDS: [[number, number], [number, number]] = [[-32, 34], [50, 76]]
 
 const WORLD_MASK_GEOJSON = {
   type: 'Feature' as const,
@@ -37,7 +37,7 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
       : attempt === 2
         ? `https://logo.clearbit.com/${domain}`
         : null
-  const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
+  const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else if (attempt === 1 && domain) setAttempt(2); else setAttempt(3) }
   const sz = isSelected ? 34 : 26
 
   const tooltipBg    = darkMode ? 'rgba(0,0,0,0.96)'  : 'rgba(255,255,255,0.96)'
@@ -57,7 +57,7 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
           border: isSelected ? `2px solid rgba(0,0,0,0.2)` : `1.5px solid rgba(0,0,0,0.1)`,
         }}
       >
-        {attempt < 2 && src ? (
+        {attempt < 3 && src ? (
           <img src={src} alt="" key={attempt} className="w-full h-full object-contain" onError={handleError}
             style={{ padding: sz > 28 ? 3 : 2, overflow: 'hidden', borderRadius: '50%' }} />
         ) : (
@@ -90,7 +90,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
       : attempt === 2
         ? `https://logo.clearbit.com/${domain}`
         : null
-  const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
+  const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else if (attempt === 1 && domain) setAttempt(2); else setAttempt(3) }
   const sz = 20
 
   const tooltipBg   = darkMode ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.96)'
@@ -107,7 +107,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
           opacity: isSelected ? 1 : 0.78,
         }}
       >
-        {attempt < 2 && src ? (
+        {attempt < 3 && src ? (
           <img src={src} alt="" key={attempt} className="w-full h-full object-contain rounded-full" onError={handleError}
             style={{ padding: 2 }} />
         ) : (
