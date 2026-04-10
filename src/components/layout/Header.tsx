@@ -148,13 +148,15 @@ export default function Header({
   const brandBdr = dm ? 'border-white/[0.08]' : 'border-slate-100'
   const btnActive = dm ? 'text-slate-100 bg-white/[0.09]' : 'text-slate-800 bg-slate-100/80'
   const btnInactive = dm ? 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.07]' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/70'
-  const hqActive = dm ? 'border-white/[0.25] bg-white/[0.10] text-slate-200' : 'border-slate-300 bg-slate-100 text-slate-800'
-  const hqInactive = dm ? 'border-transparent text-slate-500 hover:text-slate-300 hover:bg-white/[0.07]' : 'border-transparent text-slate-400 hover:text-slate-700 hover:bg-slate-100/70'
-  const hqDisabled = dm ? 'border-transparent text-white/[0.15] cursor-default' : 'border-transparent text-slate-300 cursor-default'
-  const hqDot = (active: boolean, disabled: boolean) =>
-    disabled ? (dm ? 'bg-white/[0.15]' : 'bg-slate-200')
-    : active ? (dm ? 'bg-slate-300' : 'bg-slate-600')
-    : (dm ? 'bg-slate-600' : 'bg-slate-300')
+  const officeToggleShell = dm
+    ? 'relative flex h-9 items-center rounded-full border border-white/[0.08] bg-white/[0.04] p-1'
+    : 'relative flex h-9 items-center rounded-full border border-slate-200 bg-slate-100/80 p-1'
+  const officeToggleThumb = dm
+    ? 'absolute top-1 bottom-1 w-[calc(50%-0.125rem)] rounded-full bg-white/[0.12] transition-transform duration-200 ease-out'
+    : 'absolute top-1 bottom-1 w-[calc(50%-0.125rem)] rounded-full bg-white transition-transform duration-200 ease-out shadow-[0_1px_3px_rgba(15,23,42,0.10)]'
+  const officeLabelActive = dm ? 'text-slate-100' : 'text-slate-900'
+  const officeLabelInactive = dm ? 'text-slate-500 hover:text-slate-300' : 'text-slate-500 hover:text-slate-700'
+  const officeLabelDisabled = dm ? 'text-white/[0.18]' : 'text-slate-300'
 
   const desktopDropBtn = (open: boolean) => dm
     ? `flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-[13px] font-semibold transition-all duration-150 border ${open ? 'border-white/[0.14] bg-white/[0.09] text-slate-100' : 'border-transparent text-slate-400 hover:text-slate-100 hover:bg-white/[0.07]'}`
@@ -216,14 +218,27 @@ export default function Header({
               </button>
             </div>
 
-            <button
-              onClick={view === 'map' ? onToggleOffices : undefined}
-              className={`ml-1 hidden items-center gap-1 rounded-xl border px-2.5 py-1.5 text-[12px] font-semibold transition-all duration-150 md:flex ${view !== 'map' ? hqDisabled : showOffices ? hqActive : hqInactive}`}
+            <div
+              className={`ml-1 hidden md:flex ${officeToggleShell} ${view !== 'map' ? 'opacity-60' : ''}`}
               title={view !== 'map' ? 'Switch to map view to toggle offices' : showOffices ? 'Showing all offices' : 'Showing HQ only'}
             >
-              <span className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${hqDot(showOffices, view !== 'map')}`} />
-              <span className="hidden sm:inline">{showOffices ? 'All' : 'HQ'}</span>
-            </button>
+              <span
+                className={officeToggleThumb}
+                style={{ transform: `translateX(${showOffices ? '100%' : '0%'})` }}
+              />
+              <button
+                onClick={view === 'map' && showOffices ? onToggleOffices : undefined}
+                className={`relative z-10 flex min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : !showOffices ? officeLabelActive : officeLabelInactive}`}
+              >
+                HQ
+              </button>
+              <button
+                onClick={view === 'map' && !showOffices ? onToggleOffices : undefined}
+                className={`relative z-10 flex min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : showOffices ? officeLabelActive : officeLabelInactive}`}
+              >
+                All
+              </button>
+            </div>
 
             <div className="hidden flex-1 md:block" />
 
@@ -390,14 +405,27 @@ export default function Header({
               )}
             </div>
 
-            <button
-              onClick={view === 'map' ? onToggleOffices : undefined}
-              className={`${mobileActionBtn} ${view !== 'map' ? 'opacity-50' : showOffices ? (dm ? 'bg-white/[0.09] text-slate-100' : 'bg-slate-100 text-slate-900') : ''}`}
+            <div
+              className={`${officeToggleShell} ${view !== 'map' ? 'opacity-60' : ''}`}
               title={view !== 'map' ? 'Switch to map view to toggle offices' : showOffices ? 'Showing all offices' : 'Showing HQ only'}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${hqDot(showOffices, view !== 'map')}`} />
-              <span className="truncate">{showOffices ? 'Offices' : 'HQ only'}</span>
-            </button>
+              <span
+                className={officeToggleThumb}
+                style={{ transform: `translateX(${showOffices ? '100%' : '0%'})` }}
+              />
+              <button
+                onClick={view === 'map' && showOffices ? onToggleOffices : undefined}
+                className={`relative z-10 flex min-w-0 flex-1 items-center justify-center rounded-full px-2 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : !showOffices ? officeLabelActive : officeLabelInactive}`}
+              >
+                HQ
+              </button>
+              <button
+                onClick={view === 'map' && !showOffices ? onToggleOffices : undefined}
+                className={`relative z-10 flex min-w-0 flex-1 items-center justify-center rounded-full px-2 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : showOffices ? officeLabelActive : officeLabelInactive}`}
+              >
+                All
+              </button>
+            </div>
 
             <button onClick={onRandomCompany} className={mobileActionBtn} title="Show a random company on the map">
               <Shuffle size={12} strokeWidth={2.3} />
