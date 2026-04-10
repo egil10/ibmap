@@ -259,18 +259,20 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
             )}
           </div>
 
-          {/* Map style cycle toggle */}
-          <button
-            onClick={() => {
-              const keys: MapStyleKey[] = ['minimal', 'detailed', 'vivid']
-              const idx = keys.indexOf(mapStyleKey)
-              onMapStyleChange(keys[(idx + 1) % keys.length])
-            }}
-            className={iconBtn}
-            title={`Map: ${MAP_STYLES[mapStyleKey].label} — click to cycle`}
-          >
-            {MAP_STYLE_ICONS[mapStyleKey]}
-          </button>
+          {/* Map style cycle toggle — hidden in dark mode (single dark tile) */}
+          {!darkMode && (
+            <button
+              onClick={() => {
+                const keys: MapStyleKey[] = ['minimal', 'detailed', 'vivid']
+                const idx = keys.indexOf(mapStyleKey)
+                onMapStyleChange(keys[(idx + 1) % keys.length])
+              }}
+              className={iconBtn}
+              title={`Map: ${MAP_STYLES[mapStyleKey].label} — click to cycle`}
+            >
+              {MAP_STYLE_ICONS[mapStyleKey]}
+            </button>
+          )}
 
           {/* Dark mode toggle */}
           <button

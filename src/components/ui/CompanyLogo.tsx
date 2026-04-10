@@ -22,6 +22,7 @@ export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl
 
   const sources = [
     `/logos/${company.id}.png`,
+    domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256` : null,
     domain ? `https://logo.clearbit.com/${domain}` : null,
   ]
 

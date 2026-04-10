@@ -30,7 +30,13 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
   const short = CATEGORY_SHORT[company.category]
   const [attempt, setAttempt] = useState(0)
   const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
-  const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
+  const src = attempt === 0
+    ? `/logos/${company.id}.png`
+    : attempt === 1
+      ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
+      : attempt === 2
+        ? `https://logo.clearbit.com/${domain}`
+        : null
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = isSelected ? 34 : 26
 
@@ -77,7 +83,13 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
   const short = CATEGORY_SHORT[company.category]
   const [attempt, setAttempt] = useState(0)
   const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
-  const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
+  const src = attempt === 0
+    ? `/logos/${company.id}.png`
+    : attempt === 1
+      ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
+      : attempt === 2
+        ? `https://logo.clearbit.com/${domain}`
+        : null
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = 20
 
