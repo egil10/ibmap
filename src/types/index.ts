@@ -72,6 +72,7 @@ export interface Company {
   name: string
   category: CompanyCategory
   website: string
+  address?: string
   city: string
   country: string
   lat?: number          // HQ

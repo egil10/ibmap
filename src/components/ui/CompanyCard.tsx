@@ -12,6 +12,7 @@ interface Props {
 
 export default function CompanyCard({ company, onClose, darkMode }: Props) {
   const dm = darkMode
+  const hqAddress = company.address ?? `${company.city}, ${company.country}`
 
   const cardBg   = dm ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.94)'
   const cardBdr  = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
@@ -80,6 +81,14 @@ export default function CompanyCard({ company, onClose, darkMode }: Props) {
           {company.description && (
             <p className="text-[13px] leading-relaxed" style={{ color: textSecond }}>{company.description}</p>
           )}
+
+          <div className="rounded-2xl px-3.5 py-3" style={{ background: statBg, border: `1px solid ${statBdr}` }}>
+            <p className="mb-1 text-[9px] font-bold uppercase tracking-widest" style={{ color: textMuted }}>HQ Address</p>
+            <p className="flex items-start gap-1.5 text-[12px] font-medium leading-relaxed" style={{ color: textSecond }}>
+              <MapPin size={11} strokeWidth={2.5} style={{ color: textMuted, marginTop: 2, flexShrink: 0 }} />
+              <span>{hqAddress}</span>
+            </p>
+          </div>
 
           {(company.aum || company.employees) && (
             <div className="flex gap-2">
