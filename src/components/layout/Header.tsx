@@ -1,6 +1,6 @@
 'use client'
 
-import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, Layers } from 'lucide-react'
+import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, Layers, ScanLine, AlignJustify, Sparkles } from 'lucide-react'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { FilterCategory, FILTER_CATEGORIES, companies } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
@@ -63,9 +63,9 @@ function useDropdown() {
 
 // Map style icons
 const MAP_STYLE_ICONS: Record<MapStyleKey, React.ReactNode> = {
-  light:    <Sun    size={12} strokeWidth={2.2} />,
-  detailed: <Layers size={12} strokeWidth={2.2} />,
-  dark:     <Moon   size={12} strokeWidth={2.2} />,
+  minimal:  <ScanLine      size={12} strokeWidth={2.2} />,
+  detailed: <AlignJustify  size={12} strokeWidth={2.2} />,
+  vivid:    <Sparkles      size={12} strokeWidth={2.2} />,
 }
 
 export default function Header({ view, onViewChange, filter, onFilterChange, onCitySelect, showOffices, onToggleOffices, mapStyleKey, onMapStyleChange, darkMode, onToggleDark }: Props) {

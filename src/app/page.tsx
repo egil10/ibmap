@@ -25,7 +25,7 @@ export default function Home() {
   const [view, setView] = useState<AppView>('map')
   const [filter, setFilter] = useState<FilterCategory>('ALL')
   const [showOffices, setShowOffices] = useState(false)
-  const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('light')
+  const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('minimal')
   const [darkMode, setDarkMode] = useState(false)
   const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
 

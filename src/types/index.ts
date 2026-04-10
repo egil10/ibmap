@@ -1,9 +1,24 @@
-export type MapStyleKey = 'light' | 'detailed' | 'dark'
+export type MapStyleKey = 'minimal' | 'detailed' | 'vivid'
 
-export const MAP_STYLES: Record<MapStyleKey, { label: string; url: string; maskColor: string; maskOpacity: number }> = {
-  light:    { label: 'Light',    url: 'https://tiles.openfreemap.org/styles/positron',                    maskColor: '#f0f4f8', maskOpacity: 0.88 },
-  detailed: { label: 'Detailed', url: 'https://tiles.openfreemap.org/styles/liberty',                     maskColor: '#dde4ef', maskOpacity: 0.72 },
-  dark:     { label: 'Dark',     url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.78 },
+interface MapStyleVariant { url: string; maskColor: string; maskOpacity: number }
+export interface MapStyleOption { label: string; light: MapStyleVariant; dark: MapStyleVariant }
+
+export const MAP_STYLES: Record<MapStyleKey, MapStyleOption> = {
+  minimal: {
+    label: 'Minimal',
+    light: { url: 'https://tiles.openfreemap.org/styles/positron', maskColor: '#f0f4f8', maskOpacity: 0.88 },
+    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.78 },
+  },
+  detailed: {
+    label: 'Detailed',
+    light: { url: 'https://tiles.openfreemap.org/styles/liberty',  maskColor: '#dde4ef', maskOpacity: 0.72 },
+    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.75 },
+  },
+  vivid: {
+    label: 'Vivid',
+    light: { url: 'https://tiles.openfreemap.org/styles/bright',   maskColor: '#e8edf5', maskOpacity: 0.68 },
+    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.72 },
+  },
 }
 
 export type CompanyCategory =

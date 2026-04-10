@@ -10,7 +10,7 @@ import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
 const INITIAL_VIEW = { longitude: 13.5, latitude: 63.5, zoom: 4.0 }
-const MAX_BOUNDS: [[number, number], [number, number]] = [[-10, 52], [40, 73]]
+const MAX_BOUNDS: [[number, number], [number, number]] = [[-25, 34], [50, 75]]
 
 const WORLD_MASK_GEOJSON = {
   type: 'Feature' as const,
@@ -18,7 +18,7 @@ const WORLD_MASK_GEOJSON = {
     type: 'Polygon' as const,
     coordinates: [
       [[-180, -90], [-180, 90], [180, 90], [180, -90], [-180, -90]],
-      [[-10, 52], [-10, 73], [40, 73], [40, 52], [-10, 52]],
+      [[-25, 34], [-25, 75], [50, 75], [50, 34], [-25, 34]],
     ],
   },
 }
@@ -160,11 +160,14 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
 
+  // Derive active tile variant from style + dark mode
+  const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
+
   // Keep refs current so the style.load handler always uses latest values
-  const maskColorRef   = useRef(MAP_STYLES[mapStyleKey].maskColor)
-  const maskOpacityRef = useRef(MAP_STYLES[mapStyleKey].maskOpacity)
-  maskColorRef.current   = MAP_STYLES[mapStyleKey].maskColor
-  maskOpacityRef.current = MAP_STYLES[mapStyleKey].maskOpacity
+  const maskColorRef   = useRef(activeVariant.maskColor)
+  const maskOpacityRef = useRef(activeVariant.maskOpacity)
+  maskColorRef.current   = activeVariant.maskColor
+  maskOpacityRef.current = activeVariant.maskOpacity
 
   useEffect(() => {
     onRegisterFlyTo?.((lat, lng, zoom) => {
@@ -230,7 +233,7 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
         ref={mapRef}
         initialViewState={INITIAL_VIEW}
         style={{ width: '100%', height: '100%' }}
-        mapStyle={MAP_STYLES[mapStyleKey].url}
+        mapStyle={activeVariant.url}
         attributionControl={false}
         renderWorldCopies={false}
         maxBounds={MAX_BOUNDS}
