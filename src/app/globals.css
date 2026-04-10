@@ -121,7 +121,8 @@ html, body {
   gap: 8px;
   width: max-content;
   padding: 2px 16px;
-  animation: banner-scroll 120s linear infinite;
+  animation: banner-scroll linear infinite;
+  will-change: transform;
 }
 
 /* Pause on hover */
