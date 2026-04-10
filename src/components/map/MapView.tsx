@@ -195,6 +195,7 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
+  const lastAutoFitFilterRef = useRef<FilterCategory | null>(null)
 
   const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
 
@@ -207,6 +208,55 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
   const mappedCompanies = companies.filter(company => company.lat != null && company.lng != null)
   const filteredCompanies = mappedCompanies.filter(company => filter === 'ALL' || company.category === filter)
   const jitteredFiltered = jitterMarkers(filteredCompanies)
+
+  useEffect(() => {
+    if (!mapRef.current || filteredCompanies.length === 0) return
+    if (lastAutoFitFilterRef.current === filter) return
+
+    lastAutoFitFilterRef.current = filter
+
+    if (filter === 'ALL') {
+      mapRef.current?.flyTo({
+        center: [INITIAL_VIEW.longitude, INITIAL_VIEW.latitude],
+        zoom: INITIAL_VIEW.zoom,
+        duration: 900,
+        essential: true,
+      })
+      return
+    }
+
+    const points = filteredCompanies
+      .filter(company => company.lat != null && company.lng != null)
+      .map(company => [company.lng as number, company.lat as number] as [number, number])
+
+    if (points.length === 0) return
+    if (points.length === 1) {
+      mapRef.current?.flyTo({
+        center: points[0],
+        zoom: 6,
+        duration: 900,
+        essential: true,
+      })
+      return
+    }
+
+    let minLng = points[0][0]
+    let maxLng = points[0][0]
+    let minLat = points[0][1]
+    let maxLat = points[0][1]
+
+    for (const [lng, lat] of points) {
+      minLng = Math.min(minLng, lng)
+      maxLng = Math.max(maxLng, lng)
+      minLat = Math.min(minLat, lat)
+      maxLat = Math.max(maxLat, lat)
+    }
+
+    mapRef.current?.fitBounds(
+      [[minLng, minLat], [maxLng, maxLat]],
+      { padding: { top: 110, right: 60, bottom: 120, left: 60 }, duration: 900, essential: true, maxZoom: 6.2 }
+    )
+  }, [filter, filteredCompanies])
 
   const flyTo = useCallback((lat: number, lng: number) => {
     mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
