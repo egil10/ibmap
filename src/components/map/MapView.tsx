@@ -305,7 +305,7 @@ function CompanyBanner({
                 }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />
-                <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap max-w-[110px] truncate">
+                <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap">
                   {company.name}
                 </span>
               </button>
