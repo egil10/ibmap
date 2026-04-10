@@ -65,16 +65,16 @@ export default function CompanyCard({ company, onClose, darkMode, onPrevious, on
         <div className="flex items-start gap-3 px-5 pt-5 pb-4">
           <CompanyLogo company={company} size={46} rounded="rounded-2xl" wide />
 
-          <div className="min-w-0 flex-1 pt-0.5">
+          <div className="min-w-0 flex-1 min-h-[3.9rem] pt-0.5">
             <p className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: textMuted }}>
               {CATEGORY_SHORT[company.category]} · {company.category}
             </p>
-            <h2 className="text-[15px] font-bold leading-snug tracking-tight" style={{ color: textPrimary }}>
+            <h2 className="min-h-[2.5rem] line-clamp-2 text-[15px] font-bold leading-snug tracking-tight" style={{ color: textPrimary }} title={company.name}>
               {company.name}
             </h2>
-            <p className="mt-0.5 flex items-center gap-1 text-[11px]" style={{ color: textMuted }}>
+            <p className="mt-0.5 flex items-center gap-1 text-[11px]" style={{ color: textMuted }} title={`${company.city}, ${company.country}`}>
               <MapPin size={9} strokeWidth={2.5} />
-              {company.city}, {company.country}
+              <span className="truncate">{company.city}, {company.country}</span>
             </p>
           </div>
 
