@@ -299,11 +299,9 @@ function CompanyBanner({
               <button
                 key={`${company.id}-${i}`}
                 onClick={() => onSelect(company)}
-                className="banner-item flex items-center gap-2 rounded-2xl px-3 py-1.5 transition-all duration-200 flex-shrink-0"
+                className="banner-item flex items-center gap-2 px-3 py-1.5 transition-all duration-200 flex-shrink-0"
                 style={{
-                  background: isActive ? 'rgba(226,232,240,1)' : 'rgba(248,250,252,0.9)',
-                  border: `1.5px solid ${isActive ? 'rgba(0,0,0,0.14)' : 'rgba(0,0,0,0.06)'}`,
-                  boxShadow: isActive ? '0 2px 8px rgba(0,0,0,0.07)' : '0 1px 3px rgba(0,0,0,0.04)',
+                  background: isActive ? 'rgba(226,232,240,1)' : 'transparent',
                 }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />
