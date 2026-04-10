@@ -23,11 +23,14 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
       ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
       : attempt === 2
         ? `https://logo.clearbit.com/${domain}`
-        : null
+        : attempt === 3
+          ? '/logos/_placeholder.svg'
+          : null
   const handleError = () => {
     if (attempt === 0 && domain) setAttempt(1)
     else if (attempt === 1 && domain) setAttempt(2)
-    else setAttempt(3)
+    else if (attempt === 2) setAttempt(3)
+    else setAttempt(4)
   }
   const sz = isSelected ? 34 : 26
 
@@ -51,7 +54,7 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
           border: isSelected ? '2px solid rgba(0,0,0,0.2)' : '1.5px solid rgba(0,0,0,0.1)',
         }}
       >
-        {attempt < 3 && src ? (
+        {attempt < 4 && src ? (
           <img
             src={src}
             alt=""
@@ -91,11 +94,14 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
       ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
       : attempt === 2
         ? `https://logo.clearbit.com/${domain}`
-        : null
+        : attempt === 3
+          ? '/logos/_placeholder.svg'
+          : null
   const handleError = () => {
     if (attempt === 0 && domain) setAttempt(1)
     else if (attempt === 1 && domain) setAttempt(2)
-    else setAttempt(3)
+    else if (attempt === 2) setAttempt(3)
+    else setAttempt(4)
   }
   const sz = 20
 
@@ -114,7 +120,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
           opacity: isSelected ? 1 : 0.78,
         }}
       >
-        {attempt < 3 && src ? (
+        {attempt < 4 && src ? (
           <img
             src={src}
             alt=""
