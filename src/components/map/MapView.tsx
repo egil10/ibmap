@@ -5,6 +5,7 @@ import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies, FilterCategory } from '@/data/companies'
 import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT, MapStyleKey, MAP_STYLES } from '@/types'
+import type { ActiveFilters } from '@/app/page'
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
@@ -206,8 +207,11 @@ function buildNavigationSequence(anchor: Company | null, list: Company[]) {
 }
 
 interface Props {
-  filter: FilterCategory
-  onFilterChange: (f: FilterCategory) => void
+  filters: ActiveFilters
+  onApplyCategoryFilter: (category: FilterCategory) => void
+  onApplyCountryFilter: (country: string) => void
+  onApplyCityFilter: (city: string, country: string) => void
+  onClearFilters: () => void
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
   onRegisterRandomCompany?: (fn: () => void) => void
   showOffices?: boolean
@@ -215,11 +219,22 @@ interface Props {
   darkMode: boolean
 }
 
-export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompany, showOffices = false, mapStyleKey, darkMode }: Props) {
+export default function MapView({
+  filters,
+  onApplyCategoryFilter,
+  onApplyCountryFilter,
+  onApplyCityFilter,
+  onClearFilters,
+  onRegisterFlyTo,
+  onRegisterRandomCompany,
+  showOffices = false,
+  mapStyleKey,
+  darkMode,
+}: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
-  const lastAutoFitFilterRef = useRef<FilterCategory | null>(null)
+  const lastAutoFitKeyRef = useRef<string | null>(null)
 
   const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
 
@@ -230,7 +245,11 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
   }, [onRegisterFlyTo])
 
   const mappedCompanies = companies.filter(company => company.lat != null && company.lng != null)
-  const filteredCompanies = mappedCompanies.filter(company => filter === 'ALL' || company.category === filter)
+  const filteredCompanies = mappedCompanies.filter(company =>
+    (filters.category === 'ALL' || company.category === filters.category) &&
+    (!filters.country || company.country === filters.country) &&
+    (!filters.city || company.city === filters.city)
+  )
   const jitteredFiltered = jitterMarkers(filteredCompanies)
   const navigationCompanies = useMemo(
     () => buildNavigationSequence(selected, filteredCompanies),
@@ -240,11 +259,12 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
 
   useEffect(() => {
     if (!mapRef.current || filteredCompanies.length === 0) return
-    if (lastAutoFitFilterRef.current === filter) return
+    const filterKey = JSON.stringify(filters)
+    if (lastAutoFitKeyRef.current === filterKey) return
 
-    lastAutoFitFilterRef.current = filter
+    lastAutoFitKeyRef.current = filterKey
 
-    if (filter === 'ALL') {
+    if (filters.category === 'ALL' && !filters.country && !filters.city) {
       mapRef.current?.flyTo({
         center: [INITIAL_VIEW.longitude, INITIAL_VIEW.latitude],
         zoom: INITIAL_VIEW.zoom,
@@ -285,7 +305,7 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
       [[minLng, minLat], [maxLng, maxLat]],
       { padding: { top: 110, right: 60, bottom: 120, left: 60 }, duration: 900, essential: true, maxZoom: 6.2 }
     )
-  }, [filter, filteredCompanies])
+  }, [filters, filteredCompanies])
 
   const flyTo = useCallback((lat: number, lng: number) => {
     mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
@@ -402,6 +422,11 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
           onNext={navigationCompanies.length > 1 ? () => selectRelativeCompany(1) : undefined}
           onRandom={filteredCompanies.length > 0 ? selectRandomCompany : undefined}
           navigationLabel={selectedIndex >= 0 ? `${selectedIndex + 1} / ${navigationCompanies.length}` : undefined}
+          filters={filters}
+          onApplyCategoryFilter={onApplyCategoryFilter}
+          onApplyCountryFilter={onApplyCountryFilter}
+          onApplyCityFilter={onApplyCityFilter}
+          onClearFilters={onClearFilters}
         />
       )}
 

@@ -20,10 +20,15 @@ const MapView = dynamic(() => import('@/components/map/MapView'), {
 })
 
 export type AppView = 'map' | 'companies'
+export interface ActiveFilters {
+  category: FilterCategory
+  country: string | null
+  city: string | null
+}
 
 export default function Home() {
   const [view, setView] = useState<AppView>('map')
-  const [filter, setFilter] = useState<FilterCategory>('ALL')
+  const [filters, setFilters] = useState<ActiveFilters>({ category: 'ALL', country: null, city: null })
   const [showOffices, setShowOffices] = useState(false)
   const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('minimal')
   const [darkMode, setDarkMode] = useState(false)
@@ -39,8 +44,6 @@ export default function Home() {
       <Header
         view={view}
         onViewChange={(v) => { setView(v) }}
-        filter={filter}
-        onFilterChange={setFilter}
         onCitySelect={(lat, lng, zoom) => {
           setView('map')
           flyToRef.current?.(lat, lng, zoom)
@@ -59,8 +62,19 @@ export default function Home() {
 
       {view === 'map' ? (
         <MapView
-          filter={filter}
-          onFilterChange={setFilter}
+          filters={filters}
+          onApplyCategoryFilter={(category) => setFilters(current => ({ ...current, category: current.category === category ? 'ALL' : category }))}
+          onApplyCountryFilter={(country) => setFilters(current => ({
+            ...current,
+            country: current.country === country ? null : country,
+            city: current.country === country ? current.city : current.city && current.country !== country ? null : current.city,
+          }))}
+          onApplyCityFilter={(city, country) => setFilters(current => ({
+            ...current,
+            city: current.city === city ? null : city,
+            country: current.city === city ? current.country : country,
+          }))}
+          onClearFilters={() => setFilters({ category: 'ALL', country: null, city: null })}
           onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
           onRegisterRandomCompany={(fn) => { randomCompanyRef.current = fn }}
           showOffices={showOffices}
@@ -69,7 +83,7 @@ export default function Home() {
         />
       ) : (
         <CompanyTable
-          filter={filter}
+          filters={filters}
           onViewOnMap={(company) => {
             setView('map')
             if (company.lat != null && company.lng != null) {

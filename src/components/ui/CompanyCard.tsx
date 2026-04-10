@@ -1,6 +1,8 @@
 'use client'
 
-import { X, ExternalLink, MapPin, BarChart3, Users, Building2, ChevronLeft, ChevronRight, Shuffle } from 'lucide-react'
+import { X, ExternalLink, MapPin, BarChart3, Users, Building2, ChevronLeft, ChevronRight, Shuffle, Tags } from 'lucide-react'
+import { FilterCategory } from '@/data/companies'
+import type { ActiveFilters } from '@/app/page'
 import { Company, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
 
@@ -12,11 +14,30 @@ interface Props {
   onNext?: () => void
   onRandom?: () => void
   navigationLabel?: string
+  filters: ActiveFilters
+  onApplyCategoryFilter: (category: FilterCategory) => void
+  onApplyCountryFilter: (country: string) => void
+  onApplyCityFilter: (city: string, country: string) => void
+  onClearFilters: () => void
 }
 
-export default function CompanyCard({ company, onClose, darkMode, onPrevious, onNext, onRandom, navigationLabel }: Props) {
+export default function CompanyCard({
+  company,
+  onClose,
+  darkMode,
+  onPrevious,
+  onNext,
+  onRandom,
+  navigationLabel,
+  filters,
+  onApplyCategoryFilter,
+  onApplyCountryFilter,
+  onApplyCityFilter,
+  onClearFilters,
+}: Props) {
   const dm = darkMode
   const hqAddress = company.address ?? `${company.city}, ${company.country}`
+  const hasActiveFilters = filters.category !== 'ALL' || Boolean(filters.country) || Boolean(filters.city)
 
   const cardBg   = dm ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.94)'
   const cardBdr  = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
@@ -48,6 +69,13 @@ export default function CompanyCard({ company, onClose, darkMode, onPrevious, on
     : 'flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900'
   const navPillBg = dm ? 'rgba(255,255,255,0.05)' : '#f8fafc'
   const navPillBdr = dm ? 'rgba(255,255,255,0.07)' : '#e2e8f0'
+  const filterPill = (active: boolean) => active
+    ? dm
+      ? 'border-emerald-400/40 bg-emerald-400/15 text-emerald-200'
+      : 'border-emerald-200 bg-emerald-50 text-emerald-700'
+    : dm
+      ? 'border-white/[0.08] bg-white/[0.04] text-slate-300 hover:border-white/[0.14] hover:bg-white/[0.08]'
+      : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:bg-slate-100'
 
   return (
     <div className="animate-slide-up md:animate-slide-in pointer-events-auto absolute inset-x-3 bottom-3 top-auto z-40 flex max-h-[72vh] flex-col md:inset-x-auto md:bottom-20 md:right-5 md:top-20 md:w-80 md:max-h-none">
@@ -115,6 +143,44 @@ export default function CompanyCard({ company, onClose, darkMode, onPrevious, on
               )}
             </div>
           )}
+
+          <div className="rounded-2xl px-3.5 py-3" style={{ background: navPillBg, border: `1px solid ${navPillBdr}` }}>
+            <div className="mb-2 flex items-center justify-between gap-3">
+              <p className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest" style={{ color: textMuted }}>
+                <Tags size={10} strokeWidth={2.5} />
+                Filter This View
+              </p>
+              {hasActiveFilters && (
+                <button
+                  onClick={onClearFilters}
+                  className="text-[10px] font-semibold uppercase tracking-[0.14em] transition-colors"
+                  style={{ color: textMuted }}
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => onApplyCategoryFilter(company.category)}
+                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-all duration-150 ${filterPill(filters.category === company.category)}`}
+              >
+                {company.category}
+              </button>
+              <button
+                onClick={() => onApplyCountryFilter(company.country)}
+                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-all duration-150 ${filterPill(filters.country === company.country)}`}
+              >
+                {company.country}
+              </button>
+              <button
+                onClick={() => onApplyCityFilter(company.city, company.country)}
+                className={`rounded-full border px-3 py-1.5 text-[11px] font-semibold transition-all duration-150 ${filterPill(filters.city === company.city)}`}
+              >
+                {company.city}
+              </button>
+            </div>
+          </div>
 
           {company.description && (
             <p className="text-[13px] leading-relaxed" style={{ color: textSecond }}>{company.description}</p>

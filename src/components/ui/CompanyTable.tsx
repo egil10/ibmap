@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2 } from 'lucide-react'
-import { companies, FilterCategory } from '@/data/companies'
+import { companies } from '@/data/companies'
+import type { ActiveFilters } from '@/app/page'
 import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
 
@@ -25,11 +26,11 @@ function formatOffice(office: CompanyOffice) {
 }
 
 interface Props {
-  filter: FilterCategory
+  filters: ActiveFilters
   onViewOnMap?: (company: Company) => void
 }
 
-export default function CompanyTable({ filter, onViewOnMap }: Props) {
+export default function CompanyTable({ filters, onViewOnMap }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
 
@@ -39,8 +40,10 @@ export default function CompanyTable({ filter, onViewOnMap }: Props) {
   }
 
   const filtered = useMemo(() => companies.filter(company =>
-    filter === 'ALL' || company.category === filter
-  ), [filter])
+    (filters.category === 'ALL' || company.category === filters.category) &&
+    (!filters.country || company.country === filters.country) &&
+    (!filters.city || company.city === filters.city)
+  ), [filters])
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     const vals: Record<SortKey, [string, string]> = {
@@ -66,7 +69,9 @@ export default function CompanyTable({ filter, onViewOnMap }: Props) {
       <div className="flex items-center justify-between px-5 py-2.5">
         <p className="text-[13px] font-semibold text-slate-500">
           <span className="font-bold text-slate-900">{sorted.length}</span> companies
-          {filter !== 'ALL' && <span className="text-slate-400"> · {filter}</span>}
+          {filters.category !== 'ALL' && <span className="text-slate-400"> · {filters.category}</span>}
+          {filters.country && <span className="text-slate-400"> · {filters.country}</span>}
+          {filters.city && <span className="text-slate-400"> · {filters.city}</span>}
         </p>
         <p className="text-[11px] font-medium text-slate-400">
           {sorted.filter(company => company.lat != null).length} with map pin
@@ -105,7 +110,7 @@ export default function CompanyTable({ filter, onViewOnMap }: Props) {
                 <tr>
                   <td colSpan={5} className="px-6 py-20 text-center">
                     <p className="text-sm font-semibold text-slate-400">No companies found</p>
-                    <p className="mt-1 text-xs text-slate-300">Try clearing the filter</p>
+                    <p className="mt-1 text-xs text-slate-300">Try clearing the filters from the map card</p>
                   </td>
                 </tr>
               ) : sorted.map((company) => (
