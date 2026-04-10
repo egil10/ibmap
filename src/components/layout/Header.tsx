@@ -1,6 +1,6 @@
 'use client'
 
-import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, Layers, ScanLine, AlignJustify, Sparkles } from 'lucide-react'
+import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles } from 'lucide-react'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { FilterCategory, FILTER_CATEGORIES, companies } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
@@ -63,15 +63,14 @@ function useDropdown() {
 
 // Map style icons
 const MAP_STYLE_ICONS: Record<MapStyleKey, React.ReactNode> = {
-  minimal:  <ScanLine      size={12} strokeWidth={2.2} />,
-  detailed: <AlignJustify  size={12} strokeWidth={2.2} />,
-  vivid:    <Sparkles      size={12} strokeWidth={2.2} />,
+  minimal:  <ScanLine      size={15} strokeWidth={2} />,
+  detailed: <AlignJustify  size={15} strokeWidth={2} />,
+  vivid:    <Sparkles      size={15} strokeWidth={2} />,
 }
 
 export default function Header({ view, onViewChange, filter, onFilterChange, onCitySelect, showOffices, onToggleOffices, mapStyleKey, onMapStyleChange, darkMode, onToggleDark }: Props) {
   const filterDrop = useDropdown()
   const cityDrop   = useDropdown()
-  const styleDrop  = useDropdown()
 
   const activeColors = filter !== 'ALL' ? CATEGORY_COLORS[filter as CompanyCategory] : null
   const activeLabel  = filter === 'ALL' ? 'All' : CATEGORY_SHORT[filter as CompanyCategory]
@@ -190,7 +189,7 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
           {/* City jump dropdown */}
           <div className="relative shrink-0" ref={cityDrop.ref}>
             <button
-              onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false); styleDrop.setOpen(false) }}
+              onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false) }}
               className={dropBtn(cityDrop.open)}
             >
               <Navigation size={12} strokeWidth={2.5} className="flex-shrink-0" />
@@ -223,7 +222,7 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
           {/* Category filter dropdown */}
           <div className="relative shrink-0" ref={filterDrop.ref}>
             <button
-              onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false); styleDrop.setOpen(false) }}
+              onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
               className={dropBtn(filterDrop.open)}
             >
               {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
@@ -260,37 +259,18 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
             )}
           </div>
 
-          {/* Map style picker */}
-          <div className="relative shrink-0" ref={styleDrop.ref}>
-            <button
-              onClick={() => { styleDrop.setOpen(o => !o); filterDrop.setOpen(false); cityDrop.setOpen(false) }}
-              className={`${iconBtn}${styleDrop.open ? (dm ? ' bg-white/[0.07] text-slate-200' : ' bg-slate-100/70 text-slate-700') : ''}`}
-              title="Map style"
-            >
-              <Layers size={15} strokeWidth={2} />
-            </button>
-
-            {styleDrop.open && (
-              <div
-                className="absolute right-0 top-full mt-2 w-40 rounded-2xl overflow-hidden z-50"
-                style={{ background: dropBg, backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', border: `1px solid ${dropBdr}`, boxShadow: dropShadow }}
-              >
-                <div className="p-1.5">
-                  {(Object.keys(MAP_STYLES) as MapStyleKey[]).map((k) => (
-                    <button
-                      key={k}
-                      onClick={() => { onMapStyleChange(k); styleDrop.setOpen(false) }}
-                      className={itemClass(mapStyleKey === k)}
-                    >
-                      <span className={dm ? 'text-slate-400' : 'text-slate-500'}>{MAP_STYLE_ICONS[k]}</span>
-                      <span className="flex-1">{MAP_STYLES[k].label}</span>
-                      {mapStyleKey === k && <Check size={12} strokeWidth={2.5} className={dm ? 'text-slate-400 flex-shrink-0' : 'text-slate-500 flex-shrink-0'} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          {/* Map style cycle toggle */}
+          <button
+            onClick={() => {
+              const keys: MapStyleKey[] = ['minimal', 'detailed', 'vivid']
+              const idx = keys.indexOf(mapStyleKey)
+              onMapStyleChange(keys[(idx + 1) % keys.length])
+            }}
+            className={iconBtn}
+            title={`Map: ${MAP_STYLES[mapStyleKey].label} — click to cycle`}
+          >
+            {MAP_STYLE_ICONS[mapStyleKey]}
+          </button>
 
           {/* Dark mode toggle */}
           <button
