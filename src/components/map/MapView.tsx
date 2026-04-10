@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies, FilterCategory } from '@/data/companies'
@@ -182,6 +182,29 @@ function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; 
   return out
 }
 
+function compareByLocation(a: Company, b: Company) {
+  return a.country.localeCompare(b.country) || a.city.localeCompare(b.city) || a.name.localeCompare(b.name)
+}
+
+function buildNavigationSequence(anchor: Company | null, list: Company[]) {
+  if (!anchor) return list
+  if (!list.some(company => company.id === anchor.id)) return list
+
+  const sameCity = list
+    .filter(company => company.id !== anchor.id && company.country === anchor.country && company.city === anchor.city)
+    .sort((a, b) => a.name.localeCompare(b.name))
+
+  const sameCountry = list
+    .filter(company => company.id !== anchor.id && company.country === anchor.country && company.city !== anchor.city)
+    .sort((a, b) => a.city.localeCompare(b.city) || a.name.localeCompare(b.name))
+
+  const otherCountries = list
+    .filter(company => company.id !== anchor.id && company.country !== anchor.country)
+    .sort(compareByLocation)
+
+  return [anchor, ...sameCity, ...sameCountry, ...otherCountries]
+}
+
 interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
@@ -209,7 +232,11 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
   const mappedCompanies = companies.filter(company => company.lat != null && company.lng != null)
   const filteredCompanies = mappedCompanies.filter(company => filter === 'ALL' || company.category === filter)
   const jitteredFiltered = jitterMarkers(filteredCompanies)
-  const selectedIndex = selected ? filteredCompanies.findIndex(company => company.id === selected.id) : -1
+  const navigationCompanies = useMemo(
+    () => buildNavigationSequence(selected, filteredCompanies),
+    [filteredCompanies, selected]
+  )
+  const selectedIndex = selected ? navigationCompanies.findIndex(company => company.id === selected.id) : -1
 
   useEffect(() => {
     if (!mapRef.current || filteredCompanies.length === 0) return
@@ -271,11 +298,11 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
   }, [flyTo])
 
   const selectRelativeCompany = useCallback((direction: 1 | -1) => {
-    if (filteredCompanies.length === 0) return
+    if (navigationCompanies.length === 0) return
     const startIndex = selectedIndex >= 0 ? selectedIndex : 0
-    const nextIndex = (startIndex + direction + filteredCompanies.length) % filteredCompanies.length
-    selectCompany(filteredCompanies[nextIndex])
-  }, [filteredCompanies, selectCompany, selectedIndex])
+    const nextIndex = (startIndex + direction + navigationCompanies.length) % navigationCompanies.length
+    selectCompany(navigationCompanies[nextIndex])
+  }, [navigationCompanies, selectCompany, selectedIndex])
 
   const selectRandomCompany = useCallback(() => {
     if (filteredCompanies.length === 0) return
@@ -371,10 +398,10 @@ export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompa
             setBannerPinned(false)
           }}
           darkMode={darkMode}
-          onPrevious={filteredCompanies.length > 1 ? () => selectRelativeCompany(-1) : undefined}
-          onNext={filteredCompanies.length > 1 ? () => selectRelativeCompany(1) : undefined}
+          onPrevious={navigationCompanies.length > 1 ? () => selectRelativeCompany(-1) : undefined}
+          onNext={navigationCompanies.length > 1 ? () => selectRelativeCompany(1) : undefined}
           onRandom={filteredCompanies.length > 0 ? selectRandomCompany : undefined}
-          navigationLabel={selectedIndex >= 0 ? `${selectedIndex + 1} / ${filteredCompanies.length}` : undefined}
+          navigationLabel={selectedIndex >= 0 ? `${selectedIndex + 1} / ${navigationCompanies.length}` : undefined}
         />
       )}
 
