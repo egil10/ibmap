@@ -3,7 +3,7 @@ export type MapStyleKey = 'light' | 'detailed' | 'dark'
 export const MAP_STYLES: Record<MapStyleKey, { label: string; url: string; maskColor: string; maskOpacity: number }> = {
   light:    { label: 'Light',    url: 'https://tiles.openfreemap.org/styles/positron',                    maskColor: '#f0f4f8', maskOpacity: 0.88 },
   detailed: { label: 'Detailed', url: 'https://tiles.openfreemap.org/styles/liberty',                     maskColor: '#dde4ef', maskOpacity: 0.72 },
-  dark:     { label: 'Dark',     url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#0a0f1e', maskOpacity: 0.78 },
+  dark:     { label: 'Dark',     url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.78 },
 }
 
 export type CompanyCategory =

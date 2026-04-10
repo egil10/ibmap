@@ -13,7 +13,7 @@ interface Props {
 export default function CompanyCard({ company, onClose, darkMode }: Props) {
   const dm = darkMode
 
-  const cardBg   = dm ? 'rgba(15,23,42,0.96)'   : 'rgba(255,255,255,0.94)'
+  const cardBg   = dm ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.94)'
   const cardBdr  = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
   const cardShad = dm
     ? '0 20px 60px rgba(0,0,0,0.40), 0 4px 16px rgba(0,0,0,0.20)'

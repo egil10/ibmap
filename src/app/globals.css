@@ -52,7 +52,7 @@ html, body {
 
 /* Dark mode overrides for map controls */
 [data-dark] .maplibregl-ctrl-group {
-  background: rgba(15,23,42,0.88) !important;
+  background: rgba(0,0,0,0.88) !important;
   border: 1px solid rgba(255,255,255,0.10) !important;
   box-shadow: 0 4px 24px rgba(0,0,0,0.24), 0 1px 3px rgba(0,0,0,0.18) !important;
 }
@@ -72,7 +72,7 @@ html, body {
 }
 
 .glass-dark {
-  background: rgba(15,23,42,0.82);
+  background: rgba(0,0,0,0.82);
   backdrop-filter: blur(28px) saturate(180%);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid rgba(255,255,255,0.12);

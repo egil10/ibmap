@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <div
       className="h-screen w-screen overflow-hidden"
-      style={{ background: darkMode ? '#0f172a' : '#f0f4f8' }}
+      style={{ background: darkMode ? '#000000' : '#f0f4f8' }}
       data-dark={darkMode ? 'true' : undefined}
     >
       <Header

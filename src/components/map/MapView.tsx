@@ -34,7 +34,7 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = isSelected ? 34 : 26
 
-  const tooltipBg    = darkMode ? 'rgba(15,23,42,0.96)'  : 'rgba(255,255,255,0.96)'
+  const tooltipBg    = darkMode ? 'rgba(0,0,0,0.96)'  : 'rgba(255,255,255,0.96)'
   const tooltipText  = darkMode ? '#f1f5f9'              : '#334155'
   const tooltipBdr   = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
@@ -81,7 +81,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = 20
 
-  const tooltipBg   = darkMode ? 'rgba(15,23,42,0.96)'   : 'rgba(255,255,255,0.96)'
+  const tooltipBg   = darkMode ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.96)'
   const tooltipText = darkMode ? '#f1f5f9'               : '#334155'
   const tooltipBdr  = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
@@ -300,7 +300,7 @@ function CompanyBanner({
   const doubled  = [...list, ...list]
   const duration = Math.max(60, list.length * 3)
 
-  const bannerBg  = darkMode ? 'rgba(15,23,42,0.94)'   : 'rgba(255,255,255,0.94)'
+  const bannerBg  = darkMode ? 'rgba(0,0,0,0.94)'   : 'rgba(255,255,255,0.94)'
   const bannerBdr = darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
   const textColor = darkMode ? '#cbd5e1'               : '#334155'
   const activeItemBg = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(226,232,240,1)'

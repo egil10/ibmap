@@ -90,12 +90,12 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
   // Theme helpers — keep all classes literal so Tailwind v4 scanner picks them up
   const dm = darkMode
 
-  const navBg     = dm ? 'rgba(15,23,42,0.92)'  : 'rgba(255,255,255,0.88)'
+  const navBg     = dm ? 'rgba(0,0,0,0.92)'  : 'rgba(255,255,255,0.88)'
   const navBorder = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
   const navShadow = dm
     ? '0 4px 24px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.06)'
     : '0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9)'
-  const dropBg  = dm ? 'rgba(15,23,42,0.97)'   : 'rgba(255,255,255,0.96)'
+  const dropBg  = dm ? 'rgba(0,0,0,0.97)'   : 'rgba(255,255,255,0.96)'
   const dropBdr = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
   const dropShadow = dm
     ? '0 8px 32px rgba(0,0,0,0.40), 0 2px 8px rgba(0,0,0,0.20)'
