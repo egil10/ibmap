@@ -27,6 +27,7 @@ export type CompanyCategory =
   | 'Private Equity'
   | 'Venture Capital'
   | 'Investment Banking'
+  | 'Fintech'
   | 'Trading'
   | 'Consulting'
   | 'Holding'
@@ -38,6 +39,7 @@ export const CATEGORY_SHORT: Record<CompanyCategory, string> = {
   'Private Equity':     'PE',
   'Venture Capital':    'VC',
   'Investment Banking': 'IB',
+  'Fintech':            'FT',
   'Trading':            'TR',
   'Consulting':         'CO',
   'Holding':            'HL',
@@ -50,6 +52,7 @@ export const CATEGORY_COLORS: Record<CompanyCategory, { bg: string; text: string
   'Private Equity':     { bg: 'bg-purple-50',  text: 'text-purple-700',  pin: '#9333EA', border: 'border-purple-200' },
   'Venture Capital':    { bg: 'bg-emerald-50', text: 'text-emerald-700', pin: '#059669', border: 'border-emerald-200'},
   'Investment Banking': { bg: 'bg-amber-50',   text: 'text-amber-700',   pin: '#D97706', border: 'border-amber-200'  },
+  'Fintech':            { bg: 'bg-fuchsia-50', text: 'text-fuchsia-700', pin: '#C026D3', border: 'border-fuchsia-200'},
   'Trading':            { bg: 'bg-rose-50',    text: 'text-rose-700',    pin: '#E11D48', border: 'border-rose-200'   },
   'Consulting':         { bg: 'bg-teal-50',    text: 'text-teal-700',    pin: '#0D9488', border: 'border-teal-200'   },
   'Holding':            { bg: 'bg-orange-50',  text: 'text-orange-700',  pin: '#EA580C', border: 'border-orange-200' },

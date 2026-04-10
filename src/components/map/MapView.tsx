@@ -9,8 +9,8 @@ import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT, MapStyleKey, M
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
-const INITIAL_VIEW = { longitude: 8.5, latitude: 64.2, zoom: 3.45 }
-const MAX_BOUNDS: [[number, number], [number, number]] = [[-32, 34], [50, 76]]
+const INITIAL_VIEW = { longitude: 6.5, latitude: 64.4, zoom: 3.1 }
+const MAX_BOUNDS: [[number, number], [number, number]] = [[-36, 33], [52, 77]]
 
 const WORLD_MASK_GEOJSON = {
   type: 'Feature' as const,
