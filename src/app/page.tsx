@@ -33,7 +33,21 @@ export default function Home() {
   const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('minimal')
   const [darkMode, setDarkMode] = useState(false)
   const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
+  const pendingFlyToRef = useRef<{ lat: number; lng: number; zoom: number } | null>(null)
   const randomCompanyRef = useRef<(() => void) | undefined>(undefined)
+
+  const queueFlyTo = (lat: number, lng: number, zoom: number) => {
+    pendingFlyToRef.current = { lat, lng, zoom }
+  }
+
+  const runFlyTo = (lat: number, lng: number, zoom: number) => {
+    if (flyToRef.current) {
+      flyToRef.current(lat, lng, zoom)
+      pendingFlyToRef.current = null
+      return
+    }
+    queueFlyTo(lat, lng, zoom)
+  }
 
   return (
     <div
@@ -44,9 +58,11 @@ export default function Home() {
       <Header
         view={view}
         onViewChange={(v) => { setView(v) }}
+        filter={filters.category}
+        onFilterChange={(category) => setFilters({ category, country: null, city: null })}
         onCitySelect={(lat, lng, zoom) => {
           setView('map')
-          flyToRef.current?.(lat, lng, zoom)
+          runFlyTo(lat, lng, zoom)
         }}
         showOffices={showOffices}
         onToggleOffices={() => setShowOffices(s => !s)}
@@ -63,19 +79,14 @@ export default function Home() {
       {view === 'map' ? (
         <MapView
           filters={filters}
-          onApplyCategoryFilter={(category) => setFilters(current => ({ ...current, category: current.category === category ? 'ALL' : category }))}
-          onApplyCountryFilter={(country) => setFilters(current => ({
-            ...current,
-            country: current.country === country ? null : country,
-            city: current.country === country ? current.city : current.city && current.country !== country ? null : current.city,
-          }))}
-          onApplyCityFilter={(city, country) => setFilters(current => ({
-            ...current,
-            city: current.city === city ? null : city,
-            country: current.city === city ? current.country : country,
-          }))}
-          onClearFilters={() => setFilters({ category: 'ALL', country: null, city: null })}
-          onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
+          onRegisterFlyTo={(fn) => {
+            flyToRef.current = fn
+            if (pendingFlyToRef.current) {
+              const { lat, lng, zoom } = pendingFlyToRef.current
+              fn(lat, lng, zoom)
+              pendingFlyToRef.current = null
+            }
+          }}
           onRegisterRandomCompany={(fn) => { randomCompanyRef.current = fn }}
           showOffices={showOffices}
           mapStyleKey={mapStyleKey}
@@ -87,7 +98,7 @@ export default function Home() {
           onViewOnMap={(company) => {
             setView('map')
             if (company.lat != null && company.lng != null) {
-              setTimeout(() => flyToRef.current?.(company.lat!, company.lng!, 15), 100)
+              runFlyTo(company.lat, company.lng, 15)
             }
           }}
         />

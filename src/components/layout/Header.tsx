@@ -1,9 +1,9 @@
 'use client'
 
-import { Map, LayoutList, Github, ChevronDown, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle } from 'lucide-react'
+import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle } from 'lucide-react'
 import { useState, useRef, useEffect, useMemo } from 'react'
-import { companies } from '@/data/companies'
-import { MapStyleKey, MAP_STYLES } from '@/types'
+import { companies, FilterCategory, FILTER_CATEGORIES } from '@/data/companies'
+import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
 import { AppView } from '@/app/page'
 
 interface City {
@@ -39,6 +39,8 @@ const ALWAYS_VISIBLE_CITIES = new Set(['Nordic view', 'Helsinki', 'Reykjavik'])
 interface Props {
   view: AppView
   onViewChange: (v: AppView) => void
+  filter: FilterCategory
+  onFilterChange: (f: FilterCategory) => void
   onCitySelect: (lat: number, lng: number, zoom: number) => void
   showOffices: boolean
   onToggleOffices: () => void
@@ -102,6 +104,8 @@ function DropdownPanel({
 export default function Header({
   view,
   onViewChange,
+  filter,
+  onFilterChange,
   onCitySelect,
   showOffices,
   onToggleOffices,
@@ -111,7 +115,10 @@ export default function Header({
   onToggleDark,
   onRandomCompany,
 }: Props) {
+  const filterDrop = useDropdown()
   const cityDrop = useDropdown()
+  const activeColors = filter !== 'ALL' ? CATEGORY_COLORS[filter as CompanyCategory] : null
+  const activeLabel = filter === 'ALL' ? 'All' : CATEGORY_SHORT[filter as CompanyCategory]
 
   const cities = useMemo(() => {
     const counts: Record<string, number> = {}
@@ -236,7 +243,7 @@ export default function Header({
 
             <div className="relative hidden shrink-0 md:block" ref={cityDrop.ref}>
               <button
-                onClick={() => { cityDrop.setOpen(o => !o) }}
+                onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false) }}
                 className={desktopDropBtn(cityDrop.open)}
               >
                 <Navigation size={12} strokeWidth={2.5} className="flex-shrink-0" />
@@ -257,6 +264,40 @@ export default function Header({
                         {city.country && <span className={`text-[10px] font-normal ${subText}`}>{city.country}</span>}
                       </button>
                     ))}
+                  </div>
+                </DropdownPanel>
+              )}
+            </div>
+
+            <div className="relative hidden shrink-0 md:block" ref={filterDrop.ref}>
+              <button
+                onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
+                className={desktopDropBtn(filterDrop.open)}
+              >
+                {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
+                <span>{activeLabel}</span>
+                <ChevronDown size={11} strokeWidth={2.5} className={`flex-shrink-0 transition-transform duration-200 ${filterDrop.open ? 'rotate-180' : ''}`} />
+              </button>
+
+              {filterDrop.open && (
+                <DropdownPanel dropBg={dropBg} dropBdr={dropBdr} dropShadow={dropShadow} className="right-0 w-56">
+                  <div className="p-1.5">
+                    {FILTER_CATEGORIES.map((f) => {
+                      const isActive = f === filter
+                      const isAll = f === 'ALL'
+                      const colors = isAll ? null : CATEGORY_COLORS[f as CompanyCategory]
+                      return (
+                        <button
+                          key={f}
+                          onClick={() => { onFilterChange(f); filterDrop.setOpen(false) }}
+                          className={itemClass(isActive)}
+                        >
+                          <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors ? colors.pin : '#cbd5e1' }} />
+                          <span className="flex-1">{isAll ? 'All categories' : f}</span>
+                          {isActive && <Check size={12} strokeWidth={2.5} className={dm ? 'text-slate-400 flex-shrink-0' : 'text-slate-500 flex-shrink-0'} />}
+                        </button>
+                      )
+                    })}
                   </div>
                 </DropdownPanel>
               )}
@@ -295,15 +336,49 @@ export default function Header({
             </a>
           </div>
 
-          <div className="mt-2 grid grid-cols-4 gap-1 md:hidden">
+          <div className="mt-2 grid grid-cols-5 gap-1 md:hidden">
             <button onClick={() => onViewChange(view === 'map' ? 'companies' : 'map')} className={mobileActionBtn}>
               {view === 'map' ? <LayoutList size={13} strokeWidth={2.2} /> : <Map size={13} strokeWidth={2.2} />}
               <span className="truncate">{view === 'map' ? 'List' : 'Map'}</span>
             </button>
 
+            <div className="relative" ref={filterDrop.ref}>
+              <button
+                onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
+                className={mobileActionBtn}
+              >
+                {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
+                <span className="truncate">{activeLabel}</span>
+                <ChevronDown size={11} strokeWidth={2.5} className={`flex-shrink-0 transition-transform duration-200 ${filterDrop.open ? 'rotate-180' : ''}`} />
+              </button>
+
+              {filterDrop.open && (
+                <DropdownPanel dropBg={dropBg} dropBdr={dropBdr} dropShadow={dropShadow} className="left-0 right-0">
+                  <div className="max-h-72 overflow-auto p-1.5 thin-scroll">
+                    {FILTER_CATEGORIES.map((f) => {
+                      const isActive = f === filter
+                      const isAll = f === 'ALL'
+                      const colors = isAll ? null : CATEGORY_COLORS[f as CompanyCategory]
+                      return (
+                        <button
+                          key={f}
+                          onClick={() => { onFilterChange(f); filterDrop.setOpen(false) }}
+                          className={itemClass(isActive)}
+                        >
+                          <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: colors ? colors.pin : '#cbd5e1' }} />
+                          <span className="flex-1 truncate">{isAll ? 'All categories' : f}</span>
+                          {isActive && <Check size={12} strokeWidth={2.5} className={dm ? 'text-slate-400 flex-shrink-0' : 'text-slate-500 flex-shrink-0'} />}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </DropdownPanel>
+              )}
+            </div>
+
             <div className="relative" ref={cityDrop.ref}>
               <button
-                onClick={() => { cityDrop.setOpen(o => !o) }}
+                onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false) }}
                 className={mobileActionBtn}
               >
                 <Navigation size={12} strokeWidth={2.5} className="flex-shrink-0" />

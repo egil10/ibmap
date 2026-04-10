@@ -208,10 +208,6 @@ function buildNavigationSequence(anchor: Company | null, list: Company[]) {
 
 interface Props {
   filters: ActiveFilters
-  onApplyCategoryFilter: (category: FilterCategory) => void
-  onApplyCountryFilter: (country: string) => void
-  onApplyCityFilter: (city: string, country: string) => void
-  onClearFilters: () => void
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
   onRegisterRandomCompany?: (fn: () => void) => void
   showOffices?: boolean
@@ -221,10 +217,6 @@ interface Props {
 
 export default function MapView({
   filters,
-  onApplyCategoryFilter,
-  onApplyCountryFilter,
-  onApplyCityFilter,
-  onClearFilters,
   onRegisterFlyTo,
   onRegisterRandomCompany,
   showOffices = false,
@@ -427,11 +419,6 @@ export default function MapView({
           onNext={navigationCompanies.length > 1 ? () => selectRelativeCompany(1) : undefined}
           onRandom={filteredCompanies.length > 0 ? selectRandomCompany : undefined}
           navigationLabel={selectedIndex >= 0 ? `${selectedIndex + 1} / ${navigationCompanies.length}` : undefined}
-          filters={filters}
-          onApplyCategoryFilter={onApplyCategoryFilter}
-          onApplyCountryFilter={onApplyCountryFilter}
-          onApplyCityFilter={onApplyCityFilter}
-          onClearFilters={onClearFilters}
         />
       )}
 

@@ -40,10 +40,8 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
   }
 
   const filtered = useMemo(() => companies.filter(company =>
-    (filters.category === 'ALL' || company.category === filters.category) &&
-    (!filters.country || company.country === filters.country) &&
-    (!filters.city || company.city === filters.city)
-  ), [filters])
+    filters.category === 'ALL' || company.category === filters.category
+  ), [filters.category])
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     const vals: Record<SortKey, [string, string]> = {
@@ -70,8 +68,6 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
         <p className="text-[13px] font-semibold text-slate-500">
           <span className="font-bold text-slate-900">{sorted.length}</span> companies
           {filters.category !== 'ALL' && <span className="text-slate-400"> · {filters.category}</span>}
-          {filters.country && <span className="text-slate-400"> · {filters.country}</span>}
-          {filters.city && <span className="text-slate-400"> · {filters.city}</span>}
         </p>
         <p className="text-[11px] font-medium text-slate-400">
           {sorted.filter(company => company.lat != null).length} with map pin
@@ -110,7 +106,7 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
                 <tr>
                   <td colSpan={5} className="px-6 py-20 text-center">
                     <p className="text-sm font-semibold text-slate-400">No companies found</p>
-                    <p className="mt-1 text-xs text-slate-300">Try clearing the filters from the map card</p>
+                    <p className="mt-1 text-xs text-slate-300">Try clearing the filter</p>
                   </td>
                 </tr>
               ) : sorted.map((company) => (
