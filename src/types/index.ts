@@ -12,12 +12,12 @@ export const MAP_STYLES: Record<MapStyleKey, MapStyleOption> = {
   detailed: {
     label: 'Detailed',
     light: { url: 'https://tiles.openfreemap.org/styles/liberty',  maskColor: '#dde4ef', maskOpacity: 0.72 },
-    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.75 },
+    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-nolabels-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.70 },
   },
   vivid: {
     label: 'Vivid',
     light: { url: 'https://tiles.openfreemap.org/styles/bright',   maskColor: '#e8edf5', maskOpacity: 0.68 },
-    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#000000', maskOpacity: 0.72 },
+    dark:  { url: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json', maskColor: '#080c20', maskOpacity: 0.84 },
   },
 }
 
