@@ -41,7 +41,7 @@ export default function CompanyCard({ company, onClose, darkMode }: Props) {
   const ctaSub  = dm ? '#94a3b8' : '#94a3b8'
 
   return (
-    <div className="animate-slide-in pointer-events-auto absolute right-4 top-20 bottom-20 w-80 md:right-5 flex flex-col z-40">
+    <div className="animate-slide-up md:animate-slide-in pointer-events-auto absolute inset-x-3 bottom-3 top-auto z-40 flex max-h-[72vh] flex-col md:inset-x-auto md:bottom-20 md:right-5 md:top-20 md:w-80 md:max-h-none">
       <div
         className="flex h-full flex-col overflow-hidden rounded-3xl"
         style={{

@@ -344,13 +344,15 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
         />
       )}
 
-      <CompanyBanner
-        companies={filteredCompanies}
-        selected={selected}
-        pinned={bannerPinned}
-        onSelect={handleBannerClick}
-        darkMode={darkMode}
-      />
+      <div className="hidden md:block">
+        <CompanyBanner
+          companies={filteredCompanies}
+          selected={selected}
+          pinned={bannerPinned}
+          onSelect={handleBannerClick}
+          darkMode={darkMode}
+        />
+      </div>
     </div>
   )
 }

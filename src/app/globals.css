@@ -50,6 +50,13 @@ html, body {
   bottom: 62px !important;
 }
 
+@media (max-width: 767px) {
+  .maplibregl-ctrl-bottom-right {
+    bottom: 16px !important;
+    right: 12px !important;
+  }
+}
+
 /* Dark mode overrides for map controls */
 [data-dark] .maplibregl-ctrl-group {
   background: rgba(0,0,0,0.88) !important;
