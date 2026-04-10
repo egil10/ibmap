@@ -232,6 +232,7 @@ export default function MapView({
   darkMode,
 }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
+  const [navigationAnchorId, setNavigationAnchorId] = useState<string | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
   const lastAutoFitKeyRef = useRef<string | null>(null)
@@ -251,9 +252,10 @@ export default function MapView({
     (!filters.city || company.city === filters.city)
   )
   const jitteredFiltered = jitterMarkers(filteredCompanies)
+  const navigationAnchor = filteredCompanies.find(company => company.id === navigationAnchorId) ?? selected
   const navigationCompanies = useMemo(
-    () => buildNavigationSequence(selected, filteredCompanies),
-    [filteredCompanies, selected]
+    () => buildNavigationSequence(navigationAnchor, filteredCompanies),
+    [filteredCompanies, navigationAnchor]
   )
   const selectedIndex = selected ? navigationCompanies.findIndex(company => company.id === selected.id) : -1
 
@@ -311,8 +313,9 @@ export default function MapView({
     mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
   }, [])
 
-  const selectCompany = useCallback((company: Company, pinned = false) => {
+  const selectCompany = useCallback((company: Company, pinned = false, resetNavigationAnchor = false) => {
     setSelected(company)
+    if (resetNavigationAnchor) setNavigationAnchorId(company.id)
     setBannerPinned(pinned)
     if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
   }, [flyTo])
@@ -321,7 +324,7 @@ export default function MapView({
     if (navigationCompanies.length === 0) return
     const startIndex = selectedIndex >= 0 ? selectedIndex : 0
     const nextIndex = (startIndex + direction + navigationCompanies.length) % navigationCompanies.length
-    selectCompany(navigationCompanies[nextIndex])
+    selectCompany(navigationCompanies[nextIndex], false, false)
   }, [navigationCompanies, selectCompany, selectedIndex])
 
   const selectRandomCompany = useCallback(() => {
@@ -336,7 +339,7 @@ export default function MapView({
       const currentIndex = filteredCompanies.findIndex(company => company.id === selected.id)
       nextCompany = filteredCompanies[(currentIndex + 1) % filteredCompanies.length]
     }
-    selectCompany(nextCompany)
+    selectCompany(nextCompany, false, true)
   }, [filteredCompanies, selectCompany, selected])
 
   useEffect(() => {
@@ -344,21 +347,23 @@ export default function MapView({
   }, [onRegisterRandomCompany, selectRandomCompany])
 
   const handleMarkerClick = useCallback((company: Company) => {
-    selectCompany(company)
+    selectCompany(company, false, true)
   }, [selectCompany])
 
   const handleOfficeClick = useCallback((company: Company, office: CompanyOffice) => {
     setSelected(company)
+    setNavigationAnchorId(company.id)
     setBannerPinned(false)
     flyTo(office.lat, office.lng)
   }, [flyTo])
 
   const handleBannerClick = useCallback((company: Company) => {
-    selectCompany(company, true)
+    selectCompany(company, true, true)
   }, [selectCompany])
 
   const handleMapClick = useCallback(() => {
     setSelected(null)
+    setNavigationAnchorId(null)
     setBannerPinned(false)
   }, [])
 
