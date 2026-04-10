@@ -1,6 +1,6 @@
 'use client'
 
-import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles } from 'lucide-react'
+import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle } from 'lucide-react'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { FilterCategory, FILTER_CATEGORIES, companies } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
@@ -48,6 +48,7 @@ interface Props {
   onMapStyleChange: (k: MapStyleKey) => void
   darkMode: boolean
   onToggleDark: () => void
+  onRandomCompany: () => void
 }
 
 function useDropdown() {
@@ -112,6 +113,7 @@ export default function Header({
   onMapStyleChange,
   darkMode,
   onToggleDark,
+  onRandomCompany,
 }: Props) {
   const filterDrop = useDropdown()
   const cityDrop = useDropdown()
@@ -301,6 +303,10 @@ export default function Header({
               </button>
             )}
 
+            <button onClick={onRandomCompany} className={iconBtn} title="Show a random company on the map">
+              <Shuffle size={15} strokeWidth={2} />
+            </button>
+
             <button onClick={onToggleDark} className={iconBtn} title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
               {darkMode ? <Sun size={15} strokeWidth={2} /> : <Moon size={15} strokeWidth={2} />}
             </button>
@@ -316,7 +322,7 @@ export default function Header({
             </a>
           </div>
 
-          <div className="mt-2 grid grid-cols-4 gap-1 md:hidden">
+          <div className="mt-2 grid grid-cols-5 gap-1 md:hidden">
             <button onClick={() => onViewChange(view === 'map' ? 'companies' : 'map')} className={mobileActionBtn}>
               {view === 'map' ? <LayoutList size={13} strokeWidth={2.2} /> : <Map size={13} strokeWidth={2.2} />}
               <span className="truncate">{view === 'map' ? 'List' : 'Map'}</span>
@@ -391,6 +397,11 @@ export default function Header({
             >
               <span className={`h-1.5 w-1.5 rounded-full ${hqDot(showOffices, view !== 'map')}`} />
               <span className="truncate">{showOffices ? 'Offices' : 'HQ only'}</span>
+            </button>
+
+            <button onClick={onRandomCompany} className={mobileActionBtn} title="Show a random company on the map">
+              <Shuffle size={12} strokeWidth={2.3} />
+              <span className="truncate">Random</span>
             </button>
           </div>
         </div>

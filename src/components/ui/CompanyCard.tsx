@@ -1,6 +1,6 @@
 'use client'
 
-import { X, ExternalLink, MapPin, BarChart3, Users, Building2 } from 'lucide-react'
+import { X, ExternalLink, MapPin, BarChart3, Users, Building2, ChevronLeft, ChevronRight, Shuffle } from 'lucide-react'
 import { Company, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
 
@@ -8,9 +8,13 @@ interface Props {
   company: Company
   onClose: () => void
   darkMode: boolean
+  onPrevious?: () => void
+  onNext?: () => void
+  onRandom?: () => void
+  navigationLabel?: string
 }
 
-export default function CompanyCard({ company, onClose, darkMode }: Props) {
+export default function CompanyCard({ company, onClose, darkMode, onPrevious, onNext, onRandom, navigationLabel }: Props) {
   const dm = darkMode
   const hqAddress = company.address ?? `${company.city}, ${company.country}`
 
@@ -39,6 +43,11 @@ export default function CompanyCard({ company, onClose, darkMode }: Props) {
   const ctaHov  = dm ? 'hover:bg-white/[0.16]'  : 'hover:bg-slate-700'
   const ctaText = '#ffffff'
   const ctaSub  = dm ? '#94a3b8' : '#94a3b8'
+  const navBtn = dm
+    ? 'flex h-8 w-8 items-center justify-center rounded-full text-slate-400 transition-colors hover:bg-white/[0.08] hover:text-slate-100'
+    : 'flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-900'
+  const navPillBg = dm ? 'rgba(255,255,255,0.05)' : '#f8fafc'
+  const navPillBdr = dm ? 'rgba(255,255,255,0.07)' : '#e2e8f0'
 
   return (
     <div className="animate-slide-up md:animate-slide-in pointer-events-auto absolute inset-x-3 bottom-3 top-auto z-40 flex max-h-[72vh] flex-col md:inset-x-auto md:bottom-20 md:right-5 md:top-20 md:w-80 md:max-h-none">
@@ -78,6 +87,35 @@ export default function CompanyCard({ company, onClose, darkMode }: Props) {
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 thin-scroll">
+          {(onPrevious || onNext || onRandom) && (
+            <div className="flex items-center justify-between rounded-2xl px-3 py-2" style={{ background: navPillBg, border: `1px solid ${navPillBdr}` }}>
+              <div className="flex items-center gap-1">
+                {onPrevious && (
+                  <button onClick={onPrevious} className={navBtn} aria-label="Previous company">
+                    <ChevronLeft size={14} strokeWidth={2.5} />
+                  </button>
+                )}
+                {onNext && (
+                  <button onClick={onNext} className={navBtn} aria-label="Next company">
+                    <ChevronRight size={14} strokeWidth={2.5} />
+                  </button>
+                )}
+              </div>
+              {navigationLabel && (
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: textMuted }}>
+                  {navigationLabel}
+                </span>
+              )}
+              {onRandom ? (
+                <button onClick={onRandom} className={navBtn} aria-label="Random company">
+                  <Shuffle size={13} strokeWidth={2.5} />
+                </button>
+              ) : (
+                <div className="h-8 w-8" />
+              )}
+            </div>
+          )}
+
           {company.description && (
             <p className="text-[13px] leading-relaxed" style={{ color: textSecond }}>{company.description}</p>
           )}

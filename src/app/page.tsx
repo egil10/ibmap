@@ -28,6 +28,7 @@ export default function Home() {
   const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('minimal')
   const [darkMode, setDarkMode] = useState(false)
   const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
+  const randomCompanyRef = useRef<(() => void) | undefined>(undefined)
 
   return (
     <div
@@ -50,6 +51,10 @@ export default function Home() {
         onMapStyleChange={setMapStyleKey}
         darkMode={darkMode}
         onToggleDark={() => setDarkMode(d => !d)}
+        onRandomCompany={() => {
+          setView('map')
+          randomCompanyRef.current?.()
+        }}
       />
 
       {view === 'map' ? (
@@ -57,6 +62,7 @@ export default function Home() {
           filter={filter}
           onFilterChange={setFilter}
           onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
+          onRegisterRandomCompany={(fn) => { randomCompanyRef.current = fn }}
           showOffices={showOffices}
           mapStyleKey={mapStyleKey}
           darkMode={darkMode}

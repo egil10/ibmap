@@ -186,12 +186,13 @@ interface Props {
   filter: FilterCategory
   onFilterChange: (f: FilterCategory) => void
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
+  onRegisterRandomCompany?: (fn: () => void) => void
   showOffices?: boolean
   mapStyleKey: MapStyleKey
   darkMode: boolean
 }
 
-export default function MapView({ filter, onRegisterFlyTo, showOffices = false, mapStyleKey, darkMode }: Props) {
+export default function MapView({ filter, onRegisterFlyTo, onRegisterRandomCompany, showOffices = false, mapStyleKey, darkMode }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
@@ -208,6 +209,7 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
   const mappedCompanies = companies.filter(company => company.lat != null && company.lng != null)
   const filteredCompanies = mappedCompanies.filter(company => filter === 'ALL' || company.category === filter)
   const jitteredFiltered = jitterMarkers(filteredCompanies)
+  const selectedIndex = selected ? filteredCompanies.findIndex(company => company.id === selected.id) : -1
 
   useEffect(() => {
     if (!mapRef.current || filteredCompanies.length === 0) return
@@ -262,11 +264,41 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
     mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
   }, [])
 
-  const handleMarkerClick = useCallback((company: Company) => {
+  const selectCompany = useCallback((company: Company, pinned = false) => {
     setSelected(company)
-    setBannerPinned(false)
+    setBannerPinned(pinned)
     if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
   }, [flyTo])
+
+  const selectRelativeCompany = useCallback((direction: 1 | -1) => {
+    if (filteredCompanies.length === 0) return
+    const startIndex = selectedIndex >= 0 ? selectedIndex : 0
+    const nextIndex = (startIndex + direction + filteredCompanies.length) % filteredCompanies.length
+    selectCompany(filteredCompanies[nextIndex])
+  }, [filteredCompanies, selectCompany, selectedIndex])
+
+  const selectRandomCompany = useCallback(() => {
+    if (filteredCompanies.length === 0) return
+    if (filteredCompanies.length === 1) {
+      selectCompany(filteredCompanies[0])
+      return
+    }
+
+    let nextCompany = filteredCompanies[Math.floor(Math.random() * filteredCompanies.length)]
+    if (selected && nextCompany.id === selected.id) {
+      const currentIndex = filteredCompanies.findIndex(company => company.id === selected.id)
+      nextCompany = filteredCompanies[(currentIndex + 1) % filteredCompanies.length]
+    }
+    selectCompany(nextCompany)
+  }, [filteredCompanies, selectCompany, selected])
+
+  useEffect(() => {
+    onRegisterRandomCompany?.(selectRandomCompany)
+  }, [onRegisterRandomCompany, selectRandomCompany])
+
+  const handleMarkerClick = useCallback((company: Company) => {
+    selectCompany(company)
+  }, [selectCompany])
 
   const handleOfficeClick = useCallback((company: Company, office: CompanyOffice) => {
     setSelected(company)
@@ -275,10 +307,8 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
   }, [flyTo])
 
   const handleBannerClick = useCallback((company: Company) => {
-    setSelected(company)
-    setBannerPinned(true)
-    if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
-  }, [flyTo])
+    selectCompany(company, true)
+  }, [selectCompany])
 
   const handleMapClick = useCallback(() => {
     setSelected(null)
@@ -341,6 +371,10 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false, 
             setBannerPinned(false)
           }}
           darkMode={darkMode}
+          onPrevious={filteredCompanies.length > 1 ? () => selectRelativeCompany(-1) : undefined}
+          onNext={filteredCompanies.length > 1 ? () => selectRelativeCompany(1) : undefined}
+          onRandom={filteredCompanies.length > 0 ? selectRandomCompany : undefined}
+          navigationLabel={selectedIndex >= 0 ? `${selectedIndex + 1} / ${filteredCompanies.length}` : undefined}
         />
       )}
 
