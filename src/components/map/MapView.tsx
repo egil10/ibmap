@@ -5,11 +5,10 @@ import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies } from '@/data/companies'
 import { FilterCategory } from '@/data/companies'
-import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
+import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT, MapStyleKey, MAP_STYLES } from '@/types'
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
 
-const MAP_STYLE = 'https://tiles.openfreemap.org/styles/positron'
 const INITIAL_VIEW = { longitude: 13.5, latitude: 63.5, zoom: 4.0 }
 const MAX_BOUNDS: [[number, number], [number, number]] = [[-10, 52], [40, 73]]
 
@@ -24,10 +23,9 @@ const WORLD_MASK_GEOJSON = {
   },
 }
 
-// HQ marker
-const MARKER_ACCENT = '#94a3b8' // slate-400 — neutral accent for pulse/tooltip dot
+const MARKER_ACCENT = '#94a3b8'
 
-function LogoMarker({ company, isSelected }: { company: Company; isSelected: boolean }) {
+function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSelected: boolean; darkMode: boolean }) {
   const colors = CATEGORY_COLORS[company.category]
   const short = CATEGORY_SHORT[company.category]
   const [attempt, setAttempt] = useState(0)
@@ -35,6 +33,10 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
   const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = isSelected ? 34 : 26
+
+  const tooltipBg    = darkMode ? 'rgba(15,23,42,0.96)'  : 'rgba(255,255,255,0.96)'
+  const tooltipText  = darkMode ? '#f1f5f9'              : '#334155'
+  const tooltipBdr   = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
@@ -59,7 +61,10 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
           </span>
         )}
       </span>
-      <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
+      <span
+        className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold shadow-xl opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10"
+        style={{ background: tooltipBg, color: tooltipText, border: `1px solid ${tooltipBdr}` }}
+      >
         <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: MARKER_ACCENT }} />
         {company.name}
       </span>
@@ -67,8 +72,7 @@ function LogoMarker({ company, isSelected }: { company: Company; isSelected: boo
   )
 }
 
-// Satellite office marker — smaller dot with logo
-function OfficeMarker({ company, office, isSelected }: { company: Company; office: CompanyOffice; isSelected: boolean }) {
+function OfficeMarker({ company, office, isSelected, darkMode }: { company: Company; office: CompanyOffice; isSelected: boolean; darkMode: boolean }) {
   const colors = CATEGORY_COLORS[company.category]
   const short = CATEGORY_SHORT[company.category]
   const [attempt, setAttempt] = useState(0)
@@ -76,6 +80,10 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
   const src = attempt === 0 ? `/logos/${company.id}.png` : attempt === 1 ? `https://logo.clearbit.com/${domain}` : null
   const handleError = () => { if (attempt === 0 && domain) setAttempt(1); else setAttempt(2) }
   const sz = 20
+
+  const tooltipBg   = darkMode ? 'rgba(15,23,42,0.96)'   : 'rgba(255,255,255,0.96)'
+  const tooltipText = darkMode ? '#f1f5f9'               : '#334155'
+  const tooltipBdr  = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
@@ -97,16 +105,18 @@ function OfficeMarker({ company, office, isSelected }: { company: Company; offic
           </span>
         )}
       </span>
-      <span className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl bg-white/96 backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold text-slate-700 shadow-xl border border-slate-100 opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10">
+      <span
+        className="pointer-events-none absolute bottom-full mb-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap rounded-xl backdrop-blur-md pl-1.5 pr-2.5 py-1 text-[11px] font-semibold shadow-xl opacity-0 transition-opacity duration-150 group-hover:opacity-100 z-10"
+        style={{ background: tooltipBg, color: tooltipText, border: `1px solid ${tooltipBdr}` }}
+      >
         <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: MARKER_ACCENT }} />
         {company.name}
-        {office.label && <span className="text-slate-400 font-normal ml-0.5">· {office.city}</span>}
+        {office.label && <span style={{ color: MARKER_ACCENT }} className="font-normal ml-0.5">· {office.city}</span>}
       </span>
     </div>
   )
 }
 
-// When multiple markers share the exact same coordinates, offset them in a small circle
 function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; lng: number }> {
   const groups: Record<string, Company[]> = {}
   for (const c of list) {
@@ -121,7 +131,7 @@ function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; 
     } else {
       const baseLat = group[0].lat!
       const baseLng = group[0].lng!
-      const r = 0.00042 // ~45m radius
+      const r = 0.00042
       const cosLat = Math.cos(baseLat * Math.PI / 180)
       group.forEach((c, i) => {
         const angle = (2 * Math.PI * i) / group.length - Math.PI / 2
@@ -141,12 +151,20 @@ interface Props {
   onFilterChange: (f: FilterCategory) => void
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
   showOffices?: boolean
+  mapStyleKey: MapStyleKey
+  darkMode: boolean
 }
 
-export default function MapView({ filter, onRegisterFlyTo, showOffices = false }: Props) {
+export default function MapView({ filter, onRegisterFlyTo, showOffices = false, mapStyleKey, darkMode }: Props) {
   const [selected, setSelected] = useState<Company | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const mapRef = useRef<any>(null)
+
+  // Keep refs current so the style.load handler always uses latest values
+  const maskColorRef   = useRef(MAP_STYLES[mapStyleKey].maskColor)
+  const maskOpacityRef = useRef(MAP_STYLES[mapStyleKey].maskOpacity)
+  maskColorRef.current   = MAP_STYLES[mapStyleKey].maskColor
+  maskOpacityRef.current = MAP_STYLES[mapStyleKey].maskOpacity
 
   useEffect(() => {
     onRegisterFlyTo?.((lat, lng, zoom) => {
@@ -154,30 +172,33 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
     })
   }, [onRegisterFlyTo])
 
-  const mappedCompanies = companies.filter(c => c.lat != null && c.lng != null)
+  const mappedCompanies  = companies.filter(c => c.lat != null && c.lng != null)
   const filteredCompanies = mappedCompanies.filter(c => filter === 'ALL' || c.category === filter)
-  const jitteredFiltered = jitterMarkers(filteredCompanies)
+  const jitteredFiltered  = jitterMarkers(filteredCompanies)
 
   const handleMapLoad = useCallback((e: any) => {
     const map = e.target
-    try {
-      map.addSource('world-mask', { type: 'geojson', data: WORLD_MASK_GEOJSON })
-      map.addLayer({
-        id: 'world-mask-fill',
-        type: 'fill',
-        source: 'world-mask',
-        paint: { 'fill-color': '#f0f4f8', 'fill-opacity': 0.88 },
-      })
-    } catch { /* already exists on remount */ }
-  }, [])
+    const addMask = () => {
+      try {
+        if (!map.getSource('world-mask')) {
+          map.addSource('world-mask', { type: 'geojson', data: WORLD_MASK_GEOJSON })
+        }
+        if (!map.getLayer('world-mask-fill')) {
+          map.addLayer({
+            id: 'world-mask-fill',
+            type: 'fill',
+            source: 'world-mask',
+            paint: { 'fill-color': maskColorRef.current, 'fill-opacity': maskOpacityRef.current },
+          })
+        }
+      } catch { /* ignore */ }
+    }
+    addMask()
+    map.on('style.load', addMask)
+  }, []) // refs used — no deps needed
 
   const flyTo = useCallback((lat: number, lng: number) => {
-    mapRef.current?.flyTo({
-      center: [lng, lat],
-      zoom: 15,   // ~500m street-level view
-      duration: 900,
-      essential: true,
-    })
+    mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
   }, [])
 
   const handleMarkerClick = useCallback((company: Company) => {
@@ -209,7 +230,7 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
         ref={mapRef}
         initialViewState={INITIAL_VIEW}
         style={{ width: '100%', height: '100%' }}
-        mapStyle={MAP_STYLE}
+        mapStyle={MAP_STYLES[mapStyleKey].url}
         attributionControl={false}
         renderWorldCopies={false}
         maxBounds={MAX_BOUNDS}
@@ -219,7 +240,6 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
       >
         <NavigationControl position="bottom-right" showCompass={false} />
 
-        {/* HQ markers */}
         {jitteredFiltered.map(({ company, lat, lng }) => (
           <Marker
             key={company.id}
@@ -228,11 +248,10 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
             anchor="center"
             onClick={(e) => { e.originalEvent.stopPropagation(); handleMarkerClick(company) }}
           >
-            <LogoMarker company={company} isSelected={selected?.id === company.id} />
+            <LogoMarker company={company} isSelected={selected?.id === company.id} darkMode={darkMode} />
           </Marker>
         ))}
 
-        {/* Satellite office markers */}
         {showOffices && filteredCompanies.flatMap((company) =>
           (company.offices ?? []).map((office, i) => (
             <Marker
@@ -242,14 +261,14 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
               anchor="center"
               onClick={(e) => { e.originalEvent.stopPropagation(); handleOfficeClick(company, office) }}
             >
-              <OfficeMarker company={company} office={office} isSelected={selected?.id === company.id} />
+              <OfficeMarker company={company} office={office} isSelected={selected?.id === company.id} darkMode={darkMode} />
             </Marker>
           ))
         )}
       </Map>
 
       {selected && (
-        <CompanyCard company={selected} onClose={() => { setSelected(null); setBannerPinned(false) }} />
+        <CompanyCard company={selected} onClose={() => { setSelected(null); setBannerPinned(false) }} darkMode={darkMode} />
       )}
 
       <CompanyBanner
@@ -257,6 +276,7 @@ export default function MapView({ filter, onRegisterFlyTo, showOffices = false }
         selected={selected}
         pinned={bannerPinned}
         onSelect={handleBannerClick}
+        darkMode={darkMode}
       />
     </div>
   )
@@ -267,25 +287,32 @@ function CompanyBanner({
   selected,
   pinned,
   onSelect,
+  darkMode,
 }: {
   companies: Company[]
   selected: Company | null
   pinned: boolean
   onSelect: (c: Company) => void
+  darkMode: boolean
 }) {
   if (list.length === 0) return null
 
-  const doubled = [...list, ...list]
+  const doubled  = [...list, ...list]
   const duration = Math.max(60, list.length * 3)
+
+  const bannerBg  = darkMode ? 'rgba(15,23,42,0.94)'   : 'rgba(255,255,255,0.94)'
+  const bannerBdr = darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
+  const textColor = darkMode ? '#cbd5e1'               : '#334155'
+  const activeItemBg = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(226,232,240,1)'
 
   return (
     <div
       className="absolute bottom-0 left-0 right-0 z-30"
       style={{
-        background: 'rgba(255,255,255,0.94)',
+        background: bannerBg,
         backdropFilter: 'blur(16px) saturate(160%)',
         WebkitBackdropFilter: 'blur(16px) saturate(160%)',
-        borderTop: '1px solid rgba(0,0,0,0.06)',
+        borderTop: `1px solid ${bannerBdr}`,
         boxShadow: '0 -4px 24px rgba(0,0,0,0.05)',
         paddingTop: 8,
         paddingBottom: 10,
@@ -300,12 +327,10 @@ function CompanyBanner({
                 key={`${company.id}-${i}`}
                 onClick={() => onSelect(company)}
                 className="banner-item flex items-center gap-2 px-3 py-1.5 transition-all duration-200 flex-shrink-0"
-                style={{
-                  background: isActive ? 'rgba(226,232,240,1)' : 'transparent',
-                }}
+                style={{ background: isActive ? activeItemBg : 'transparent' }}
               >
                 <CompanyLogo company={company} size={22} rounded="rounded-lg" />
-                <span className="text-[12px] font-semibold text-slate-700 whitespace-nowrap">
+                <span className="text-[12px] font-semibold whitespace-nowrap" style={{ color: textColor }}>
                   {company.name}
                 </span>
               </button>

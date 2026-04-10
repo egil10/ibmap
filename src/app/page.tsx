@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import { useState, useRef } from 'react'
 import { FilterCategory } from '@/data/companies'
+import { MapStyleKey } from '@/types'
 import Header from '@/components/layout/Header'
 import CompanyTable from '@/components/ui/CompanyTable'
 
@@ -24,10 +25,16 @@ export default function Home() {
   const [view, setView] = useState<AppView>('map')
   const [filter, setFilter] = useState<FilterCategory>('ALL')
   const [showOffices, setShowOffices] = useState(false)
+  const [mapStyleKey, setMapStyleKey] = useState<MapStyleKey>('light')
+  const [darkMode, setDarkMode] = useState(false)
   const flyToRef = useRef<((lat: number, lng: number, zoom: number) => void) | undefined>(undefined)
 
   return (
-    <div className="h-screen w-screen overflow-hidden" style={{ background: '#f0f4f8' }}>
+    <div
+      className="h-screen w-screen overflow-hidden"
+      style={{ background: darkMode ? '#0f172a' : '#f0f4f8' }}
+      data-dark={darkMode ? 'true' : undefined}
+    >
       <Header
         view={view}
         onViewChange={(v) => { setView(v) }}
@@ -39,6 +46,10 @@ export default function Home() {
         }}
         showOffices={showOffices}
         onToggleOffices={() => setShowOffices(s => !s)}
+        mapStyleKey={mapStyleKey}
+        onMapStyleChange={setMapStyleKey}
+        darkMode={darkMode}
+        onToggleDark={() => setDarkMode(d => !d)}
       />
 
       {view === 'map' ? (
@@ -47,6 +58,8 @@ export default function Home() {
           onFilterChange={setFilter}
           onRegisterFlyTo={(fn) => { flyToRef.current = fn }}
           showOffices={showOffices}
+          mapStyleKey={mapStyleKey}
+          darkMode={darkMode}
         />
       ) : (
         <CompanyTable

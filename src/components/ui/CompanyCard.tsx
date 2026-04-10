@@ -7,19 +7,48 @@ import CompanyLogo from './CompanyLogo'
 interface Props {
   company: Company
   onClose: () => void
+  darkMode: boolean
 }
 
-export default function CompanyCard({ company, onClose }: Props) {
+export default function CompanyCard({ company, onClose, darkMode }: Props) {
+  const dm = darkMode
+
+  const cardBg   = dm ? 'rgba(15,23,42,0.96)'   : 'rgba(255,255,255,0.94)'
+  const cardBdr  = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'
+  const cardShad = dm
+    ? '0 20px 60px rgba(0,0,0,0.40), 0 4px 16px rgba(0,0,0,0.20)'
+    : '0 20px 60px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)'
+
+  const textPrimary  = dm ? '#f1f5f9' : '#0f172a'
+  const textSecond   = dm ? '#94a3b8' : '#64748b'
+  const textMuted    = dm ? '#64748b' : '#94a3b8'
+  const dividerColor = dm ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)'
+
+  const statBg  = dm ? 'rgba(255,255,255,0.05)' : '#f8fafc'
+  const statBdr = dm ? 'rgba(255,255,255,0.07)' : '#f1f5f9'
+
+  const closeCls = dm
+    ? 'flex-shrink-0 mt-0.5 rounded-full p-1.5 text-slate-600 hover:bg-white/[0.08] hover:text-slate-300 transition-colors'
+    : 'flex-shrink-0 mt-0.5 rounded-full p-1.5 text-slate-300 hover:bg-slate-100 hover:text-slate-500 transition-colors'
+
+  const officePillBg  = dm ? 'rgba(255,255,255,0.05)' : '#f8fafc'
+  const officePillBdr = dm ? 'rgba(255,255,255,0.07)' : '#f1f5f9'
+
+  const ctaBg   = dm ? 'rgba(255,255,255,0.10)' : '#0f172a'
+  const ctaHov  = dm ? 'hover:bg-white/[0.16]'  : 'hover:bg-slate-700'
+  const ctaText = '#ffffff'
+  const ctaSub  = dm ? '#94a3b8' : '#94a3b8'
+
   return (
     <div className="animate-slide-in pointer-events-auto absolute right-4 top-20 bottom-20 w-80 md:right-5 flex flex-col z-40">
       <div
         className="flex h-full flex-col overflow-hidden rounded-3xl"
         style={{
-          background: 'rgba(255,255,255,0.94)',
+          background: cardBg,
           backdropFilter: 'blur(32px) saturate(180%)',
           WebkitBackdropFilter: 'blur(32px) saturate(180%)',
-          border: '1px solid rgba(0,0,0,0.07)',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04)',
+          border: `1px solid ${cardBdr}`,
+          boxShadow: cardShad,
         }}
       >
         {/* Header */}
@@ -27,51 +56,47 @@ export default function CompanyCard({ company, onClose }: Props) {
           <CompanyLogo company={company} size={46} rounded="rounded-2xl" wide />
 
           <div className="min-w-0 flex-1 pt-0.5">
-            <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-1">
+            <p className="text-[10px] font-semibold uppercase tracking-widest mb-1" style={{ color: textMuted }}>
               {CATEGORY_SHORT[company.category]} · {company.category}
             </p>
-            <h2 className="text-[15px] font-bold text-slate-900 leading-snug tracking-tight">
+            <h2 className="text-[15px] font-bold leading-snug tracking-tight" style={{ color: textPrimary }}>
               {company.name}
             </h2>
-            <p className="mt-0.5 flex items-center gap-1 text-[11px] text-slate-400">
+            <p className="mt-0.5 flex items-center gap-1 text-[11px]" style={{ color: textMuted }}>
               <MapPin size={9} strokeWidth={2.5} />
               {company.city}, {company.country}
             </p>
           </div>
 
-          <button
-            onClick={onClose}
-            className="flex-shrink-0 mt-0.5 rounded-full p-1.5 text-slate-300 hover:bg-slate-100 hover:text-slate-500 transition-colors"
-          >
+          <button onClick={onClose} className={closeCls}>
             <X size={13} strokeWidth={2.5} />
           </button>
         </div>
 
-        <div className="mx-5 h-px" style={{ background: 'rgba(0,0,0,0.05)' }} />
+        <div className="mx-5 h-px" style={{ background: dividerColor }} />
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 thin-scroll">
           {company.description && (
-            <p className="text-[13px] leading-relaxed text-slate-500">{company.description}</p>
+            <p className="text-[13px] leading-relaxed" style={{ color: textSecond }}>{company.description}</p>
           )}
 
-          {/* Stats */}
           {(company.aum || company.employees) && (
             <div className="flex gap-2">
               {company.aum && (
-                <div className="flex-1 rounded-2xl bg-slate-50 border border-slate-100 px-3.5 py-2.5">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">AUM / Revenue</p>
-                  <p className="text-[12px] font-semibold text-slate-700 flex items-center gap-1">
-                    <BarChart3 size={10} className="text-slate-400" strokeWidth={2.5} />
+                <div className="flex-1 rounded-2xl px-3.5 py-2.5" style={{ background: statBg, border: `1px solid ${statBdr}` }}>
+                  <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5" style={{ color: textMuted }}>AUM / Revenue</p>
+                  <p className="text-[12px] font-semibold flex items-center gap-1" style={{ color: textSecond }}>
+                    <BarChart3 size={10} strokeWidth={2.5} style={{ color: textMuted }} />
                     {company.aum}
                   </p>
                 </div>
               )}
               {company.employees && (
-                <div className="flex-1 rounded-2xl bg-slate-50 border border-slate-100 px-3.5 py-2.5">
-                  <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-0.5">Employees</p>
-                  <p className="text-[12px] font-semibold text-slate-700 flex items-center gap-1">
-                    <Users size={10} className="text-slate-400" strokeWidth={2.5} />
+                <div className="flex-1 rounded-2xl px-3.5 py-2.5" style={{ background: statBg, border: `1px solid ${statBdr}` }}>
+                  <p className="text-[9px] font-bold uppercase tracking-widest mb-0.5" style={{ color: textMuted }}>Employees</p>
+                  <p className="text-[12px] font-semibold flex items-center gap-1" style={{ color: textSecond }}>
+                    <Users size={10} strokeWidth={2.5} style={{ color: textMuted }} />
                     {company.employees}
                   </p>
                 </div>
@@ -79,15 +104,15 @@ export default function CompanyCard({ company, onClose }: Props) {
             </div>
           )}
 
-          {/* Additional offices */}
           {company.offices && company.offices.length > 0 && (
             <div>
-              <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-2">Also in</p>
+              <p className="text-[9px] font-bold uppercase tracking-widest mb-2" style={{ color: textMuted }}>Also in</p>
               <div className="flex flex-wrap gap-1.5">
                 {company.offices.map((office, i) => (
                   <span key={i}
-                    className="inline-flex items-center gap-1 rounded-xl bg-slate-50 border border-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600">
-                    <Building2 size={9} className="text-slate-400" strokeWidth={2.5} />
+                    className="inline-flex items-center gap-1 rounded-xl px-2.5 py-1 text-[11px] font-medium"
+                    style={{ background: officePillBg, border: `1px solid ${officePillBdr}`, color: textSecond }}>
+                    <Building2 size={9} strokeWidth={2.5} style={{ color: textMuted }} />
                     {office.city}
                   </span>
                 ))}
@@ -103,9 +128,10 @@ export default function CompanyCard({ company, onClose }: Props) {
               href={company.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex w-full items-center justify-between gap-2 rounded-2xl px-4 py-2.5 text-[13px] font-semibold bg-slate-900 text-white transition-all duration-150 hover:bg-slate-700 active:scale-[0.98]"
+              className={`flex w-full items-center justify-between gap-2 rounded-2xl px-4 py-2.5 text-[13px] font-semibold transition-all duration-150 active:scale-[0.98] ${ctaHov}`}
+              style={{ background: ctaBg, color: ctaText }}
             >
-              <span className="truncate text-slate-300 font-normal text-[12px]">
+              <span className="truncate text-[12px] font-normal" style={{ color: ctaSub }}>
                 {company.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
               </span>
               <ExternalLink size={12} strokeWidth={2.5} className="flex-shrink-0" />

@@ -50,6 +50,17 @@ html, body {
   bottom: 62px !important;
 }
 
+/* Dark mode overrides for map controls */
+[data-dark] .maplibregl-ctrl-group {
+  background: rgba(15,23,42,0.88) !important;
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.24), 0 1px 3px rgba(0,0,0,0.18) !important;
+}
+[data-dark] .maplibregl-ctrl-zoom-in button,
+[data-dark] .maplibregl-ctrl-zoom-out button {
+  filter: invert(1);
+}
+
 /* Glass surface utility (used by floating panels) */
 .glass {
   background: rgba(255,255,255,0.72);
