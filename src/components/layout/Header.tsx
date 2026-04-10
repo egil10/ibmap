@@ -104,7 +104,7 @@ export default function Header({ view, onViewChange, filter, onFilterChange, onC
   const brandText  = dm ? 'text-slate-100' : 'text-slate-900'
   const brandBdr   = dm ? 'border-white/[0.08]' : 'border-slate-100'
 
-  const btnActive   = dm ? 'bg-white/[0.14] text-white shadow-sm'             : 'bg-slate-900 text-white shadow-sm'
+  const btnActive   = dm ? 'text-slate-100 bg-white/[0.09]' : 'text-slate-800 bg-slate-100/80'
   const btnInactive = dm ? 'text-slate-400 hover:text-slate-100 hover:bg-white/[0.07]' : 'text-slate-500 hover:text-slate-800 hover:bg-slate-100/70'
 
   const hqActive   = dm ? 'border-white/[0.25] bg-white/[0.10] text-slate-200' : 'border-slate-300 bg-slate-100 text-slate-800'
