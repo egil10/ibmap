@@ -277,10 +277,12 @@ export default function Header({
             <div className="relative hidden shrink-0 md:block" ref={filterDrop.ref}>
               <button
                 onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
-                className={desktopDropBtn(filterDrop.open)}
+                className={`${desktopDropBtn(filterDrop.open)} w-40 justify-between`}
               >
-                {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
-                <span>{activeLabel}</span>
+                <div className="flex items-center gap-1.5 min-w-0">
+                  {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
+                  <span className="truncate text-left">{activeLabel}</span>
+                </div>
                 <ChevronDown size={11} strokeWidth={2.5} className={`flex-shrink-0 transition-transform duration-200 ${filterDrop.open ? 'rotate-180' : ''}`} />
               </button>
 
