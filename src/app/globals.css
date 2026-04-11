@@ -171,8 +171,7 @@ html, body {
 .banner-track-wrap {
   overflow: hidden;
   width: 100%;
-  contain: strict;
-  content-visibility: auto;
+  contain: content;
 }
 
 .banner-track {
@@ -199,4 +198,17 @@ html, body {
 .banner-item {
   flex-shrink: 0;
   contain: layout style;
+}
+
+/* Banner logos: greyscale by default, colorize on hover */
+.banner-item img {
+  filter: grayscale(1) opacity(0.7);
+  transition: filter 0.2s ease;
+}
+.banner-item:hover img {
+  filter: grayscale(0) opacity(1);
+}
+/* Active/selected item always shows color */
+.banner-item--active img {
+  filter: grayscale(0) opacity(1);
 }

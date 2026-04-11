@@ -636,10 +636,10 @@ const CompanyBanner = memo(function CompanyBanner({
               <button
                 key={`${company.id}-${index}`}
                 onClick={() => onSelect(company)}
-                className="banner-item flex flex-shrink-0 items-center gap-2 px-3 py-1.5 transition-all duration-200"
+                className={`banner-item${isActive ? ' banner-item--active' : ''} flex flex-shrink-0 items-center gap-2 px-3 py-1.5 transition-all duration-200`}
                 style={{ background: isActive ? activeItemBg : 'transparent' }}
               >
-                <CompanyLogo company={company} size={22} rounded="rounded-lg" />
+                <CompanyLogo company={company} size={18} rounded="rounded-md" />
                 <span className="whitespace-nowrap text-[12px] font-semibold" style={{ color: textColor }}>
                   {company.name}
                 </span>
