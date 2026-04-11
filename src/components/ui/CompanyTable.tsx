@@ -1,8 +1,8 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2, Search, X } from 'lucide-react'
-import { companies } from '@/data/companies'
+import { useState, useMemo, useEffect } from 'react'
+import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2, Search, X, Filter } from 'lucide-react'
+import { companies, FILTER_CATEGORIES } from '@/data/companies'
 import type { ActiveFilters } from '@/app/page'
 import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
@@ -34,6 +34,26 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
   const [sortKey, setSortKey] = useState<SortKey>('name')
   const [sortDir, setSortDir] = useState<SortDir>('asc')
   const [searchQuery, setSearchQuery] = useState('')
+  
+  // Local Table Filters
+  const [localCategory, setLocalCategory] = useState<string>('ALL')
+  const [localCountry, setLocalCountry] = useState<string>('ALL')
+  const [localCity, setLocalCity] = useState<string>('ALL')
+
+  const availableCountries = useMemo(() => Array.from(new Set(companies.map(c => c.country))).sort(), [])
+  const availableCities = useMemo(() => {
+    let comps = companies
+    if (localCountry !== 'ALL') comps = comps.filter(c => c.country === localCountry)
+    return Array.from(new Set(comps.map(c => c.city))).sort()
+  }, [localCountry])
+
+  // Reset city if it's not in the newly selected country
+  useEffect(() => {
+    if (localCountry !== 'ALL' && localCity !== 'ALL') {
+      const cityExists = companies.some(c => c.country === localCountry && c.city === localCity)
+      if (!cityExists) setLocalCity('ALL')
+    }
+  }, [localCountry, localCity])
 
   const handleSort = (key: SortKey) => {
     if (key === sortKey) setSortDir(d => d === 'asc' ? 'desc' : 'asc')
@@ -43,12 +63,17 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
   const filtered = useMemo(() => {
     const query = searchQuery.toLowerCase().trim()
     return companies.filter(company => {
-      // Active Filters
+      // 1. Global Active Filters (from Map view props)
       if (filters.category !== 'ALL' && company.category !== filters.category) return false
       if (filters.country && company.country !== filters.country) return false
       if (filters.city && company.city !== filters.city) return false
 
-      // Search Query
+      // 2. Local Table Filters (dropdowns)
+      if (localCategory !== 'ALL' && company.category !== localCategory) return false
+      if (localCountry !== 'ALL' && company.country !== localCountry) return false
+      if (localCity !== 'ALL' && company.city !== localCity) return false
+
+      // 3. Search Query
       if (query) {
         return company.name.toLowerCase().includes(query) ||
                company.description?.toLowerCase().includes(query) ||
@@ -58,7 +83,7 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
       }
       return true
     })
-  }, [filters, searchQuery])
+  }, [filters, searchQuery, localCategory, localCountry, localCity])
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
     const vals: Record<SortKey, [string, string]> = {
@@ -79,9 +104,11 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
     { key: 'aum', label: 'AUM / Revenue' },
   ]
 
+  const dropdownClass = "appearance-none cursor-pointer rounded-full border border-slate-200 bg-white/70 py-2 pl-3.5 pr-8 text-[12px] font-semibold text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all hover:bg-white hover:text-slate-900 focus:border-slate-300 focus:outline-none focus:ring-4 focus:ring-slate-100"
+
   return (
     <div className="absolute inset-0 top-0 flex animate-fade-in flex-col pt-28 md:pt-20" style={{ background: '#f0f4f8' }}>
-      <div className="flex flex-col gap-3 px-5 py-3 sm:flex-row sm:items-center sm:justify-between md:pt-4">
+      <div className="flex flex-col gap-4 px-5 py-3 xl:flex-row xl:items-center xl:justify-between md:pt-4">
         <div>
           <p className="text-[14px] font-semibold text-slate-700">
             <span className="font-bold text-slate-900">{sorted.length}</span> companies
@@ -92,25 +119,58 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
-            <Search size={14} className="text-slate-400" strokeWidth={2.5} />
+        <div className="flex flex-wrap items-center gap-2.5">
+          <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100/50 px-2 py-1 shadow-sm">
+            <Filter size={13} className="ml-1 text-slate-400" strokeWidth={2.5} />
+            
+            {/* Category Filter */}
+            <div className="relative">
+              <select value={localCategory} onChange={(e) => setLocalCategory(e.target.value)} className={dropdownClass}>
+                <option value="ALL">All Sectors</option>
+                {FILTER_CATEGORIES.filter(c => c !== 'ALL').map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
+            </div>
+
+            {/* Country Filter */}
+            <div className="relative">
+              <select value={localCountry} onChange={(e) => setLocalCountry(e.target.value)} className={dropdownClass}>
+                <option value="ALL">All Countries</option>
+                {availableCountries.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
+            </div>
+
+            {/* City Filter */}
+            <div className="relative">
+              <select value={localCity} onChange={(e) => setLocalCity(e.target.value)} className={dropdownClass} disabled={availableCities.length === 0}>
+                <option value="ALL">All Cities</option>
+                {availableCities.map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
+            </div>
           </div>
-          <input
-            type="text"
-            placeholder="Search companies, cities, categories..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full sm:w-80 rounded-full border border-slate-200 bg-white/70 py-2.5 pl-9 pr-9 text-[13px] font-medium text-slate-700 placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-4 focus:ring-slate-100 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
-          />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-600 transition-colors"
-            >
-              <X size={14} strokeWidth={2.5} />
-            </button>
-          )}
+
+          <div className="relative ml-1">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+              <Search size={14} className="text-slate-400" strokeWidth={2.5} />
+            </div>
+            <input
+              type="text"
+              placeholder="Search names, keywords..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full sm:w-64 rounded-full border border-slate-200 bg-white/70 py-2 pl-9 pr-9 text-[13px] font-medium text-slate-700 placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-4 focus:ring-slate-100 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-600 transition-colors"
+              >
+                <X size={14} strokeWidth={2.5} />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
