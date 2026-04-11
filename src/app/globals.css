@@ -64,6 +64,15 @@ html, body {
   contain: layout style;
   content-visibility: auto;
   contain-intrinsic-size: 32px 32px;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+}
+.maplibregl-marker:focus {
+  outline: none !important;
+}
+.maplibregl-marker * {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Push bottom-right controls above the footer (~58px tall) */

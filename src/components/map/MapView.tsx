@@ -32,7 +32,7 @@ const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: {
   const tooltipBdr = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
   return (
-    <div className="group relative flex items-center justify-center cursor-pointer">
+    <div className="group relative flex items-center justify-center cursor-pointer outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       {isSelected && (
         <span
           className="absolute rounded-full marker-pulse"
@@ -67,7 +67,7 @@ const OfficeMarker = memo(function OfficeMarker({ company, office, isSelected, d
   const tooltipBdr = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
 
   return (
-    <div className="group relative flex items-center justify-center cursor-pointer">
+    <div className="group relative flex items-center justify-center cursor-pointer outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       <span
         className="relative flex items-center justify-center rounded-full bg-white overflow-hidden"
         style={{
