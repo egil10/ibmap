@@ -34,9 +34,9 @@ const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: {
   return (
     <div className="group relative flex items-center justify-center cursor-pointer outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       {isSelected && (
-        <span
-          className="absolute rounded-full marker-pulse"
-          style={{ width: sz + 10, height: sz + 10, backgroundColor: MARKER_ACCENT, opacity: 0.3 }}
+        <div
+          className="absolute marker-pulse"
+          style={{ width: sz + 10, height: sz + 10, borderRadius: '50%', backgroundColor: MARKER_ACCENT, opacity: 0.3 }}
         />
       )}
       <span

@@ -93,6 +93,7 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
           height: size,
           backgroundColor: colors.bg,
           border: `1px solid ${colors.pin}20`,
+          borderRadius: rounded.includes('full') ? '50%' : undefined,
         }}
       >
         <Globe size={iconSize} strokeWidth={1.8} style={{ color: colors.pin, opacity: 0.7 }} />
