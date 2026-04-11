@@ -1,7 +1,7 @@
 'use client'
 
 import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle } from 'lucide-react'
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { companies, FilterCategory, FILTER_CATEGORIES } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
 import { AppView } from '@/app/page'
@@ -53,11 +53,16 @@ interface Props {
 
 function useDropdown() {
   const [open, setOpen] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const containers = useRef<HTMLDivElement[]>([])
+
+  const ref = useCallback((el: HTMLDivElement | null) => {
+    if (el && !containers.current.includes(el)) containers.current.push(el)
+  }, [])
 
   useEffect(() => {
     function handler(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false)
+      const target = e.target as Node
+      if (containers.current.every(c => !c.contains(target))) setOpen(false)
     }
     if (open) document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
