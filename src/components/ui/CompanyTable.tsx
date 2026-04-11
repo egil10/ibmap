@@ -104,7 +104,7 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
     { key: 'aum', label: 'AUM / Revenue' },
   ]
 
-  const dropdownClass = "appearance-none cursor-pointer rounded-full border border-slate-200 bg-white/70 py-2 pl-3.5 pr-8 text-[12px] font-semibold text-slate-600 shadow-[0_2px_8px_rgba(0,0,0,0.02)] transition-all hover:bg-white hover:text-slate-900 focus:border-slate-300 focus:outline-none focus:ring-4 focus:ring-slate-100"
+  const dropdownClass = "appearance-none bg-transparent cursor-pointer py-2.5 pl-4 pr-8 text-[13px] font-semibold text-slate-600 transition-colors hover:text-slate-900 focus:outline-none"
 
   return (
     <div className="absolute inset-0 top-0 flex animate-fade-in flex-col pt-28 md:pt-20" style={{ background: '#f0f4f8' }}>
@@ -119,58 +119,63 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
-          <div className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-100/50 px-2 py-1 shadow-sm">
-            <Filter size={13} className="ml-1 text-slate-400" strokeWidth={2.5} />
-            
-            {/* Category Filter */}
-            <div className="relative">
-              <select value={localCategory} onChange={(e) => setLocalCategory(e.target.value)} className={dropdownClass}>
-                <option value="ALL">All Sectors</option>
-                {FILTER_CATEGORIES.filter(c => c !== 'ALL').map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
-            </div>
-
-            {/* Country Filter */}
-            <div className="relative">
-              <select value={localCountry} onChange={(e) => setLocalCountry(e.target.value)} className={dropdownClass}>
-                <option value="ALL">All Countries</option>
-                {availableCountries.map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
-            </div>
-
-            {/* City Filter */}
-            <div className="relative">
-              <select value={localCity} onChange={(e) => setLocalCity(e.target.value)} className={dropdownClass} disabled={availableCities.length === 0}>
-                <option value="ALL">All Cities</option>
-                {availableCities.map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
-              <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={3} />
-            </div>
-          </div>
-
-          <div className="relative ml-1">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
-              <Search size={14} className="text-slate-400" strokeWidth={2.5} />
-            </div>
+        {/* Consolidated Filter Pill */}
+        <div className="flex items-center overflow-hidden rounded-full bg-white/70 shadow-[0_2px_16px_rgba(0,0,0,0.04)] ring-1 ring-slate-900/5 backdrop-blur-xl transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:bg-white/90">
+          
+          {/* Search */}
+          <div className="relative flex items-center bg-transparent">
+            <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" strokeWidth={2.5} />
             <input
               type="text"
-              placeholder="Search names, keywords..."
+              placeholder="Search companies..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full sm:w-64 rounded-full border border-slate-200 bg-white/70 py-2 pl-9 pr-9 text-[13px] font-medium text-slate-700 placeholder:text-slate-400 focus:border-slate-300 focus:bg-white focus:outline-none focus:ring-4 focus:ring-slate-100 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.02)]"
+              className="w-full sm:w-56 bg-transparent py-2.5 pl-10 pr-9 text-[13px] font-medium text-slate-700 placeholder:text-slate-400 focus:outline-none"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-600 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-slate-600 transition-colors"
+                title="Clear search"
               >
                 <X size={14} strokeWidth={2.5} />
               </button>
             )}
           </div>
+
+          <div className="h-5 w-px bg-slate-200/80" />
+
+          {/* Category Filter */}
+          <div className="relative group flex items-center">
+            <select value={localCategory} onChange={(e) => setLocalCategory(e.target.value)} className={dropdownClass}>
+              <option value="ALL">All Sectors</option>
+              {FILTER_CATEGORIES.filter(c => c !== 'ALL').map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <ChevronDown size={12} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
+          </div>
+
+          <div className="h-5 w-px bg-slate-200/80" />
+
+          {/* Country Filter */}
+          <div className="relative group flex items-center">
+            <select value={localCountry} onChange={(e) => setLocalCountry(e.target.value)} className={dropdownClass}>
+              <option value="ALL">All Countries</option>
+              {availableCountries.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <ChevronDown size={12} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
+          </div>
+
+          <div className="h-5 w-px bg-slate-200/80" />
+
+          {/* City Filter */}
+          <div className="relative group flex items-center">
+            <select value={localCity} onChange={(e) => setLocalCity(e.target.value)} className={`${dropdownClass} pr-9 ${availableCities.length === 0 ? 'opacity-50' : ''}`} disabled={availableCities.length === 0}>
+              <option value="ALL">All Cities</option>
+              {availableCities.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+            <ChevronDown size={12} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
+          </div>
+
         </div>
       </div>
 
