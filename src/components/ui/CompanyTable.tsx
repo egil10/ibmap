@@ -175,18 +175,18 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
     return sortDir === 'asc' ? cmp : -cmp
   }), [filtered, sortKey, sortDir])
 
-  const COLS: { key: SortKey; label: string }[] = [
-    { key: 'name', label: 'Company' },
-    { key: 'category', label: 'Category' },
-    { key: 'city', label: 'HQ / Offices' },
-    { key: 'aum', label: 'AUM / Revenue' },
+  const COLS: { key: SortKey; label: string; width: string }[] = [
+    { key: 'name', label: 'Company', width: 'w-[32%]' },
+    { key: 'category', label: 'Category', width: 'w-[18%]' },
+    { key: 'city', label: 'HQ / Offices', width: 'w-[28%]' },
+    { key: 'aum', label: 'AUM / Revenue', width: 'w-[14%]' },
   ]
 
   const dropdownClass = "appearance-none bg-transparent cursor-pointer py-2.5 pl-4 pr-8 text-[13px] font-semibold text-slate-600 transition-colors hover:text-slate-900 focus:outline-none"
 
   return (
     <div className="absolute inset-0 top-0 flex animate-fade-in flex-col pt-28 md:pt-20" style={{ background: '#f0f4f8' }}>
-      <div className="flex flex-col gap-4 px-5 py-3 xl:flex-row xl:items-center xl:justify-between md:pt-4">
+      <div className="relative z-20 flex flex-col gap-4 px-5 py-3 xl:flex-row xl:items-center xl:justify-between md:pt-4">
         <div>
           <p className="text-[14px] font-semibold text-slate-700">
             <span className="font-bold text-slate-900">{sorted.length}</span> companies
@@ -283,17 +283,17 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
             WebkitBackdropFilter: 'blur(24px) saturate(180%)',
           }}
         >
-          <table className="w-full min-w-[980px] border-collapse text-left">
+          <table className="w-full min-w-[980px] table-fixed border-collapse text-left">
             <thead className="sticky top-0 z-10">
               <tr style={{ background: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)', borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
-                {COLS.map(({ key, label }) => (
-                  <th key={key} className="cursor-pointer select-none px-5 py-3" onClick={() => handleSort(key)}>
+                {COLS.map(({ key, label, width }) => (
+                  <th key={key} className={`cursor-pointer select-none px-5 py-3 ${width}`} onClick={() => handleSort(key)}>
                     <span className="flex items-center gap-1.5 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.1em] text-slate-400 transition-colors hover:text-slate-700">
                       {label} <SortIcon active={sortKey === key} dir={sortDir} />
                     </span>
                   </th>
                 ))}
-                <th className="px-5 py-3 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.1em] text-slate-400">
+                <th className="w-[8%] px-5 py-3 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.1em] text-slate-400">
                   Website
                 </th>
               </tr>
