@@ -1,11 +1,8 @@
 'use client'
 
-import { useState, useEffect, useRef, memo } from 'react'
-import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
-
-function getDomain(url: string): string {
-  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return '' }
-}
+import { useState, memo } from 'react'
+import { Building2 } from 'lucide-react'
+import { Company, CATEGORY_COLORS } from '@/types'
 
 /* ── Global image status cache ──
    Prevents re-mounting logos from hitting the network again.
@@ -20,79 +17,51 @@ interface Props {
 }
 
 export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
-  const domain = getDomain(company.website)
   const colors = CATEGORY_COLORS[company.category]
-  const short  = CATEGORY_SHORT[company.category]
-
   const localSrc = `/logos/${company.id}.png`
 
-  /* Determine initial attempt based on cache */
-  const getInitialAttempt = (): number => {
-    if (imgStatusCache.get(localSrc) === 'ok') return 0
-    if (imgStatusCache.get(localSrc) === 'err') {
-      // Local failed — try favicon if available
-      if (domain) {
-        const favSrc = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
-        if (imgStatusCache.get(favSrc) === 'ok') return 1
-        if (imgStatusCache.get(favSrc) === 'err') return 3 // badge
-      }
-      return domain ? 1 : 3
-    }
-    return 0
-  }
-
-  const [attempt, setAttempt] = useState(getInitialAttempt)
-  const mountedRef = useRef(true)
-
-  useEffect(() => {
-    mountedRef.current = true
-    return () => { mountedRef.current = false }
-  }, [])
-
-  const getSrc = (a: number): string | null => {
-    if (a === 0) return localSrc
-    if (a === 1 && domain) return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`
-    return null
-  }
-
-  const src = getSrc(attempt)
+  /* Skip straight to fallback if we already know the local logo fails */
+  const [failed, setFailed] = useState(() => imgStatusCache.get(localSrc) === 'err')
 
   const handleLoad = () => {
-    if (src) imgStatusCache.set(src, 'ok')
+    imgStatusCache.set(localSrc, 'ok')
   }
 
   const handleError = () => {
-    if (src) imgStatusCache.set(src, 'err')
-    if (!mountedRef.current) return
-    // Move to next source
-    if (attempt === 0 && domain) {
-      setAttempt(1)
-    } else {
-      setAttempt(3) // badge fallback
-    }
+    imgStatusCache.set(localSrc, 'err')
+    setFailed(true)
   }
 
-  if (!src || attempt >= 3) {
+  /* ── SVG icon fallback ── */
+  if (failed) {
+    const iconSize = Math.max(10, Math.round(size * 0.45))
     return (
       <div
-        className={`flex flex-shrink-0 items-center justify-center ${rounded} font-black text-white`}
-        style={{ width: size, height: size, backgroundColor: colors.pin, fontSize: size * 0.22 }}
+        className={`flex flex-shrink-0 items-center justify-center ${rounded}`}
+        style={{
+          width: size,
+          height: size,
+          backgroundColor: colors.bg,
+          border: `1px solid ${colors.pin}20`,
+        }}
       >
-        {short}
+        <Building2
+          size={iconSize}
+          strokeWidth={1.8}
+          style={{ color: colors.pin, opacity: 0.7 }}
+        />
       </div>
     )
   }
 
   return (
     <img
-      key={`${company.id}-${attempt}`}
-      src={src}
+      src={localSrc}
       alt={company.name}
       width={size}
       height={size}
       loading="lazy"
       decoding="async"
-      /* Prevent layout shifts */
       className={`flex-shrink-0 ${rounded} object-contain bg-white`}
       style={{ width: size, height: size, padding: Math.max(2, Math.round(size * 0.07)) }}
       onLoad={handleLoad}
