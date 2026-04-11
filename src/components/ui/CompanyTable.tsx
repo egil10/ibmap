@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2, Search, X, Filter, RotateCcw } from 'lucide-react'
 import { companies, FILTER_CATEGORIES } from '@/data/companies'
 import type { ActiveFilters } from '@/app/page'
@@ -12,6 +12,75 @@ type SortDir = 'asc' | 'desc'
 
 function getDomain(url: string): string {
   try { return new URL(url).hostname.replace(/^www\./, '') } catch { return '' }
+}
+
+function CustomCombo({ value, onChange, options, placeholder, disabled, widthCls = "w-32" }: {
+  value: string;
+  onChange: (val: string) => void;
+  options: {value: string; label: string}[];
+  placeholder: string;
+  disabled?: boolean;
+  widthCls?: string;
+}) {
+  const [open, setOpen] = useState(false)
+  const clickRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (clickRef.current && !clickRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  const selectedOption = options.find(o => o.value === value)
+
+  return (
+    <div className="relative flex items-center" ref={clickRef}>
+      <button 
+        disabled={disabled}
+        onClick={() => setOpen(!open)}
+        className={`flex ${widthCls} items-center justify-between bg-transparent py-2.5 pl-4 pr-3 text-[13px] font-semibold transition-colors focus:outline-none ${
+          disabled ? 'opacity-40 cursor-not-allowed' : 'hover:text-slate-900 cursor-pointer text-slate-600'
+        }`}
+      >
+        <span className="truncate">{selectedOption ? selectedOption.label : placeholder}</span>
+        <ChevronDown size={12} className={`flex-shrink-0 text-slate-400 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} strokeWidth={3} />
+      </button>
+
+      {open && !disabled && (
+         <div className="absolute top-[calc(100%+8px)] left-0 z-50 w-48 overflow-hidden rounded-2xl bg-white/95 backdrop-blur-xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] ring-1 ring-slate-900/5 animate-fade-in py-1">
+           <div className="max-h-64 overflow-y-auto thin-scroll">
+              <button
+                 className={`w-full text-left px-4 py-2.5 text-[13px] transition-colors ${
+                   value === 'ALL' 
+                     ? 'bg-slate-50 text-slate-900 font-bold'
+                     : 'text-slate-600 hover:bg-slate-50/80 hover:text-slate-900 font-medium'
+                 }`}
+                 onClick={() => { onChange('ALL'); setOpen(false); }}
+              >
+                 {placeholder}
+              </button>
+              {options.map(opt => (
+                 <button
+                   key={opt.value}
+                   className={`w-full text-left px-4 py-2 text-[13px] transition-colors ${
+                     opt.value === value 
+                       ? 'bg-slate-50 text-slate-900 font-bold'
+                       : 'text-slate-600 hover:bg-slate-50/80 hover:text-slate-900 font-medium'
+                   }`}
+                   onClick={() => { onChange(opt.value); setOpen(false); }}
+                 >
+                   <span className="block truncate">{opt.label}</span>
+                 </button>
+              ))}
+           </div>
+         </div>
+      )}
+    </div>
+  )
 }
 
 function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
@@ -154,50 +223,50 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
 
           <div className="h-5 w-px bg-slate-200/80" />
 
-          {/* Category Filter */}
-          <div className="relative group flex items-center">
-            <select value={localCategory} onChange={(e) => setLocalCategory(e.target.value)} className={dropdownClass}>
-              <option value="ALL">All Sectors</option>
-              {FILTER_CATEGORIES.filter(c => c !== 'ALL').map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <ChevronDown size={12} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
+          {/* Reserved Reset Button Slot (Prevents UI shifting) */}
+          <div className="flex w-12 items-center justify-center">
+            <button
+              onClick={handleResetFilters}
+              className={`flex h-full w-full items-center justify-center bg-transparent text-slate-400 hover:text-red-500 transition-all duration-300 focus:outline-none ${hasActiveFilters ? 'opacity-100 pointer-events-auto scale-100' : 'opacity-0 pointer-events-none scale-90'}`}
+              title="Reset all filters"
+            >
+              <RotateCcw size={14} strokeWidth={2.5} />
+            </button>
           </div>
+
+          <div className="h-5 w-px bg-slate-200/80" />
+
+          {/* Category Filter */}
+          <CustomCombo
+            value={localCategory}
+            onChange={setLocalCategory}
+            options={FILTER_CATEGORIES.filter(c => c !== 'ALL').map(c => ({ value: c, label: c }))}
+            placeholder="All Sectors"
+            widthCls="w-36"
+          />
 
           <div className="h-5 w-px bg-slate-200/80" />
 
           {/* Country Filter */}
-          <div className="relative group flex items-center">
-            <select value={localCountry} onChange={(e) => setLocalCountry(e.target.value)} className={dropdownClass}>
-              <option value="ALL">All Countries</option>
-              {availableCountries.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <ChevronDown size={12} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
-          </div>
+          <CustomCombo
+            value={localCountry}
+            onChange={setLocalCountry}
+            options={availableCountries.map(c => ({ value: c, label: c }))}
+            placeholder="All Countries"
+            widthCls="w-[124px]"
+          />
 
           <div className="h-5 w-px bg-slate-200/80" />
 
           {/* City Filter */}
-          <div className="relative group flex items-center">
-            <select value={localCity} onChange={(e) => setLocalCity(e.target.value)} className={`${dropdownClass} pr-9 ${availableCities.length === 0 ? 'opacity-50' : ''}`} disabled={availableCities.length === 0}>
-              <option value="ALL">All Cities</option>
-              {availableCities.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-            <ChevronDown size={12} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
-          </div>
-
-          {/* Reset Button */}
-          {hasActiveFilters && (
-            <>
-              <div className="h-5 w-px bg-slate-200/80" />
-              <button
-                onClick={handleResetFilters}
-                className="flex h-full items-center justify-center bg-transparent py-2.5 px-4 text-slate-400 hover:bg-slate-50 hover:text-slate-800 transition-colors focus:outline-none"
-                title="Reset all filters"
-              >
-                <RotateCcw size={14} strokeWidth={2.5} />
-              </button>
-            </>
-          )}
+          <CustomCombo
+            value={localCity}
+            onChange={setLocalCity}
+            options={availableCities.map(c => ({ value: c, label: c }))}
+            placeholder="All Cities"
+            disabled={availableCities.length === 0}
+            widthCls="w-28"
+          />
 
         </div>
       </div>
