@@ -198,7 +198,7 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
         </div>
 
         {/* Consolidated Filter Pill */}
-        <div className="flex items-center overflow-hidden rounded-full bg-white/70 shadow-[0_2px_16px_rgba(0,0,0,0.04)] ring-1 ring-slate-900/5 backdrop-blur-xl transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:bg-white/90">
+        <div className="flex items-center rounded-full bg-white/70 shadow-[0_2px_16px_rgba(0,0,0,0.04)] ring-1 ring-slate-900/5 backdrop-blur-xl transition-all hover:shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:bg-white/90">
           
           {/* Search */}
           <div className="relative flex items-center bg-transparent">
