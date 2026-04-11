@@ -59,20 +59,31 @@ html, body {
 }
 
 /* ── Marker performance: hardware-accelerate marker containers ── */
-.maplibregl-marker {
+.maplibregl-marker,
+.mapboxgl-marker {
   will-change: transform;
   contain: layout style;
   content-visibility: auto;
   contain-intrinsic-size: 32px 32px;
   outline: none !important;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
+  background: transparent !important;
 }
-.maplibregl-marker:focus {
+
+.maplibregl-marker:focus,
+.mapboxgl-marker:focus,
+.maplibregl-marker:active,
+.mapboxgl-marker:active,
+.maplibregl-marker:hover,
+.mapboxgl-marker:hover {
   outline: none !important;
+  background: transparent !important;
 }
-.maplibregl-marker * {
+
+.maplibregl-marker *,
+.mapboxgl-marker * {
   outline: none !important;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 /* Push bottom-right controls above the footer (~58px tall) */

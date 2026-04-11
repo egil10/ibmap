@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2, Search, X, Filter } from 'lucide-react'
+import { ExternalLink, ChevronUp, ChevronDown, MapPin, Building2, Search, X, Filter, RotateCcw } from 'lucide-react'
 import { companies, FILTER_CATEGORIES } from '@/data/companies'
 import type { ActiveFilters } from '@/app/page'
 import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
@@ -54,6 +54,15 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
       if (!cityExists) setLocalCity('ALL')
     }
   }, [localCountry, localCity])
+
+  const hasActiveFilters = localCategory !== 'ALL' || localCountry !== 'ALL' || localCity !== 'ALL' || searchQuery.trim() !== ''
+
+  const handleResetFilters = () => {
+    setLocalCategory('ALL')
+    setLocalCountry('ALL')
+    setLocalCity('ALL')
+    setSearchQuery('')
+  }
 
   const handleSort = (key: SortKey) => {
     if (key === sortKey) setSortDir(d => d === 'asc' ? 'desc' : 'asc')
@@ -175,6 +184,20 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
             </select>
             <ChevronDown size={12} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-slate-600 transition-colors" strokeWidth={3} />
           </div>
+
+          {/* Reset Button */}
+          {hasActiveFilters && (
+            <>
+              <div className="h-5 w-px bg-slate-200/80" />
+              <button
+                onClick={handleResetFilters}
+                className="flex h-full items-center justify-center bg-transparent py-2.5 px-4 text-slate-400 hover:bg-slate-50 hover:text-slate-800 transition-colors focus:outline-none"
+                title="Reset all filters"
+              >
+                <RotateCcw size={14} strokeWidth={2.5} />
+              </button>
+            </>
+          )}
 
         </div>
       </div>
