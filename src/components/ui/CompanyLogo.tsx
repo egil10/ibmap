@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, memo } from 'react'
-import { Building2 } from 'lucide-react'
+import { useState, memo, useEffect } from 'react'
+import { Globe } from 'lucide-react'
 import { Company, CATEGORY_COLORS } from '@/types'
 
 /* ── Global image status cache ──
@@ -13,23 +13,56 @@ interface Props {
   company: Company
   size?: number
   rounded?: string
-  wide?: boolean  // kept for API compat, ignored
+  wide?: boolean
 }
 
-export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
+export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl', wide }: Props) {
   const colors = CATEGORY_COLORS[company.category]
-  const localSrc = `/logos/${company.id}.png`
+  
+  const wideSrc = `/logos/${company.id}-wide.png`
+  const squareSrc = `/logos/${company.id}.png`
+  
+  // Try wide src first if requested, otherwise start with square
+  const initialSrc = wide ? wideSrc : squareSrc
+  
+  const [currentSrc, setCurrentSrc] = useState<string>(
+    () => imgStatusCache.get(initialSrc) === 'err' && wide ? squareSrc : initialSrc
+  )
+  const [failed, setFailed] = useState(() => imgStatusCache.get(squareSrc) === 'err')
 
-  /* Skip straight to fallback if we already know the local logo fails */
-  const [failed, setFailed] = useState(() => imgStatusCache.get(localSrc) === 'err')
+  // Effect to handle prop changes (e.g. reused component for different company)
+  useEffect(() => {
+    const src = wide ? wideSrc : squareSrc
+    if (imgStatusCache.get(src) === 'err') {
+      if (wide && imgStatusCache.get(squareSrc) !== 'err') {
+        setCurrentSrc(squareSrc)
+        setFailed(false)
+      } else {
+        setFailed(true)
+      }
+    } else {
+      setCurrentSrc(src)
+      setFailed(false)
+    }
+  }, [company.id, wide, wideSrc, squareSrc])
 
   const handleLoad = () => {
-    imgStatusCache.set(localSrc, 'ok')
+    imgStatusCache.set(currentSrc, 'ok')
   }
 
   const handleError = () => {
-    imgStatusCache.set(localSrc, 'err')
-    setFailed(true)
+    imgStatusCache.set(currentSrc, 'err')
+    if (wide && currentSrc === wideSrc) {
+      // If the wide image failed, fallback to the square one
+      if (imgStatusCache.get(squareSrc) === 'err') {
+        setFailed(true)
+      } else {
+        setCurrentSrc(squareSrc)
+      }
+    } else {
+      // If square failed (or we weren't wide to begin with), show icon
+      setFailed(true)
+    }
   }
 
   /* ── SVG icon fallback ── */
@@ -39,13 +72,13 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
       <div
         className={`flex flex-shrink-0 items-center justify-center ${rounded}`}
         style={{
-          width: size,
+          width: wide ? size * 1.5 : size,
           height: size,
           backgroundColor: colors.bg,
           border: `1px solid ${colors.pin}20`,
         }}
       >
-        <Building2
+        <Globe
           size={iconSize}
           strokeWidth={1.8}
           style={{ color: colors.pin, opacity: 0.7 }}
@@ -56,14 +89,18 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
 
   return (
     <img
-      src={localSrc}
+      src={currentSrc}
       alt={company.name}
-      width={size}
+      width={wide && currentSrc === wideSrc ? size * 1.5 : size}
       height={size}
       loading="lazy"
       decoding="async"
       className={`flex-shrink-0 ${rounded} object-contain bg-white`}
-      style={{ width: size, height: size, padding: Math.max(2, Math.round(size * 0.07)) }}
+      style={{ 
+        width: wide && currentSrc === wideSrc ? size * 1.5 : size, 
+        height: size, 
+        padding: Math.max(2, Math.round(size * 0.07)) 
+      }}
       onLoad={handleLoad}
       onError={handleError}
     />
