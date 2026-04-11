@@ -156,8 +156,8 @@ export default function Header({
     ? 'relative flex h-9 items-center rounded-full border border-white/[0.08] bg-white/[0.04] p-1'
     : 'relative flex h-9 items-center rounded-full border border-slate-200 bg-slate-100/80 p-1'
   const officeToggleThumb = dm
-    ? 'absolute top-1 bottom-1 w-[calc(50%-0.125rem)] rounded-full bg-white/[0.12] transition-transform duration-200 ease-out'
-    : 'absolute top-1 bottom-1 w-[calc(50%-0.125rem)] rounded-full bg-white transition-transform duration-200 ease-out shadow-[0_1px_3px_rgba(15,23,42,0.10)]'
+    ? 'absolute top-1 bottom-1 left-1 w-[calc(50%-0.25rem)] rounded-full bg-white/[0.12] transition-transform duration-200 ease-out'
+    : 'absolute top-1 bottom-1 left-1 w-[calc(50%-0.25rem)] rounded-full bg-white transition-transform duration-200 ease-out shadow-[0_1px_3px_rgba(15,23,42,0.10)]'
   const officeLabelActive = dm ? 'text-slate-100' : 'text-slate-900'
   const officeLabelInactive = dm ? 'text-slate-500 hover:text-slate-300' : 'text-slate-500 hover:text-slate-700'
   const officeLabelDisabled = dm ? 'text-white/[0.18]' : 'text-slate-300'
@@ -232,13 +232,13 @@ export default function Header({
               />
               <button
                 onClick={view === 'map' && showOffices ? onToggleOffices : undefined}
-                className={`relative z-10 flex min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : !showOffices ? officeLabelActive : officeLabelInactive}`}
+                className={`relative z-10 flex flex-1 min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : !showOffices ? officeLabelActive : officeLabelInactive}`}
               >
                 HQ
               </button>
               <button
                 onClick={view === 'map' && !showOffices ? onToggleOffices : undefined}
-                className={`relative z-10 flex min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : showOffices ? officeLabelActive : officeLabelInactive}`}
+                className={`relative z-10 flex flex-1 min-w-[3.25rem] items-center justify-center rounded-full px-3 text-[12px] font-semibold transition-colors duration-150 ${view !== 'map' ? officeLabelDisabled : showOffices ? officeLabelActive : officeLabelInactive}`}
               >
                 All
               </button>
