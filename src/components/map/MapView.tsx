@@ -188,13 +188,13 @@ export default function MapView({
   const [navigationAnchorId, setNavigationAnchorId] = useState<string | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const [currentZoom, setCurrentZoom] = useState(INITIAL_VIEW.zoom)
-  const [revealedCount, setRevealedCount] = useState(0)     // progressive reveal
-  const [isMoving, setIsMoving] = useState(false)            // suppress markers during movement
+  const [viewportKey, setViewportKey] = useState(0)   // bumped on move-end to refresh culling
   const mapRef = useRef<any>(null)
   const lastAutoFitKeyRef = useRef<string | null>(null)
   const moveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const batchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const viewportRef = useRef<{ swLat: number; swLng: number; neLat: number; neLng: number } | null>(null)
+  const prevShowMarkersRef = useRef(false)
 
   const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
   const showIndividualMarkers = currentZoom >= CLUSTER_ZOOM
@@ -240,9 +240,9 @@ export default function MapView({
     }
   }, [])
 
-  /* Viewport-culled markers */
-  const viewportMarkers = useMemo(() => {
-    if (!showIndividualMarkers || isMoving) return []
+  /* Viewport-culled markers — stays stable during movement, refreshes on move-end */
+  const visibleMarkers = useMemo(() => {
+    if (!showIndividualMarkers) return []
     const vp = viewportRef.current
     if (!vp) return jitteredFiltered.slice(0, MAX_VISIBLE_MARKERS)
     return jitteredFiltered
@@ -251,39 +251,43 @@ export default function MapView({
       )
       .slice(0, MAX_VISIBLE_MARKERS)
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [jitteredFiltered, showIndividualMarkers, isMoving, currentZoom])
+  }, [jitteredFiltered, showIndividualMarkers, viewportKey])
 
-  /* Progressive reveal: when viewport markers change, reveal in batches */
+  /* Progressive reveal only on initial zoom-in transition (cluster → markers) */
+  const [revealedCount, setRevealedCount] = useState(MAX_VISIBLE_MARKERS)
+
   useEffect(() => {
-    if (batchTimerRef.current) clearTimeout(batchTimerRef.current)
+    const wasShowingMarkers = prevShowMarkersRef.current
+    prevShowMarkersRef.current = showIndividualMarkers
 
-    if (viewportMarkers.length === 0) {
-      setRevealedCount(0)
-      return
-    }
+    // Only batch-reveal when transitioning from clusters → individual markers
+    if (showIndividualMarkers && !wasShowingMarkers && visibleMarkers.length > MARKER_BATCH_SIZE) {
+      if (batchTimerRef.current) clearTimeout(batchTimerRef.current)
+      setRevealedCount(MARKER_BATCH_SIZE)
 
-    // Immediately show first batch
-    setRevealedCount(MARKER_BATCH_SIZE)
-
-    // Progressively reveal more
-    let shown = MARKER_BATCH_SIZE
-    const revealNext = () => {
-      if (shown >= viewportMarkers.length) return
-      shown = Math.min(shown + MARKER_BATCH_SIZE, viewportMarkers.length)
-      startTransition(() => setRevealedCount(shown))
-      if (shown < viewportMarkers.length) {
-        batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
+      let shown = MARKER_BATCH_SIZE
+      const revealNext = () => {
+        if (shown >= visibleMarkers.length) return
+        shown = Math.min(shown + MARKER_BATCH_SIZE, visibleMarkers.length)
+        startTransition(() => setRevealedCount(shown))
+        if (shown < visibleMarkers.length) {
+          batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
+        }
       }
+      batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
+    } else if (showIndividualMarkers) {
+      // Already showing markers, just make sure everything is revealed
+      setRevealedCount(MAX_VISIBLE_MARKERS)
     }
-    batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
 
     return () => { if (batchTimerRef.current) clearTimeout(batchTimerRef.current) }
-  }, [viewportMarkers])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showIndividualMarkers])
 
-  /* Actual markers to render (capped by progressive reveal) */
-  const visibleMarkers = useMemo(
-    () => viewportMarkers.slice(0, revealedCount),
-    [viewportMarkers, revealedCount]
+  /* Final marker list (progressive reveal cap only matters during initial transition) */
+  const renderedMarkers = useMemo(
+    () => visibleMarkers.slice(0, revealedCount),
+    [visibleMarkers, revealedCount]
   )
 
   const navigationAnchor = useMemo(
@@ -427,11 +431,6 @@ export default function MapView({
   }, [selectCompany])
 
   /* ── Debounced move/zoom handler ── */
-  const handleMoveStart = useCallback(() => {
-    setIsMoving(true)
-    if (moveTimerRef.current) clearTimeout(moveTimerRef.current)
-  }, [])
-
   const handleMoveEnd = useCallback(() => {
     if (moveTimerRef.current) clearTimeout(moveTimerRef.current)
     moveTimerRef.current = setTimeout(() => {
@@ -439,7 +438,7 @@ export default function MapView({
       const z = mapRef.current?.getZoom() ?? currentZoom
       startTransition(() => {
         setCurrentZoom(z)
-        setIsMoving(false)
+        setViewportKey(k => k + 1)
       })
     }, MOVE_DEBOUNCE_MS)
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -471,7 +470,6 @@ export default function MapView({
         maxBounds={MAX_BOUNDS}
         reuseMaps
         onClick={handleMapClick}
-        onMoveStart={handleMoveStart}
         onMoveEnd={handleMoveEnd}
         interactiveLayerIds={['cluster-circles', 'unclustered-points']}
       >
@@ -529,8 +527,8 @@ export default function MapView({
           />
         </Source>
 
-        {/* ── Individual logo markers (only when zoomed in past CLUSTER_ZOOM and not moving) ── */}
-        {showIndividualMarkers && !isMoving && visibleMarkers.map(({ company, lat, lng }) => (
+        {/* ── Individual logo markers (only when zoomed in past CLUSTER_ZOOM) ── */}
+        {showIndividualMarkers && renderedMarkers.map(({ company, lat, lng }) => (
           <Marker
             key={company.id}
             longitude={lng}
@@ -545,7 +543,7 @@ export default function MapView({
           </Marker>
         ))}
 
-        {showOffices && showIndividualMarkers && !isMoving && filteredCompanies.flatMap((company) =>
+        {showOffices && showIndividualMarkers && filteredCompanies.flatMap((company) =>
           (company.offices ?? []).map((office, index) => (
             <Marker
               key={`${company.id}-office-${index}`}
