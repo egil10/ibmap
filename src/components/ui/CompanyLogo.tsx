@@ -146,9 +146,10 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
         alt={company.name}
         loading="lazy"
         decoding="async"
-        className={`relative z-10 w-full h-full object-contain ${!isWideImage ? 'p-[15%]' : ''}`}
+        className={`relative z-10 w-full h-full object-contain`}
         style={{
           backgroundColor: '#ffffff',
+          borderRadius: rounded.includes('full') ? '50%' : undefined,
           opacity: isImageLoaded ? 1 : 0,
           transition: 'opacity 0.2s ease-out',
         }}
