@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useCallback, useRef, useEffect, useMemo } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo, memo } from 'react'
 import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { companies, FilterCategory } from '@/data/companies'
-import { Company, CompanyOffice, CATEGORY_COLORS, CATEGORY_SHORT, MapStyleKey, MAP_STYLES } from '@/types'
+import { companies } from '@/data/companies'
+import { Company, CompanyOffice, MapStyleKey, MAP_STYLES } from '@/types'
 import type { ActiveFilters } from '@/app/page'
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
@@ -13,28 +13,8 @@ const INITIAL_VIEW = { longitude: 6.5, latitude: 64.4, zoom: 3.1 }
 const MAX_BOUNDS: [[number, number], [number, number]] = [[-36, 33], [52, 77]]
 const MARKER_ACCENT = '#94a3b8'
 
-function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSelected: boolean; darkMode: boolean }) {
-  const colors = CATEGORY_COLORS[company.category]
-  const short = CATEGORY_SHORT[company.category]
-  const [attempt, setAttempt] = useState(0)
-  const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
-  const src = attempt === 0
-    ? `/logos/${company.id}.png`
-    : attempt === 1
-      ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
-      : attempt === 2
-        ? `https://logo.clearbit.com/${domain}`
-        : attempt === 3
-          ? '/logos/_placeholder.svg'
-          : null
-  const handleError = () => {
-    if (attempt === 0 && domain) setAttempt(1)
-    else if (attempt === 1 && domain) setAttempt(2)
-    else if (attempt === 2) setAttempt(3)
-    else setAttempt(4)
-  }
+const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSelected: boolean; darkMode: boolean }) {
   const sz = isSelected ? 34 : 26
-
   const tooltipBg = darkMode ? 'rgba(0,0,0,0.96)' : 'rgba(255,255,255,0.96)'
   const tooltipText = darkMode ? '#f1f5f9' : '#334155'
   const tooltipBdr = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
@@ -48,30 +28,14 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
         />
       )}
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
+        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150 overflow-hidden"
         style={{
           width: sz,
           height: sz,
           border: isSelected ? '2px solid rgba(0,0,0,0.2)' : '1.5px solid rgba(0,0,0,0.1)',
         }}
       >
-        {attempt < 4 && src ? (
-          <img
-            src={src}
-            alt=""
-            key={attempt}
-            className="w-full h-full object-contain"
-            onError={handleError}
-            style={{ padding: sz > 28 ? 3 : 2, overflow: 'hidden', borderRadius: '50%' }}
-          />
-        ) : (
-          <span
-            className="flex h-full w-full items-center justify-center rounded-full text-[8px] font-black text-white"
-            style={{ backgroundColor: colors.pin }}
-          >
-            {short}
-          </span>
-        )}
+        <CompanyLogo company={company} size={sz} rounded="rounded-full" />
       </span>
       <span
         className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-xl border px-2.5 py-1 text-[11px] font-semibold opacity-0 shadow-xl backdrop-blur-md transition-opacity duration-150 group-hover:opacity-100"
@@ -82,30 +46,10 @@ function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSel
       </span>
     </div>
   )
-}
+})
 
-function OfficeMarker({ company, office, isSelected, darkMode }: { company: Company; office: CompanyOffice; isSelected: boolean; darkMode: boolean }) {
-  const colors = CATEGORY_COLORS[company.category]
-  const short = CATEGORY_SHORT[company.category]
-  const [attempt, setAttempt] = useState(0)
-  const domain = (() => { try { return new URL(company.website).hostname.replace(/^www\./, '') } catch { return '' } })()
-  const src = attempt === 0
-    ? `/logos/${company.id}.png`
-    : attempt === 1
-      ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256`
-      : attempt === 2
-        ? `https://logo.clearbit.com/${domain}`
-        : attempt === 3
-          ? '/logos/_placeholder.svg'
-          : null
-  const handleError = () => {
-    if (attempt === 0 && domain) setAttempt(1)
-    else if (attempt === 1 && domain) setAttempt(2)
-    else if (attempt === 2) setAttempt(3)
-    else setAttempt(4)
-  }
+const OfficeMarker = memo(function OfficeMarker({ company, office, isSelected, darkMode }: { company: Company; office: CompanyOffice; isSelected: boolean; darkMode: boolean }) {
   const sz = 20
-
   const tooltipBg = darkMode ? 'rgba(0,0,0,0.96)' : 'rgba(255,255,255,0.96)'
   const tooltipText = darkMode ? '#f1f5f9' : '#334155'
   const tooltipBdr = darkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'
@@ -113,7 +57,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150"
+        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150 overflow-hidden"
         style={{
           width: sz,
           height: sz,
@@ -121,23 +65,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
           opacity: isSelected ? 1 : 0.78,
         }}
       >
-        {attempt < 4 && src ? (
-          <img
-            src={src}
-            alt=""
-            key={attempt}
-            className="h-full w-full rounded-full object-contain"
-            onError={handleError}
-            style={{ padding: 2 }}
-          />
-        ) : (
-          <span
-            className="flex h-full w-full items-center justify-center rounded-full text-[6px] font-black text-white"
-            style={{ backgroundColor: colors.pin }}
-          >
-            {short}
-          </span>
-        )}
+        <CompanyLogo company={company} size={sz} rounded="rounded-full" />
       </span>
       <span
         className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-xl border px-2.5 py-1 text-[11px] font-semibold opacity-0 shadow-xl backdrop-blur-md transition-opacity duration-150 group-hover:opacity-100"
@@ -149,7 +77,7 @@ function OfficeMarker({ company, office, isSelected, darkMode }: { company: Comp
       </span>
     </div>
   )
-}
+})
 
 function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; lng: number }> {
   const groups: Record<string, Company[]> = {}
@@ -237,18 +165,28 @@ export default function MapView({
     })
   }, [onRegisterFlyTo])
 
-  const mappedCompanies = companies.filter(company => company.lat != null && company.lng != null)
-  const filteredCompanies = mappedCompanies.filter(company =>
-    (filters.category === 'ALL' || company.category === filters.category) &&
-    (!filters.country || company.country === filters.country) &&
-    (!filters.city || company.city === filters.city)
+  const filteredCompanies = useMemo(() =>
+    companies.filter(company =>
+      company.lat != null && company.lng != null &&
+      (filters.category === 'ALL' || company.category === filters.category) &&
+      (!filters.country || company.country === filters.country) &&
+      (!filters.city || company.city === filters.city)
+    ),
+    [filters]
   )
-  const jitteredFiltered = jitterMarkers(filteredCompanies)
-  const navigationAnchor = filteredCompanies.find(company => company.id === navigationAnchorId) ?? selected
+
+  const jitteredFiltered = useMemo(() => jitterMarkers(filteredCompanies), [filteredCompanies])
+
+  const navigationAnchor = useMemo(
+    () => filteredCompanies.find(company => company.id === navigationAnchorId) ?? selected,
+    [filteredCompanies, navigationAnchorId, selected]
+  )
+
   const navigationCompanies = useMemo(
     () => buildNavigationSequence(navigationAnchor, filteredCompanies),
     [filteredCompanies, navigationAnchor]
   )
+
   const selectedIndex = selected ? navigationCompanies.findIndex(company => company.id === selected.id) : -1
 
   useEffect(() => {
@@ -268,26 +206,16 @@ export default function MapView({
       return
     }
 
-    const points = filteredCompanies
-      .filter(company => company.lat != null && company.lng != null)
-      .map(company => [company.lng as number, company.lat as number] as [number, number])
+    const points = filteredCompanies.map(company => [company.lng as number, company.lat as number] as [number, number])
 
     if (points.length === 0) return
     if (points.length === 1) {
-      mapRef.current?.flyTo({
-        center: points[0],
-        zoom: 6,
-        duration: 900,
-        essential: true,
-      })
+      mapRef.current?.flyTo({ center: points[0], zoom: 6, duration: 900, essential: true })
       return
     }
 
-    let minLng = points[0][0]
-    let maxLng = points[0][0]
-    let minLat = points[0][1]
-    let maxLat = points[0][1]
-
+    let minLng = points[0][0], maxLng = points[0][0]
+    let minLat = points[0][1], maxLat = points[0][1]
     for (const [lng, lat] of points) {
       minLng = Math.min(minLng, lng)
       maxLng = Math.max(maxLng, lng)
@@ -325,7 +253,6 @@ export default function MapView({
       selectCompany(filteredCompanies[0])
       return
     }
-
     let nextCompany = filteredCompanies[Math.floor(Math.random() * filteredCompanies.length)]
     if (selected && nextCompany.id === selected.id) {
       const currentIndex = filteredCompanies.findIndex(company => company.id === selected.id)
@@ -450,7 +377,7 @@ function CompanyBanner({
 }) {
   if (list.length === 0) return null
 
-  const doubled = [...list, ...list]
+  const doubled = useMemo(() => [...list, ...list], [list])
   const duration = Math.max(60, list.length * 3)
 
   const bannerBg = darkMode ? 'rgba(0,0,0,0.94)' : 'rgba(255,255,255,0.94)'
