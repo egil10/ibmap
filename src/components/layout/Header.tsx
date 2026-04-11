@@ -277,7 +277,7 @@ export default function Header({
             <div className="relative hidden shrink-0 md:block" ref={filterDrop.ref}>
               <button
                 onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
-                className={`${desktopDropBtn(filterDrop.open)} w-20 justify-between`}
+                className={`${desktopDropBtn(filterDrop.open)} w-[4.5rem] justify-between cursor-pointer`}
               >
                 <div className="flex items-center gap-1.5 min-w-0">
                   {activeColors && <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: activeColors.pin }} />}
