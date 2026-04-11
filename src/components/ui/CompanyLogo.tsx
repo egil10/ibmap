@@ -35,16 +35,11 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
 
   const cacheKey = `${company.id}-${wide ? 'wide' : 'square'}`
   
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
   const [failed, setFailed] = useState<boolean>(false)
   const [currentSrc, setCurrentSrc] = useState<string>('')
-  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false)
 
-  // Reset loading state safely anytime the URL source cascades
-  useEffect(() => {
-    setIsImageLoaded(false)
-  }, [currentSrc])
-
+  // The engine background-evaluates every link completely outside the DOM.
+  // It only commits a URL to the DOM state natively if it flawlessly loaded beforehand.
   useEffect(() => {
     const cachedBest = bestSourceCache.get(cacheKey)
     if (cachedBest !== undefined) {
@@ -57,51 +52,54 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
       return
     }
 
-    // Fast-forward through known bad URLs
-    let startIdx = 0
-    while (startIdx < sources.length && urlCache.get(sources[startIdx]) === 'err') {
-      startIdx++
+    let isSubscribed = true
+
+    const attemptLoad = (idx: number) => {
+      if (!isSubscribed) return
+      if (idx >= sources.length) {
+        bestSourceCache.set(cacheKey, null)
+        setFailed(true)
+        return
+      }
+
+      const url = sources[idx]
+      if (urlCache.get(url) === 'err') {
+        attemptLoad(idx + 1)
+        return
+      }
+      if (urlCache.get(url) === 'ok') {
+        bestSourceCache.set(cacheKey, url)
+        setCurrentSrc(url)
+        setFailed(false)
+        return
+      }
+
+      // Invisible DOM-less native image verification
+      const img = new Image()
+      img.onload = () => {
+        if (!isSubscribed) return
+        urlCache.set(url, 'ok')
+        bestSourceCache.set(cacheKey, url)
+        setCurrentSrc(url)
+        setFailed(false)
+      }
+      img.onerror = () => {
+        if (!isSubscribed) return
+        urlCache.set(url, 'err')
+        attemptLoad(idx + 1)
+      }
+      img.src = url
     }
 
-    if (startIdx >= sources.length) {
-      bestSourceCache.set(cacheKey, null)
-      setFailed(true)
-    } else {
-      setCurrentIndex(startIdx)
-      setCurrentSrc(sources[startIdx])
-      setFailed(false)
-    }
+    attemptLoad(0)
+
+    return () => { isSubscribed = false }
   }, [cacheKey, sources])
 
-  const handleLoad = () => {
-    urlCache.set(currentSrc, 'ok')
-    bestSourceCache.set(cacheKey, currentSrc)
-    setIsImageLoaded(true)
-  }
-
-  const handleError = () => {
-    urlCache.set(currentSrc, 'err')
-    setIsImageLoaded(false)
-    
-    let nextIdx = currentIndex + 1
-    while (nextIdx < sources.length && urlCache.get(sources[nextIdx]) === 'err') {
-      nextIdx++
-    }
-
-    if (nextIdx < sources.length) {
-      setCurrentIndex(nextIdx)
-      setCurrentSrc(sources[nextIdx])
-    } else {
-      bestSourceCache.set(cacheKey, null)
-      setFailed(true)
-    }
-  }
-
   const iconSize = Math.max(10, Math.round(size * 0.45))
-  const isWideImage = wide && currentSrc.includes('-wide')
-  const actualWidth = isWideImage ? Math.round(size * 1.5) : size
 
-  // If utterly failed (all local + remote sources 404'd), display ONLY the clean fallback UI.
+  // Render the strict clean fallback directly while background pre-fetching is occurring 
+  // or if all sequential sources cascaded natively into errors.
   if (failed || !currentSrc) {
     return (
       <div
@@ -119,42 +117,27 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
     )
   }
 
-  // Active Loading State / Render sequence: 
-  // Displays the exact same fallback Globe initially, but hides it natively instantly 
-  // upon the hidden img successfully triggering onLoad. Blocks 404 outlines organically.
+  const isWideImage = wide && currentSrc.includes('-wide')
+  const actualWidth = isWideImage ? Math.round(size * 1.5) : size
+
+  // Natively render the verified image exclusively since it's structurally guaranteed 
+  // to avoid sending broken HTTP URLs that flash as ugly DOM square failures.
   return (
     <div
-      className={`relative flex flex-shrink-0 items-center justify-center ${rounded} overflow-hidden`}
+      className={`relative flex flex-shrink-0 items-center justify-center bg-white ${rounded} overflow-hidden`}
       style={{
         width: actualWidth,
         height: size,
-        backgroundColor: colors.bg,
-        border: `1px solid ${colors.pin}20`,
         borderRadius: rounded.includes('full') ? '50%' : undefined,
       }}
     >
-      {/* Permanent visual proxy underlying the loading image */}
-      <Globe 
-        className="absolute"
-        size={iconSize} 
-        strokeWidth={1.8} 
-        style={{ color: colors.pin, opacity: isImageLoaded ? 0 : 0.7, transition: 'opacity 0.2s ease-out' }} 
-      />
       <img
         key={currentSrc}
         src={currentSrc}
         alt={company.name}
         loading="lazy"
         decoding="async"
-        className={`relative z-10 w-full h-full object-contain`}
-        style={{
-          backgroundColor: '#ffffff',
-          borderRadius: rounded.includes('full') ? '50%' : undefined,
-          opacity: isImageLoaded ? 1 : 0,
-          transition: 'opacity 0.2s ease-out',
-        }}
-        onLoad={handleLoad}
-        onError={handleError}
+        className={`w-full h-full object-contain`}
       />
     </div>
   )
