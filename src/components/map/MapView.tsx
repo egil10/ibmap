@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef, useEffect, useMemo, memo } from 'react'
+import { useState, useCallback, useRef, useEffect, useMemo, memo, startTransition } from 'react'
 import MapGL, { Marker, NavigationControl, Source, Layer } from 'react-map-gl/maplibre'
 import type { MapLayerMouseEvent, GeoJSONSource as GeoJSONSourceType } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
@@ -16,6 +16,13 @@ const MARKER_ACCENT = '#94a3b8'
 
 /* ────────────────────────── Cluster zoom threshold ────────────────────────── */
 const CLUSTER_ZOOM = 9 // below this, we show clusters; above, individual markers
+
+/* ────────────────────────── Performance constants ────────────────────────── */
+const MARKER_BATCH_SIZE = 40      // render markers in batches
+const MARKER_BATCH_DELAY = 80     // ms between batches
+const VIEWPORT_PAD = 0.02         // extra lat/lng padding for viewport culling
+const MAX_VISIBLE_MARKERS = 200   // absolute cap on simultaneous DOM markers
+const MOVE_DEBOUNCE_MS = 120      // debounce move/zoom events
 
 /* ────────────────────────── Logo Marker (DOM — only for visible pins at zoom ≥ CLUSTER_ZOOM) ── */
 const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSelected: boolean; darkMode: boolean }) {
@@ -33,7 +40,7 @@ const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: {
         />
       )}
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150 overflow-hidden"
+        className="relative flex items-center justify-center rounded-full bg-white overflow-hidden"
         style={{
           width: sz,
           height: sz,
@@ -62,7 +69,7 @@ const OfficeMarker = memo(function OfficeMarker({ company, office, isSelected, d
   return (
     <div className="group relative flex items-center justify-center cursor-pointer">
       <span
-        className="relative flex items-center justify-center rounded-full bg-white transition-colors duration-150 overflow-hidden"
+        className="relative flex items-center justify-center rounded-full bg-white overflow-hidden"
         style={{
           width: sz,
           height: sz,
@@ -181,8 +188,13 @@ export default function MapView({
   const [navigationAnchorId, setNavigationAnchorId] = useState<string | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
   const [currentZoom, setCurrentZoom] = useState(INITIAL_VIEW.zoom)
+  const [revealedCount, setRevealedCount] = useState(0)     // progressive reveal
+  const [isMoving, setIsMoving] = useState(false)            // suppress markers during movement
   const mapRef = useRef<any>(null)
   const lastAutoFitKeyRef = useRef<string | null>(null)
+  const moveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const batchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const viewportRef = useRef<{ swLat: number; swLng: number; neLat: number; neLng: number } | null>(null)
 
   const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
   const showIndividualMarkers = currentZoom >= CLUSTER_ZOOM
@@ -212,19 +224,67 @@ export default function MapView({
     [filteredCompanies, showIndividualMarkers]
   )
 
-  /* Visible markers — for very high zoom, limit to viewport (optimization) */
-  const visibleMarkers = useMemo(() => {
-    if (!showIndividualMarkers) return []
+  /* Update viewport bounds ref (non-reactive, avoids re-render) */
+  const updateViewport = useCallback(() => {
     const map = mapRef.current
-    if (!map) return jitteredFiltered
+    if (!map) return
     const bounds = map.getBounds()
-    if (!bounds) return jitteredFiltered
+    if (!bounds) return
     const sw = bounds.getSouthWest()
     const ne = bounds.getNorthEast()
-    return jitteredFiltered.filter(({ lat, lng }) =>
-      lat >= sw.lat && lat <= ne.lat && lng >= sw.lng && lng <= ne.lng
-    )
-  }, [jitteredFiltered, showIndividualMarkers, currentZoom])
+    viewportRef.current = {
+      swLat: sw.lat - VIEWPORT_PAD,
+      swLng: sw.lng - VIEWPORT_PAD,
+      neLat: ne.lat + VIEWPORT_PAD,
+      neLng: ne.lng + VIEWPORT_PAD,
+    }
+  }, [])
+
+  /* Viewport-culled markers */
+  const viewportMarkers = useMemo(() => {
+    if (!showIndividualMarkers || isMoving) return []
+    const vp = viewportRef.current
+    if (!vp) return jitteredFiltered.slice(0, MAX_VISIBLE_MARKERS)
+    return jitteredFiltered
+      .filter(({ lat, lng }) =>
+        lat >= vp.swLat && lat <= vp.neLat && lng >= vp.swLng && lng <= vp.neLng
+      )
+      .slice(0, MAX_VISIBLE_MARKERS)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [jitteredFiltered, showIndividualMarkers, isMoving, currentZoom])
+
+  /* Progressive reveal: when viewport markers change, reveal in batches */
+  useEffect(() => {
+    if (batchTimerRef.current) clearTimeout(batchTimerRef.current)
+
+    if (viewportMarkers.length === 0) {
+      setRevealedCount(0)
+      return
+    }
+
+    // Immediately show first batch
+    setRevealedCount(MARKER_BATCH_SIZE)
+
+    // Progressively reveal more
+    let shown = MARKER_BATCH_SIZE
+    const revealNext = () => {
+      if (shown >= viewportMarkers.length) return
+      shown = Math.min(shown + MARKER_BATCH_SIZE, viewportMarkers.length)
+      startTransition(() => setRevealedCount(shown))
+      if (shown < viewportMarkers.length) {
+        batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
+      }
+    }
+    batchTimerRef.current = setTimeout(revealNext, MARKER_BATCH_DELAY)
+
+    return () => { if (batchTimerRef.current) clearTimeout(batchTimerRef.current) }
+  }, [viewportMarkers])
+
+  /* Actual markers to render (capped by progressive reveal) */
+  const visibleMarkers = useMemo(
+    () => viewportMarkers.slice(0, revealedCount),
+    [viewportMarkers, revealedCount]
+  )
 
   const navigationAnchor = useMemo(
     () => filteredCompanies.find(company => company.id === navigationAnchorId) ?? selected,
@@ -366,10 +426,32 @@ export default function MapView({
     setBannerPinned(false)
   }, [selectCompany])
 
-  const handleZoomEnd = useCallback(() => {
-    const z = mapRef.current?.getZoom() ?? currentZoom
-    setCurrentZoom(z)
-  }, [currentZoom])
+  /* ── Debounced move/zoom handler ── */
+  const handleMoveStart = useCallback(() => {
+    setIsMoving(true)
+    if (moveTimerRef.current) clearTimeout(moveTimerRef.current)
+  }, [])
+
+  const handleMoveEnd = useCallback(() => {
+    if (moveTimerRef.current) clearTimeout(moveTimerRef.current)
+    moveTimerRef.current = setTimeout(() => {
+      updateViewport()
+      const z = mapRef.current?.getZoom() ?? currentZoom
+      startTransition(() => {
+        setCurrentZoom(z)
+        setIsMoving(false)
+      })
+    }, MOVE_DEBOUNCE_MS)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updateViewport])
+
+  /* Cleanup timers */
+  useEffect(() => {
+    return () => {
+      if (moveTimerRef.current) clearTimeout(moveTimerRef.current)
+      if (batchTimerRef.current) clearTimeout(batchTimerRef.current)
+    }
+  }, [])
 
   /* Cluster colors */
   const clusterBg = darkMode ? '#1e293b' : '#ffffff'
@@ -389,8 +471,8 @@ export default function MapView({
         maxBounds={MAX_BOUNDS}
         reuseMaps
         onClick={handleMapClick}
-        onZoomEnd={handleZoomEnd}
-        onMoveEnd={handleZoomEnd}
+        onMoveStart={handleMoveStart}
+        onMoveEnd={handleMoveEnd}
         interactiveLayerIds={['cluster-circles', 'unclustered-points']}
       >
         <NavigationControl position="bottom-right" showCompass={false} />
@@ -447,8 +529,8 @@ export default function MapView({
           />
         </Source>
 
-        {/* ── Individual logo markers (only when zoomed in past CLUSTER_ZOOM) ── */}
-        {showIndividualMarkers && visibleMarkers.map(({ company, lat, lng }) => (
+        {/* ── Individual logo markers (only when zoomed in past CLUSTER_ZOOM and not moving) ── */}
+        {showIndividualMarkers && !isMoving && visibleMarkers.map(({ company, lat, lng }) => (
           <Marker
             key={company.id}
             longitude={lng}
@@ -463,7 +545,7 @@ export default function MapView({
           </Marker>
         ))}
 
-        {showOffices && showIndividualMarkers && filteredCompanies.flatMap((company) =>
+        {showOffices && showIndividualMarkers && !isMoving && filteredCompanies.flatMap((company) =>
           (company.offices ?? []).map((office, index) => (
             <Marker
               key={`${company.id}-office-${index}`}
@@ -525,8 +607,8 @@ const CompanyBanner = memo(function CompanyBanner({
 }) {
   if (list.length === 0) return null
 
-  /* Only duplicate if we have enough to scroll. For very large lists, cap at 200 items total. */
-  const cappedList = list.length > 100 ? list.slice(0, 100) : list
+  /* Only duplicate if we have enough to scroll. For very large lists, cap at 80 items total. */
+  const cappedList = list.length > 40 ? list.slice(0, 40) : list
   const doubled = useMemo(() => [...cappedList, ...cappedList], [cappedList])
   const duration = Math.max(60, cappedList.length * 3)
 
