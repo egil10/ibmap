@@ -215,6 +215,17 @@ export default function MapView({
     [filters]
   )
 
+  /* ── Context Reset Logic ──
+     If the user changes the filter criteria (e.g. selects a different category) and the
+     currently open company card no longer belongs in the filtered dataset, cleanly dismiss it. */
+  useEffect(() => {
+    if (selected && !filteredCompanies.some(c => c.id === selected.id)) {
+      setSelected(null)
+      setNavigationAnchorId(null)
+      setBannerPinned(false)
+    }
+  }, [filteredCompanies, selected])
+
   /* GeoJSON for the clustered source */
   const geojsonData = useMemo(() => buildGeoJSON(filteredCompanies), [filteredCompanies])
 
