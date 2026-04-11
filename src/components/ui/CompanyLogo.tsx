@@ -10,10 +10,6 @@ import { Company, CATEGORY_COLORS } from '@/types'
 const urlCache = new Map<string, 'ok' | 'err'>()
 const bestSourceCache = new Map<string, string | null>()
 
-function getDomain(url: string): string {
-  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return '' }
-}
-
 interface Props {
   company: Company
   size?: number
@@ -22,19 +18,14 @@ interface Props {
 }
 
 export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl', wide }: Props) {
-  const colors = CATEGORY_COLORS[company.category]
-  const domain = getDomain(company.website)
+  const colors = CATEGORY_COLORS[company.category] || { bg: '#f1f5f9', pin: '#64748b' }
   
   const sources = useMemo(() => {
     const list: string[] = []
     if (wide) list.push(`/logos/${company.id}-wide.png`)
     list.push(`/logos/${company.id}.png`)
-    if (domain) {
-      list.push(`https://logo.clearbit.com/${domain}?size=128`)
-      list.push(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`)
-    }
     return list
-  }, [company.id, wide, domain])
+  }, [company.id, wide])
 
   const cacheKey = `${company.id}-${wide ? 'wide' : 'square'}`
   
