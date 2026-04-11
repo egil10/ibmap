@@ -261,7 +261,15 @@ export default function CompanyTable({ filters, onViewOnMap }: Props) {
           {/* City Filter */}
           <CustomCombo
             value={localCity}
-            onChange={setLocalCity}
+            onChange={(city) => {
+              setLocalCity(city)
+              if (city !== 'ALL') {
+                const found = companies.find(c => c.city === city)
+                if (found && localCountry !== found.country) {
+                  setLocalCountry(found.country)
+                }
+              }
+            }}
             options={availableCities.map(c => ({ value: c, label: c }))}
             placeholder="All Cities"
             disabled={availableCities.length === 0}
