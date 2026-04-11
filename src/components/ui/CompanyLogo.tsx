@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import { Company, CATEGORY_COLORS, CATEGORY_SHORT } from '@/types'
 
 function getDomain(url: string): string {
@@ -11,10 +11,10 @@ interface Props {
   company: Company
   size?: number
   rounded?: string
-  wide?: boolean  // kept for API compat, ignored — wide logos removed
+  wide?: boolean  // kept for API compat, ignored
 }
 
-export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
+export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl' }: Props) {
   const [attempt, setAttempt] = useState(0)
   const domain = getDomain(company.website)
   const colors = CATEGORY_COLORS[company.category]
@@ -22,9 +22,8 @@ export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl
 
   const sources = [
     `/logos/${company.id}.png`,
-    domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=256` : null,
-    domain ? `https://logo.clearbit.com/${domain}` : null,
-    '/logos/_placeholder.svg',
+    domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=128` : null,
+    null, // skip clearbit - slow CDN, unnecessary external request
   ]
 
   const src = sources[attempt] ?? null
@@ -50,9 +49,13 @@ export default function CompanyLogo({ company, size = 40, rounded = 'rounded-2xl
       key={attempt}
       src={src}
       alt={company.name}
+      width={size}
+      height={size}
+      loading="lazy"
+      decoding="async"
       className={`flex-shrink-0 ${rounded} object-contain bg-white`}
       style={{ width: size, height: size, padding: Math.max(2, Math.round(size * 0.07)) }}
       onError={handleError}
     />
   )
-}
+})

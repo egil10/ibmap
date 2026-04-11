@@ -1,10 +1,11 @@
 'use client'
 
 import { useState, useCallback, useRef, useEffect, useMemo, memo } from 'react'
-import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre'
+import MapGL, { Marker, NavigationControl, Source, Layer } from 'react-map-gl/maplibre'
+import type { MapLayerMouseEvent, GeoJSONSource as GeoJSONSourceType } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { companies } from '@/data/companies'
-import { Company, CompanyOffice, MapStyleKey, MAP_STYLES } from '@/types'
+import { Company, CompanyOffice, MapStyleKey, MAP_STYLES, CATEGORY_COLORS } from '@/types'
 import type { ActiveFilters } from '@/app/page'
 import CompanyCard from '@/components/ui/CompanyCard'
 import CompanyLogo from '@/components/ui/CompanyLogo'
@@ -13,6 +14,10 @@ const INITIAL_VIEW = { longitude: 6.5, latitude: 64.4, zoom: 3.1 }
 const MAX_BOUNDS: [[number, number], [number, number]] = [[-36, 33], [52, 77]]
 const MARKER_ACCENT = '#94a3b8'
 
+/* ────────────────────────── Cluster zoom threshold ────────────────────────── */
+const CLUSTER_ZOOM = 9 // below this, we show clusters; above, individual markers
+
+/* ────────────────────────── Logo Marker (DOM — only for visible pins at zoom ≥ CLUSTER_ZOOM) ── */
 const LogoMarker = memo(function LogoMarker({ company, isSelected, darkMode }: { company: Company; isSelected: boolean; darkMode: boolean }) {
   const sz = isSelected ? 34 : 26
   const tooltipBg = darkMode ? 'rgba(0,0,0,0.96)' : 'rgba(255,255,255,0.96)'
@@ -79,6 +84,7 @@ const OfficeMarker = memo(function OfficeMarker({ company, office, isSelected, d
   )
 })
 
+/* ────────────────────────── Jitter logic (only for visible markers) ────────────────────────── */
 function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; lng: number }> {
   const groups: Record<string, Company[]> = {}
   for (const company of list) {
@@ -111,6 +117,7 @@ function jitterMarkers(list: Company[]): Array<{ company: Company; lat: number; 
   return out
 }
 
+/* ────────────────────────── Navigation helpers ────────────────────────── */
 function compareByLocation(a: Company, b: Company) {
   return a.country.localeCompare(b.country) || a.city.localeCompare(b.city) || a.name.localeCompare(b.name)
 }
@@ -134,6 +141,25 @@ function buildNavigationSequence(anchor: Company | null, list: Company[]) {
   return [anchor, ...sameCity, ...sameCountry, ...otherCountries]
 }
 
+/* ────────────────────────── GeoJSON builder ────────────────────────── */
+function buildGeoJSON(list: Company[]): GeoJSON.FeatureCollection {
+  return {
+    type: 'FeatureCollection',
+    features: list.map(company => ({
+      type: 'Feature' as const,
+      properties: { id: company.id },
+      geometry: {
+        type: 'Point' as const,
+        coordinates: [company.lng!, company.lat!],
+      },
+    })),
+  }
+}
+
+/* ────────────────────────── Company lookup ────────────────────────── */
+const companyById = new globalThis.Map<string, Company>(companies.map(c => [c.id, c]))
+
+/* ────────────────────────── Props ────────────────────────── */
 interface Props {
   filters: ActiveFilters
   onRegisterFlyTo?: (fn: (lat: number, lng: number, zoom: number) => void) => void
@@ -154,10 +180,12 @@ export default function MapView({
   const [selected, setSelected] = useState<Company | null>(null)
   const [navigationAnchorId, setNavigationAnchorId] = useState<string | null>(null)
   const [bannerPinned, setBannerPinned] = useState(false)
+  const [currentZoom, setCurrentZoom] = useState(INITIAL_VIEW.zoom)
   const mapRef = useRef<any>(null)
   const lastAutoFitKeyRef = useRef<string | null>(null)
 
   const activeVariant = MAP_STYLES[mapStyleKey][darkMode ? 'dark' : 'light']
+  const showIndividualMarkers = currentZoom >= CLUSTER_ZOOM
 
   useEffect(() => {
     onRegisterFlyTo?.((lat, lng, zoom) => {
@@ -175,7 +203,28 @@ export default function MapView({
     [filters]
   )
 
-  const jitteredFiltered = useMemo(() => jitterMarkers(filteredCompanies), [filteredCompanies])
+  /* GeoJSON for the clustered source */
+  const geojsonData = useMemo(() => buildGeoJSON(filteredCompanies), [filteredCompanies])
+
+  /* Only jitter when zoomed in enough to show individual markers */
+  const jitteredFiltered = useMemo(
+    () => showIndividualMarkers ? jitterMarkers(filteredCompanies) : [],
+    [filteredCompanies, showIndividualMarkers]
+  )
+
+  /* Visible markers — for very high zoom, limit to viewport (optimization) */
+  const visibleMarkers = useMemo(() => {
+    if (!showIndividualMarkers) return []
+    const map = mapRef.current
+    if (!map) return jitteredFiltered
+    const bounds = map.getBounds()
+    if (!bounds) return jitteredFiltered
+    const sw = bounds.getSouthWest()
+    const ne = bounds.getNorthEast()
+    return jitteredFiltered.filter(({ lat, lng }) =>
+      lat >= sw.lat && lat <= ne.lat && lng >= sw.lng && lng <= ne.lng
+    )
+  }, [jitteredFiltered, showIndividualMarkers, currentZoom])
 
   const navigationAnchor = useMemo(
     () => filteredCompanies.find(company => company.id === navigationAnchorId) ?? selected,
@@ -280,15 +329,57 @@ export default function MapView({
     selectCompany(company, true, true)
   }, [selectCompany])
 
-  const handleMapClick = useCallback(() => {
+  const handleMapClick = useCallback((e: MapLayerMouseEvent) => {
+    // Check if a cluster was clicked
+    const map = mapRef.current
+    if (!map) { setSelected(null); setNavigationAnchorId(null); setBannerPinned(false); return }
+
+    const features = map.queryRenderedFeatures(e.point, { layers: ['cluster-circles', 'unclustered-points'] })
+    if (features && features.length > 0) {
+      const feature = features[0]
+      if (feature.properties?.cluster) {
+        // Cluster click → zoom in
+        const source = map.getSource('companies-src') as GeoJSONSourceType | undefined
+        if (source && typeof source.getClusterExpansionZoom === 'function') {
+          source.getClusterExpansionZoom(feature.properties.cluster_id).then((zoom: number) => {
+            map.flyTo({
+              center: (feature.geometry as GeoJSON.Point).coordinates as [number, number],
+              zoom: Math.min(zoom, 16),
+              duration: 500,
+              essential: true,
+            })
+          })
+        }
+      } else {
+        // Single unclustered point
+        const id = feature.properties?.id as string
+        const company = companyById.get(id)
+        if (company) {
+          selectCompany(company, false, true)
+        }
+      }
+      return
+    }
+
     setSelected(null)
     setNavigationAnchorId(null)
     setBannerPinned(false)
-  }, [])
+  }, [selectCompany])
+
+  const handleZoomEnd = useCallback(() => {
+    const z = mapRef.current?.getZoom() ?? currentZoom
+    setCurrentZoom(z)
+  }, [currentZoom])
+
+  /* Cluster colors */
+  const clusterBg = darkMode ? '#1e293b' : '#ffffff'
+  const clusterBorder = darkMode ? '#475569' : '#94a3b8'
+  const clusterText = darkMode ? '#e2e8f0' : '#334155'
+  const dotColor = darkMode ? '#64748b' : '#94a3b8'
 
   return (
     <div className="absolute inset-0 top-0">
-      <Map
+      <MapGL
         ref={mapRef}
         initialViewState={INITIAL_VIEW}
         style={{ width: '100%', height: '100%' }}
@@ -298,10 +389,66 @@ export default function MapView({
         maxBounds={MAX_BOUNDS}
         reuseMaps
         onClick={handleMapClick}
+        onZoomEnd={handleZoomEnd}
+        onMoveEnd={handleZoomEnd}
+        interactiveLayerIds={['cluster-circles', 'unclustered-points']}
       >
         <NavigationControl position="bottom-right" showCompass={false} />
 
-        {jitteredFiltered.map(({ company, lat, lng }) => (
+        {/* ── Clustered GeoJSON source (GPU-rendered circles when zoomed out) ── */}
+        <Source
+          id="companies-src"
+          type="geojson"
+          data={geojsonData}
+          cluster={true}
+          clusterMaxZoom={CLUSTER_ZOOM - 1}
+          clusterRadius={50}
+        >
+          {/* Cluster circles */}
+          <Layer
+            id="cluster-circles"
+            type="circle"
+            filter={['has', 'point_count']}
+            paint={{
+              'circle-color': clusterBg,
+              'circle-radius': ['step', ['get', 'point_count'], 18, 10, 22, 50, 28, 100, 34],
+              'circle-stroke-width': 2,
+              'circle-stroke-color': clusterBorder,
+              'circle-opacity': 0.92,
+            }}
+          />
+          {/* Cluster count labels */}
+          <Layer
+            id="cluster-count"
+            type="symbol"
+            filter={['has', 'point_count']}
+            layout={{
+              'text-field': '{point_count_abbreviated}',
+              'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+              'text-size': 12,
+              'text-allow-overlap': true,
+            }}
+            paint={{
+              'text-color': clusterText,
+            }}
+          />
+          {/* Unclustered points (small dots when zoomed out, hidden when we show logo markers) */}
+          <Layer
+            id="unclustered-points"
+            type="circle"
+            filter={['!', ['has', 'point_count']]}
+            paint={{
+              'circle-color': dotColor,
+              'circle-radius': showIndividualMarkers ? 0 : 5,
+              'circle-stroke-width': showIndividualMarkers ? 0 : 1.5,
+              'circle-stroke-color': clusterBg,
+              'circle-opacity': showIndividualMarkers ? 0 : 0.8,
+            }}
+          />
+        </Source>
+
+        {/* ── Individual logo markers (only when zoomed in past CLUSTER_ZOOM) ── */}
+        {showIndividualMarkers && visibleMarkers.map(({ company, lat, lng }) => (
           <Marker
             key={company.id}
             longitude={lng}
@@ -316,7 +463,7 @@ export default function MapView({
           </Marker>
         ))}
 
-        {showOffices && filteredCompanies.flatMap((company) =>
+        {showOffices && showIndividualMarkers && filteredCompanies.flatMap((company) =>
           (company.offices ?? []).map((office, index) => (
             <Marker
               key={`${company.id}-office-${index}`}
@@ -332,7 +479,7 @@ export default function MapView({
             </Marker>
           ))
         )}
-      </Map>
+      </MapGL>
 
       {selected && (
         <CompanyCard
@@ -362,7 +509,8 @@ export default function MapView({
   )
 }
 
-function CompanyBanner({
+/* ────────────────────────── Scrolling banner (virtualized) ────────────────────────── */
+const CompanyBanner = memo(function CompanyBanner({
   companies: list,
   selected,
   pinned,
@@ -377,8 +525,10 @@ function CompanyBanner({
 }) {
   if (list.length === 0) return null
 
-  const doubled = useMemo(() => [...list, ...list], [list])
-  const duration = Math.max(60, list.length * 3)
+  /* Only duplicate if we have enough to scroll. For very large lists, cap at 200 items total. */
+  const cappedList = list.length > 100 ? list.slice(0, 100) : list
+  const doubled = useMemo(() => [...cappedList, ...cappedList], [cappedList])
+  const duration = Math.max(60, cappedList.length * 3)
 
   const bannerBg = darkMode ? 'rgba(0,0,0,0.94)' : 'rgba(255,255,255,0.94)'
   const bannerBdr = darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
@@ -420,4 +570,4 @@ function CompanyBanner({
       </div>
     </div>
   )
-}
+})

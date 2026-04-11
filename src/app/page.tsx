@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { FilterCategory } from '@/data/companies'
 import { MapStyleKey } from '@/types'
 import Header from '@/components/layout/Header'
@@ -9,15 +9,48 @@ import CompanyTable from '@/components/ui/CompanyTable'
 
 const MapView = dynamic(() => import('@/components/map/MapView'), {
   ssr: false,
-  loading: () => (
-    <div className="flex h-screen w-screen items-center justify-center" style={{ background: '#f0f4f8' }}>
-      <div className="flex flex-col items-center gap-3">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-slate-200 border-t-slate-700" />
-        <p className="text-sm font-medium text-slate-400">Loading map…</p>
+  loading: () => <MapLoading />,
+})
+
+/* ── Tiny branded splash screen ── */
+function MapLoading() {
+  const [show, setShow] = useState(false)
+  useEffect(() => { setShow(true) }, [])
+
+  return (
+    <div
+      className="flex h-screen w-screen items-center justify-center"
+      style={{
+        background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+        transition: 'opacity 0.3s ease-out',
+        opacity: show ? 1 : 0,
+      }}
+    >
+      <div className="flex flex-col items-center gap-4">
+        <div className="relative">
+          {/* Outer ring */}
+          <div
+            className="h-12 w-12 rounded-full border-2 border-slate-700"
+            style={{ borderTopColor: '#94a3b8', animation: 'spin 1s linear infinite' }}
+          />
+          {/* Inner dot */}
+          <div
+            className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{ backgroundColor: '#94a3b8' }}
+          />
+        </div>
+        <div className="flex flex-col items-center gap-1">
+          <p className="text-[13px] font-black uppercase tracking-[0.18em] text-slate-300">
+            Kapitalkart
+          </p>
+          <p className="text-[11px] font-medium text-slate-600">
+            Loading map…
+          </p>
+        </div>
       </div>
     </div>
-  ),
-})
+  )
+}
 
 export type AppView = 'map' | 'companies'
 export interface ActiveFilters {

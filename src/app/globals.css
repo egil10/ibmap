@@ -17,10 +17,19 @@ html, body {
   font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
 }
 
 /* Scrollable pages need overflow */
 .page-scroll { overflow: auto; }
+
+/* ── Performance: GPU-accelerate map container ── */
+.maplibregl-map {
+  contain: strict;
+}
+.maplibregl-canvas-container {
+  will-change: contents;
+}
 
 /* MapLibre overrides */
 .maplibregl-canvas { outline: none; }
@@ -43,6 +52,12 @@ html, body {
 .maplibregl-ctrl-compass {
   width: 40px !important;
   height: 40px !important;
+}
+
+/* ── Marker performance: hardware-accelerate marker containers ── */
+.maplibregl-marker {
+  will-change: transform;
+  contain: layout style;
 }
 
 /* Push bottom-right controls above the footer (~58px tall) */
@@ -93,6 +108,11 @@ html, body {
 .thin-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
 
 /* Animations */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes ping {
   75%, 100% { transform: scale(2.4); opacity: 0; }
 }
@@ -132,6 +152,7 @@ html, body {
 .banner-track-wrap {
   overflow: hidden;
   width: 100%;
+  contain: content;
 }
 
 .banner-track {
@@ -155,4 +176,5 @@ html, body {
 
 .banner-item {
   flex-shrink: 0;
+  contain: layout style;
 }
