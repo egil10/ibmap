@@ -27,8 +27,16 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
   
   const sources = useMemo(() => {
     const list: string[] = []
-    if (wide) list.push(`/logos/${company.id}-wide.png`)
+    if (wide) {
+      list.push(`/logos/${company.id}-wide.png`)
+      list.push(`/logos/${company.id}-wide.svg`)
+      list.push(`/logos/${company.id}-wide.jpg`)
+    }
+    // Try all stored extensions: .png, .svg, .jpg, .webp
     list.push(`/logos/${company.id}.png`)
+    list.push(`/logos/${company.id}.svg`)
+    list.push(`/logos/${company.id}.jpg`)
+    list.push(`/logos/${company.id}.webp`)
     if (domain) list.push(`https://logo.clearbit.com/${domain}?size=128`)
     return list
   }, [company.id, wide, domain])
