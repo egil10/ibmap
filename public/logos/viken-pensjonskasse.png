@@ -1,0 +1,1476 @@
+
+		
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<!--
+    ____  _____  _________       ______
+   / __ \/   \ \/ /_  __/ |     / / __ \
+  / / / / /| |\  / / /  | | /| / / / / /
+ / /_/ / ___ |/ / / /   | |/ |/ / /_/ /
+/_____/_/  |_/_/ /_/    |__/|__/\____/
+
+
+    Made by: https://daytwo.no
+    Year: 2023
+    Apply: https://daytwo.no
+--><html xmlns="http://www.w3.org/1999/xhtml" lang="nb-NO" class="bg-[var(--background-color)]">
+	<head>
+		<script>
+    // Define dataLayer and the gtag function.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+            let object = {
+            'ad_storage': 'denied', //advertising
+            'ad_user_data': 'denied', //advertising
+            'ad_personalization': 'denied', //personalization
+            'personalization_storage': 'denied', //personalization
+            'analytics_storage': 'denied', //analytics
+            'functionality_storage': 'granted', //functional
+            'security_storage': 'granted' //functional
+        }
+        gtag('consent', 'default', object);
+
+        let data = {
+            'event': 'd2_cookiemng_consent_update',
+            'ad_storage': 'denied', //advertising
+            'ad_user_data': 'denied', //advertising
+            'ad_personalization': 'denied', //personalization
+            'personalization_storage': 'denied', //personalization
+            'analytics_storage': 'denied', //analytics
+            'functionality_storage': 'granted', //functional
+            'security_storage': 'granted' //functional
+        }
+
+        dataLayer.push(data);
+        
+        let cm_updateConsent = (granted,denied) => {
+                let consent_list = {};
+        granted.forEach((prop)=>{
+            switch (prop){
+                case 'functional':
+                    consent_list['functionality_storage'] = 'granted'    
+                    consent_list['security_storage'] = 'granted'
+                    break;
+                case 'analytics':
+                    consent_list['analytics_storage'] = 'granted'
+                    break;
+                case 'advertising':
+                    consent_list['ad_storage'] = 'granted'
+                    consent_list['ad_user_data'] = 'granted'
+                    break;
+                case 'personalization':
+                    consent_list['personalization_storage'] = 'granted'
+                    consent_list['ad_personalization'] = 'granted'
+                    break;
+            }
+        });
+        denied.forEach((prop)=>{
+            switch (prop){
+                case 'functional':
+                    consent_list['functionality_storage'] = 'denied'    
+                    consent_list['security_storage'] = 'denied'
+                    break;
+                case 'analytics':
+                    consent_list['analytics_storage'] = 'denied'
+                    break;
+                case 'advertising':
+                    consent_list['ad_storage'] = 'denied'
+                    consent_list['ad_user_data'] = 'denied'
+                    break;
+                case 'personalization':
+                    consent_list['personalization_storage'] = 'denied'
+                    consent_list['ad_personalization'] = 'denied'
+                    break;
+            }
+        });
+        let object = {};
+        let data = {
+            'event': 'd2_cookiemng_consent_update',
+        }
+        for (const [key, value] of Object.entries(consent_list)) {
+            object[key] = value;
+            data[key] = value;
+        }
+        gtag('consent', 'update', object);
+
+        dataLayer.push(data);
+    }
+</script>
+		<meta name="sitehandle" content="pensjonskassenforfylkene"/>
+								<style>:root
+			{
+				--background-color: #F2F4EA
+				;
+
+				--primary-color: #1F3327
+				;
+				--secondary-color: #CFEA84
+				;
+				--tertiary-color: #A4D386
+				;
+
+				--primary-text-color: #1F3327
+				;
+				--secondary-text-color: #A4D386
+				;
+				--light-text-color: #FFFFFF
+				;
+
+				--primary-button-color: #A4D386
+				;
+				--primary-button-text-color: #00013D
+				;
+				--primary-button-hover-color: #CFEA84
+				;
+				--primary-button-hover-text-color: #00013D
+				;
+
+				--secondary-button-color: #CFEA84
+				;
+				--secondary-button-text-color: #00013D
+				;
+				--secondary-button-hover-color: #A4D386
+				;
+				--secondary-button-hover-text-color: #FFFFFF
+				;
+
+				--tertiary-button-color: #CFEA84
+				;
+				--tertiary-button-text-color: #00013D
+				;
+				--tertiary-button-hover-color: #A4D386
+				;
+				--tertiary-button-hover-text-color: #FFFFFF
+				;
+
+				--card-background-color: #FFFFFF
+				;
+				--card-highlight-background-color: #CFEA84
+				;
+				--card-highlight-text-color: #1F3327
+				;
+				--card-cta-button-color: #A4D386
+				;
+				--card-cta-text-color: #1F3327
+				;
+				--card-cta-button-hover-color: #1F3327
+				;
+				--card-cta-text-hover-color: #FFFFFF
+				;
+
+				--header-text-color: #1F3327
+				;
+				--header-scrolling-text-color: #FFFFFF
+				;
+				--header-scrolling-background-color: #CFEA84
+				;
+
+				--footer-background-color: #1F3327
+				;
+				--footer-text-color: #FFFFFF
+				;
+				--footer-link-color: #CFEA84
+				;
+
+									--header-text-color: #1F3327
+					;
+					--header-scrolling-text-color: #FFFFFF
+					;
+					--header-scrolling-background-color: #1F3327
+					;
+							}
+			{
+				#% endcache %#
+			}
+		</style>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta charset="utf-8">
+		<meta name="author" content="https://daytwo.no">
+		<meta name="referrer" content="origin-when-cross-origin"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0, viewport-fit=cover shrink-to-fit=no">
+
+										
+		<link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicon/apple-icon-152x152.png"/>
+		<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-icon-180x180.png"/>
+		<link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon/android-icon-192x192.png"/>
+		<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png"/>
+		<link rel="icon" type="image/png" sizes="96x96" href="/assets/images/favicon/favicon-96x96.png"/>
+		<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png"/>
+		<meta name="msapplication-TileColor" content="#FFFFFF"/>
+		<meta name="msapplication-TileImage" content=/assets/images/favicon "/ms-icon-144x144.png"/>
+		<meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+
+		<link rel="manifest" href="/assets/images/favicon/manifest.json"/>
+		<meta name="theme-color" content="#FFFFFF"/>
+		<meta name="application-name" content="Pensjonskassen for fylkene"/>
+
+				<link rel="preconnect" href="//maps.googleapis.com/maps/api/js?key=&amp;v=weekly" as="script"/>
+
+		<meta name="robots" content="all">
+		<meta name="msapplication-TileColor" content="#000000">
+
+		<meta name="description" content="">
+
+		<meta property="og:site_name" content="Pensjonskassen for fylkene"/>
+		<meta property="og:title" content="Pensjonskassen for fylkene - Pensjonskassen for fylkene"/>
+		<meta property="og:description" content="">
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="https://pensjonskassenforfylkene.no/"/>
+
+		<meta name="twitter:title" content="Pensjonskassen for fylkene - Pensjonskassen for fylkene"/>
+		<meta name="twitter:description" content=""/>
+		<meta name="twitter:card" content="summary_large_image">
+
+		
+
+		<title>Pensjonskassen for fylkene - Pensjonskassen for fylkene</title>
+
+				
+				
+		<!-- Google Tag Manager -->
+		<script>
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+					new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-N6TLN87F');
+		</script>
+		<!-- End Google Tag Manager -->
+
+	<link href="/assets/static/fonts/style/pensjonskassenforfylkene.css?v=1773230645" rel="stylesheet">
+<link href="/assets/build/css/tailwind.css?v=1773230644" rel="stylesheet">
+<link href="/assets/static/css/tooltip.css?v=1773230645" rel="stylesheet">
+<link href="https://pensjonskassenforfylkene.no/cpresources/fef8a2c6/css/cookiemng.css?v=1764171442" rel="stylesheet"></head>
+
+<body  class="project home" >
+
+	<a id="skip-main" href="#main">Skip to main content</a>
+
+	
+    <noscript>
+        <iframe role="none" src="https://www.googletagmanager.com/ns.html?id=GTM-N6TLN87F"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+		<div
+		id="page" class="">
+						
+
+
+<header id="main-header" class="group/header bg-transparent absolute w-full top-0 z-[9999] transition-all ease-in-out [&.scrolling]:bg-[var(--header-scrolling-background-color)] [&.scrolling]:fixed [&.scrolling]:shadow-md [&.scrolling]:mb-4 [&.scroll-down:not(.open)]:translate-y-[-100%]">
+
+                                
+    <div class="grid-container xxl:px-[24px] xxxl:px-[72px] py-[45px] group-[&.scrolling]/header:py-6 ease-in-out duration-300">
+        <div class="flex justify-between col-span-12 items-center">
+
+                        <div class="relative">
+                                    <a href="https://pensjonskassenforfylkene.no/" class="relative w-[190px] md:w-[160px] xxxl:w-[220px] h-auto shrink-0 block group-[&.scrolling]/header:hidden group-[&.open]/header:!block" title="Tilbake til hjemmeside" data-eventcategory="menu" data-eventaction="click" data-eventlabel="Logo">  
+                        <img src="/assets/images/logos/pensjonskassenforfylkene/headerLogo.png" alt="Pensjonskassen for fylkene" class="w-full h-full max-h-[40px] lg:max-h-[75px] object-contain object-left inline group-[&.scrolling]/header:hidden group-[&.scrolling]/header:opacity-0 group-[&.open]/header:!opacity-100 group-[&.open]/header:!inline transition-all duration-150 ">
+                    </a>
+                                                    <a href="https://pensjonskassenforfylkene.no/" class="relative w-[190px] md:w-[160px] xxxl:w-[220px] h-auto shrink-0 absolute top-0 left-0 hidden group-[&.scrolling]/header:block" title="Tilbake til hjemmeside" data-eventcategory="menu" data-eventaction="click" data-eventlabel="Logo">  
+                        <img src="/assets/images/logos/pensjonskassenforfylkene/scrollingHeaderLogo.png" alt="Pensjonskassen for fylkene" class="w-full h-full max-h-[65px] object-contain object-left inline opacity-0 group-[&.scrolling]/header:opacity-100 group-[&.scrolling]/header:inline transition-all duration-150 ">
+                    </a>
+                            </div> 
+            
+                        <div class="flex items-center xxl:gap-x-6 xxxl:gap-x-10 xxl:ml-auto">
+                <nav id="main-header-nav" class="hidden xxl:flex xxl:gap-x-5 xxxl:gap-x-10 text-[var(--header-text-color)] group-[&.scrolling]/header:text-[var(--header-scrolling-text-color)]">
+                                                                                                        
+                                                                                                                                                
+                                                                        
+                                                                                                                                                                    <div class="submenu-first relative flex flex-col items-start">
+                                                <div class="flex gap-x-2 items-center cursor-pointer">
+                                                                                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/pensjon" role="button" title="Les mer om Pensjon" target="_self">
+                                                        Pensjon
+                                                    </a>
+                                                    <svg role="none" class="fill-[var(--header-text-color)] group-[&.scrolling]/header:fill-[var(--header-scrolling-text-color)]" height="12px" width="12px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                        <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                    </svg>
+                                                </div>
+
+                                                                                                <ul class="submenu-list bg-[var(--header-scrolling-background-color)] text-[var(--header-scrolling-text-color)] shadow-md shadow-black absolute top-full [&.visible]:top-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex-col hidden opacity-0 [&.visible]:flex [&.visible]:opacity-100 pointer-events-none [&.visible]:pointer-events-auto transition-all rounded-[5px]">
+                                                    
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/alderspensjon" title="Les mer om Alderspensjon" role="button" target="_self">
+                                                                    Alderspensjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/afp" title="Les mer om AFP" role="button" target="_self">
+                                                                    AFP
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/uforepensjon" title="Les mer om Uførepensjon" role="button" target="_self">
+                                                                    Uførepensjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/etterlattepensjon" title="Les mer om Etterlattepensjon" role="button" target="_self">
+                                                                    Etterlattepensjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/soknad-om-pensjon" title="Les mer om Søknad om pensjon" role="button" target="_self">
+                                                                    Søknad om pensjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/utbetaling-av-pensjon" title="Les mer om Utbetaling av pensjon" role="button" target="_self">
+                                                                    Utbetaling av pensjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/tidligere-medlem" title="Les mer om Tidligere medlem" role="button" target="_self">
+                                                                    Tidligere medlem
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/saeraldersgrenser" title="Les mer om Særaldersgrenser" role="button" target="_self">
+                                                                    Særaldersgrenser
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/ordbok" title="Les mer om Pensjonsordbok" role="button" target="_self">
+                                                                    Pensjonsordbok
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/fa-en-innforing-i-pensjonssystemet" title="Les mer om Få en innføring i pensjonssystemet" role="button" target="_self">
+                                                                    Få en innføring i pensjonssystemet
+                                                                </a>
+                                                            </li>
+                                                                                                                                                            </ul>
+                                            </div>
+                                                                                                                                                                                                                                                                        
+                                                                                                                                                
+                                                                        
+                                                                                                                                                                    <div class="submenu-first relative flex flex-col items-start">
+                                                <div class="flex gap-x-2 items-center cursor-pointer">
+                                                                                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/medlemsfordeler" role="button" title="Les mer om Medlem" target="_self">
+                                                        Medlem
+                                                    </a>
+                                                    <svg role="none" class="fill-[var(--header-text-color)] group-[&.scrolling]/header:fill-[var(--header-scrolling-text-color)]" height="12px" width="12px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                        <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                    </svg>
+                                                </div>
+
+                                                                                                <ul class="submenu-list bg-[var(--header-scrolling-background-color)] text-[var(--header-scrolling-text-color)] shadow-md shadow-black absolute top-full [&.visible]:top-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex-col hidden opacity-0 [&.visible]:flex [&.visible]:opacity-100 pointer-events-none [&.visible]:pointer-events-auto transition-all rounded-[5px]">
+                                                    
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/lan" title="Les mer om Lån" role="button" target="_self">
+                                                                    Lån
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/logg-inn" title="Les mer om Logg inn" role="button" target="_self">
+                                                                    Logg inn
+                                                                </a>
+                                                            </li>
+                                                                                                                                                            </ul>
+                                            </div>
+                                                                                                                                                                                                                                                                        
+                                                                                                                                                
+                                                                        
+                                                                                                                                                                    <div class="submenu-first relative flex flex-col items-start">
+                                                <div class="flex gap-x-2 items-center cursor-pointer">
+                                                                                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/arbeidsgiver" role="button" title="Les mer om Arbeidsgiver" target="_self">
+                                                        Arbeidsgiver
+                                                    </a>
+                                                    <svg role="none" class="fill-[var(--header-text-color)] group-[&.scrolling]/header:fill-[var(--header-scrolling-text-color)]" height="12px" width="12px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                        <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                    </svg>
+                                                </div>
+
+                                                                                                <ul class="submenu-list bg-[var(--header-scrolling-background-color)] text-[var(--header-scrolling-text-color)] shadow-md shadow-black absolute top-full [&.visible]:top-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex-col hidden opacity-0 [&.visible]:flex [&.visible]:opacity-100 pointer-events-none [&.visible]:pointer-events-auto transition-all rounded-[5px]">
+                                                    
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/arbeidsgiver" title="Les mer om Arbeidsgiver" role="button" target="_self">
+                                                                    Arbeidsgiver
+                                                                </a>
+                                                            </li>
+                                                                                                                                                            </ul>
+                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/nyheter" title="Les mer om Nyheter" target="_self">
+                                            Nyheter
+                                        </a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/kontakt-oss" title="Les mer om Kontakt oss" target="_self">
+                                            Kontakt oss
+                                        </a>
+                                                                                                                                                                                                                                
+                                                                                                                                                
+                                                                        
+                                                                                                                                                                    <div class="submenu-first relative flex flex-col items-start">
+                                                <div class="flex gap-x-2 items-center cursor-pointer">
+                                                                                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/om-oss" role="button" title="Les mer om Om oss" target="_self">
+                                                        Om oss
+                                                    </a>
+                                                    <svg role="none" class="fill-[var(--header-text-color)] group-[&.scrolling]/header:fill-[var(--header-scrolling-text-color)]" height="12px" width="12px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                        <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                    </svg>
+                                                </div>
+
+                                                                                                <ul class="submenu-list bg-[var(--header-scrolling-background-color)] text-[var(--header-scrolling-text-color)] shadow-md shadow-black absolute top-full [&.visible]:top-[calc(100%+10px)] left-1/2 -translate-x-1/2 flex-col hidden opacity-0 [&.visible]:flex [&.visible]:opacity-100 pointer-events-none [&.visible]:pointer-events-auto transition-all rounded-[5px]">
+                                                    
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/organisasjon" title="Les mer om Organisasjon" role="button" target="_self">
+                                                                    Organisasjon
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/arsrapporter" title="Les mer om Årsrapporter" role="button" target="_self">
+                                                                    Årsrapporter
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/kapitalforvaltningsstrategi" title="Les mer om Kapitalforvaltningsstrategi" role="button" target="_self">
+                                                                    Kapitalforvaltningsstrategi
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/esg-strategi" title="Les mer om ESG-strategi" role="button" target="_self">
+                                                                    ESG-strategi
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/styrets-sammensetning" title="Les mer om Styrets sammensetning" role="button" target="_self">
+                                                                    Styrets sammensetning
+                                                                </a>
+                                                            </li>
+                                                                                                            
+                                                                                                                                                                                                                                                                                                <li class="min-w-[120px] hover:bg-[var(--card-background-color)] hover:text-[var(--header-text-color)] hover:cursor-pointer whitespace-nowrap">
+                                                                
+                                                                <a class="text-[20px] leading-[24px] p-[15px] block w-full " href="https://pensjonskassenforfylkene.no/vedtekter" title="Les mer om Vedtekter" role="button" target="_self">
+                                                                    Vedtekter
+                                                                </a>
+                                                            </li>
+                                                                                                                                                            </ul>
+                                            </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                        <a class="text-[20px] leading-[24px]   whitespace-nowrap" href="https://pensjonskassenforfylkene.no/bestill-veiledning" title="Les mer om Bestill veiledning" target="_self">
+                                            Bestill veiledning
+                                        </a>
+                                                                                                                                                            </nav> 
+
+                <div class="flex items-center gap-x-4 xxxl:gap-x-8">
+                    
+                     
+                                                                                                                                                                                                                    
+                                                                
+                                
+                                                                                                                                
+                                
+                                                                                                                                
+                                                                                                
+
+                                
+                                  
+        
+            
+                
+
+                
+
+
+            <a  id="" target="_self" href="https://pensjonskassenforfylkene.no/logg-inn" class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline hidden xxl:flex whitespace-nowrap  bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Logg inn
+        </a>
+      
+                                                                            
+                    <div id="desktop-search" class="hidden xxl:block cursor-pointer" tabindex="0">
+                        <form action="https://pensjonskassenforfylkene.no/search" method="get" class="relative" role="search">
+                            <button type="submit" class="absolute left-[16px] top-1/2 -translate-y-1/2 hover:scale-110 ease-in-out duration-200  inline pointer-events-none">
+                                <svg aria-label="Søk" class="object-fill fill-[var(--header-text-color)] group-[&.scrolling]/header:fill-[var(--header-scrolling-text-color)]" width="13" height="13" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11.5792 2.13823C9.11883 -0.322118 5.12982 -0.322118 2.66948 2.13823C0.209131 4.59857 0.209134 8.58758 2.66948 11.0479C5.12982 13.5083 9.11883 13.5083 11.5792 11.0479C14.0395 8.58758 14.0395 4.59857 11.5792 2.13823ZM3.58863 10.1288C1.63591 8.17606 1.63591 5.01009 3.58863 3.05738C5.54134 1.10466 8.70731 1.10466 10.66 3.05738C12.6127 5.01009 12.6127 8.17606 10.66 10.1288C8.70731 12.0815 5.54134 12.0815 3.58863 10.1288Z"></path>
+                                    <path d="M16.5889 14.0215L14.3595 11.7922C13.9953 11.4279 13.4823 11.3032 13.0162 11.4178L12.2194 10.6211C12.0638 10.8171 11.8964 11.0055 11.7169 11.1851C11.5373 11.3647 11.3488 11.5321 11.1528 11.6877L11.9682 12.5031C11.8732 12.9562 12.0013 13.4468 12.3531 13.7986L14.5825 16.0279C15.1365 16.582 16.0348 16.582 16.5889 16.0279C17.1429 15.4739 17.1429 14.5756 16.5889 14.0215Z"></path>
+                                </svg><span class="opacity-0 absolute w-0 h-0 overflow-hidden">Søk</span>
+
+                                                            </button> 
+
+                            <input type="search" aria-label="Søk" name="s" class="w-[200px] xl:w-[150px] xxxl:w-[180px] pl-10 pr-5 h-[38px] rounded-[24px] bg-transparent border-2 border-[var(--header-text-color)] text-[var(--primary-color)] group-[&.scrolling]/header:text-[var(--card-background-color)] group-[&.scrolling]/header:border-[var(--header-scrolling-text-color)]" placeholder="Søk" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex gap-x-5 items-center">
+                                <div id="menu-button" class="cursor-pointer hover:scale-110 w-[35px] h-[19px] flex flex-col justify-between transition-all ease-in-out duration-200 z-50 group [&.open]:-mt-4 xxl:hidden">
+                    <span class="w-full h-[2px] bg-[var(--header-text-color)] group-[&.scrolling]/header:bg-[var(--header-scrolling-text-color)] group-[&.open]/header:bg-[var(--card-background-color)] group-[&.open]:rotate-45 group-[&.open]:mt-4 transition-all ease-in-out duration-300"></span>
+                    <span class="w-full h-[2px] bg-[var(--header-text-color)] group-[&.scrolling]/header:bg-[var(--header-scrolling-text-color)] group-[&.open]/header:bg-[var(--card-background-color)] group-[&.open]:rotate-[135deg] transition-all ease-in-out duration-300"></span>
+                    <span class="w-full h-[2px] bg-[var(--header-text-color)] group-[&.scrolling]/header:bg-[var(--header-scrolling-text-color)] group-[&.open]/header:bg-[var(--card-background-color)] group-[&.open]:w-0"></span>
+                </div>
+            </div>
+
+                        <div id="mobile-menu" class="fixed top-0 left-0 h-screen w-screen hidden opacity-0 pointer-events-none justify-end group-[&.open]/header:opacity-100 group-[&.open]/header:flex group-[&.open]/header:pointer-events-auto transition-all">
+                <div class="bg-black top-0 left-0 absolute h-full w-screen hidden opacity-0 group-[&.open]/header:opacity-70 group-[&.open]/header:block transition-all z-10"></div>
+            
+                <div class="top-0 -right-[150%] group-[&.open]/header:right-0 h-full w-full sm:w-[75vw] md:w-[50vw] xl:w-[40vw] bg-[var(--header-scrolling-background-color)] text-[var(--header-scrolling-text-color)] z-20 relative transition-all px-10 py-20 overflow-y-auto">
+                    <div class="flex flex-col gap-y-5">
+                                                                                                                        
+                                                                                                                                                                
+                                        
+                                                                                                                                            
+                                                <div class="submenu-first relative flex flex-col w-fit group">
+                                                    <div class="flex items-center justify-between w-fit gap-x-5">
+                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/pensjon" title="Les mer om Pensjon" >Pensjon</a>
+                                                        <svg role="none" class="cursor-pointer fill-[var(--header-scrolling-text-color)] group-[&.open]:rotate-180 transition-all" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                            <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <ul class="hidden opacity-0 max-h-0 submenu-list flex-col pointer-events-none [&.open]:flex [&.open]:opacity-100 [&.open]:max-h-[2000px] [&.open]:pointer-events-auto ease-in-out duration-300">
+            
+                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                <li class="pl-4 py-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/alderspensjon" title="Les mer om Alderspensjon" >Alderspensjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/afp" title="Les mer om AFP" >AFP</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/uforepensjon" title="Les mer om Uførepensjon" >Uførepensjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/etterlattepensjon" title="Les mer om Etterlattepensjon" >Etterlattepensjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/soknad-om-pensjon" title="Les mer om Søknad om pensjon" >Søknad om pensjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/utbetaling-av-pensjon" title="Les mer om Utbetaling av pensjon" >Utbetaling av pensjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/tidligere-medlem" title="Les mer om Tidligere medlem" >Tidligere medlem</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/saeraldersgrenser" title="Les mer om Særaldersgrenser" >Særaldersgrenser</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/ordbok" title="Les mer om Pensjonsordbok" >Pensjonsordbok</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/fa-en-innforing-i-pensjonssystemet" title="Les mer om Få en innføring i pensjonssystemet" >Få en innføring i pensjonssystemet</a>
+                                                                </li>
+                                                                                                                                                                        </ul>
+                                                </div>
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                
+                                        
+                                                                                                                                            
+                                                <div class="submenu-first relative flex flex-col w-fit group">
+                                                    <div class="flex items-center justify-between w-fit gap-x-5">
+                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/medlemsfordeler" title="Les mer om Medlem" >Medlem</a>
+                                                        <svg role="none" class="cursor-pointer fill-[var(--header-scrolling-text-color)] group-[&.open]:rotate-180 transition-all" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                            <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <ul class="hidden opacity-0 max-h-0 submenu-list flex-col pointer-events-none [&.open]:flex [&.open]:opacity-100 [&.open]:max-h-[2000px] [&.open]:pointer-events-auto ease-in-out duration-300">
+            
+                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                <li class="pl-4 py-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/lan" title="Les mer om Lån" >Lån</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/logg-inn" title="Les mer om Logg inn" >Logg inn</a>
+                                                                </li>
+                                                                                                                                                                        </ul>
+                                                </div>
+                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                
+                                        
+                                                                                                                                            
+                                                <div class="submenu-first relative flex flex-col w-fit group">
+                                                    <div class="flex items-center justify-between w-fit gap-x-5">
+                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/arbeidsgiver" title="Les mer om Arbeidsgiver" >Arbeidsgiver</a>
+                                                        <svg role="none" class="cursor-pointer fill-[var(--header-scrolling-text-color)] group-[&.open]:rotate-180 transition-all" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                            <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <ul class="hidden opacity-0 max-h-0 submenu-list flex-col pointer-events-none [&.open]:flex [&.open]:opacity-100 [&.open]:max-h-[2000px] [&.open]:pointer-events-auto ease-in-out duration-300">
+            
+                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                <li class="pl-4 py-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/arbeidsgiver" title="Les mer om Arbeidsgiver" >Arbeidsgiver</a>
+                                                                </li>
+                                                                                                                                                                        </ul>
+                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/nyheter" title="Les mer om Nyheter" >Nyheter</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/kontakt-oss" title="Les mer om Kontakt oss" >Kontakt oss</a>
+                                                                                                                                                                                                                                                                
+                                                                                                                                                                
+                                        
+                                                                                                                                            
+                                                <div class="submenu-first relative flex flex-col w-fit group">
+                                                    <div class="flex items-center justify-between w-fit gap-x-5">
+                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/om-oss" title="Les mer om Om oss" >Om oss</a>
+                                                        <svg role="none" class="cursor-pointer fill-[var(--header-scrolling-text-color)] group-[&.open]:rotate-180 transition-all" height="16px" width="16px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+                                                            <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393 c-5.857-5.857-15.355-5.858-21.213,0.001c-5.858,5.858-5.858,15.355,0,21.213l150.004,150c2.813,2.813,6.628,4.393,10.606,4.393 s7.794-1.581,10.606-4.394l149.996-150C331.465,94.749,331.465,85.251,325.607,79.393z"/>
+                                                        </svg>
+                                                    </div>
+                                                    <ul class="hidden opacity-0 max-h-0 submenu-list flex-col pointer-events-none [&.open]:flex [&.open]:opacity-100 [&.open]:max-h-[2000px] [&.open]:pointer-events-auto ease-in-out duration-300">
+            
+                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                <li class="pl-4 py-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/organisasjon" title="Les mer om Organisasjon" >Organisasjon</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/arsrapporter" title="Les mer om Årsrapporter" >Årsrapporter</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/kapitalforvaltningsstrategi" title="Les mer om Kapitalforvaltningsstrategi" >Kapitalforvaltningsstrategi</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/esg-strategi" title="Les mer om ESG-strategi" >ESG-strategi</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/styrets-sammensetning" title="Les mer om Styrets sammensetning" >Styrets sammensetning</a>
+                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                <li class="pl-4 pb-[10px]">
+                                                                    <a class="h3  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/vedtekter" title="Les mer om Vedtekter" >Vedtekter</a>
+                                                                </li>
+                                                                                                                                                                        </ul>
+                                                </div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <a class="h2  [&.active]:font-bold" href="https://pensjonskassenforfylkene.no/bestill-veiledning" title="Les mer om Bestill veiledning" >Bestill veiledning</a>
+                                                                                                                                                                                    </div>
+
+                    <div class="flex flex-col xl:flex-row gap-6 xl:items-center mt-10">
+                                                                                                                    
+                                                                                                
+                                                                                                                                                                
+                                                                
+                                  
+        
+            
+                
+
+                
+
+
+            <a  id="" target="_self" href="https://pensjonskassenforfylkene.no/logg-inn" class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline   bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Logg inn
+        </a>
+      
+
+                                                     
+
+                        <div id="mobile-search" class="cursor-pointer" tabindex="0">
+                            <form action="https://pensjonskassenforfylkene.no/search" method="get" class="relative" role="search">
+                                <button class="absolute left-[16px] top-1/2 -translate-y-1/2 inline pointer-events-none" type="submit">
+                                    <svg aria-label="Søk" class="object-fill fill-[var(--header-scrolling-text-color)]" width="22" height="22" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.5792 2.13823C9.11883 -0.322118 5.12982 -0.322118 2.66948 2.13823C0.209131 4.59857 0.209134 8.58758 2.66948 11.0479C5.12982 13.5083 9.11883 13.5083 11.5792 11.0479C14.0395 8.58758 14.0395 4.59857 11.5792 2.13823ZM3.58863 10.1288C1.63591 8.17606 1.63591 5.01009 3.58863 3.05738C5.54134 1.10466 8.70731 1.10466 10.66 3.05738C12.6127 5.01009 12.6127 8.17606 10.66 10.1288C8.70731 12.0815 5.54134 12.0815 3.58863 10.1288Z"></path>
+                                        <path d="M16.5889 14.0215L14.3595 11.7922C13.9953 11.4279 13.4823 11.3032 13.0162 11.4178L12.2194 10.6211C12.0638 10.8171 11.8964 11.0055 11.7169 11.1851C11.5373 11.3647 11.3488 11.5321 11.1528 11.6877L11.9682 12.5031C11.8732 12.9562 12.0013 13.4468 12.3531 13.7986L14.5825 16.0279C15.1365 16.582 16.0348 16.582 16.5889 16.0279C17.1429 15.4739 17.1429 14.5756 16.5889 14.0215Z"></path>
+                                    </svg><span class="opacity-0 absolute w-0 h-0 overflow-hidden">Søk</span>
+                                </button> 
+
+                                <input type="search" aria-label="Søk" name="s" class="w-full lg:w-[250px] xxl:w-[300px] pl-10 pr-5 py-[10px] rounded-[48px] bg-transparent border-2 border-[var(--header-scrolling-text-color)] text-[var(--header-scrolling-text-color)]" placeholder="Søk" />
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+				<div id="content" class="site-content">
+			<main id="main" role="main" class=""> 
+    <div id="page-wrapper" class="page-wrapper">
+        <div class="page-content">
+	   
+					
+			
+    <section id="module-1" class="module module-centeredText pt-48 pb-0 lg:pt-48 lg:pb-0">
+        <div class="grid-container text-[var(--primary-text-color)]">
+                            <div class="col-span-12 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3 mb-5 md:text-center"><h1>Velkommen til Pensjonskassen for fylkene<br /> </h1></div>
+                                </div>
+    </section>
+					
+			
+
+
+	
+                
+    
+    <section id="module-2" class="module module-picturesCarousel pt-10 pb-0 lg:pt-10 lg:pb-0">
+        <div class="grid-container">
+            <div class="col-span-12  relative">
+                <div class="swiper">
+                    <ul class="swiper-wrapper">
+                         
+
+                            <li class="swiper-slide w-full relative h-[320px] md:h-[495px] xxl:h-[730px] xxxl:h-[800px]">
+                                <img loading="lazy" class="rounded-[10px] w-full h-full" src="/uploads/local/bodo/carousel/2024-08-22_Fylkeskommunene-Buskerud_0015-RGB-1.jpg" style="object-fit: cover;" alt="Kvinne i arbeidstøy sitter i en veiarbeiderbil med logo fra Buskerud fylkeskommune på" width="1619" height="1080">
+
+                                                                    <div class="absolute bottom-0 right-0 p-[10px] bg-[var(--secondary-button-color)] text-[var(--secondary-button-text-color)] tag rounded-br-[10px]">Foto: Yina Chan</div>
+                                                            </li>
+                         
+
+                            <li class="swiper-slide w-full relative h-[320px] md:h-[495px] xxl:h-[730px] xxxl:h-[800px]">
+                                <img loading="lazy" class="rounded-[10px] w-full h-full" src="/uploads/local/bodo/carousel/2024-08-21_Fylkeskommunene-Oslo_9646-RGB.jpg" style="object-fit: cover; object-position: 39.56% 12.41%" alt="Kvinne støvsuger kontorer på Akershus fylkeskommune" width="1619" height="1080">
+
+                                                                    <div class="absolute bottom-0 right-0 p-[10px] bg-[var(--secondary-button-color)] text-[var(--secondary-button-text-color)] tag rounded-br-[10px]">Foto:Yina Chan</div>
+                                                            </li>
+                         
+
+                            <li class="swiper-slide w-full relative h-[320px] md:h-[495px] xxl:h-[730px] xxxl:h-[800px]">
+                                <img loading="lazy" class="rounded-[10px] w-full h-full" src="/uploads/local/bodo/carousel/2024-08-21_Fylkeskommunene-Oslo_8038-RGB1.jpg" style="object-fit: cover; object-position: 56.73% 7.61%" alt="Mannlig kontorarbeider sitter bak to PC-skjermer med headset på, han smiler" width="1620" height="1080">
+
+                                                                    <div class="absolute bottom-0 right-0 p-[10px] bg-[var(--secondary-button-color)] text-[var(--secondary-button-text-color)] tag rounded-br-[10px]">Foto:Yina Chan</div>
+                                                            </li>
+                                            </ul>
+                </div>
+                                    <div role="button" tabindex="0" class="swiper-prev flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-[10px] lg:left-5 h-8 w-8 xl:w-[60px] xl:h-[60px] rounded-[50%] bg-[var(--secondary-button-color)] z-50 cursor-pointer group">
+                        <svg aria-label="Se forrige bilde" class="fill-[var(--secondary-button-text-color)] w-6 h-6 xl:w-6 xl:h-6 group-hover:opacity-60 transition-all" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve">
+                            <polygon points="332.668,490 82.631,244.996 332.668,0 407.369,76.493 235.402,244.996 407.369,413.507 " style="fill:var(--secondary-button-text-color)"/>
+                        </svg><span class="opacity-0 absolute w-0 h-0 overflow-hidden">Se forrige bilde</span>
+                    </div>
+                    <div role="button" tabindex="0" aria-label="Se neste bilde" class="swiper-next flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-[10px] lg:right-5 h-8 w-8 xl:w-[60px] xl:h-[60px] rounded-[50%] bg-[var(--secondary-button-color)] z-50 cursor-pointer group">
+                        <svg aria-label="Se neste bilde" class="fill-[var(--secondary-button-text-color)] w-6 h-6 xl:w-6 xl:h-6 group-hover:opacity-60 transition-all -scale-x-100" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490 490" xml:space="preserve">
+                            <polygon points="332.668,490 82.631,244.996 332.668,0 407.369,76.493 235.402,244.996 407.369,413.507 " style="fill:var(--secondary-button-text-color)"/>
+                        </svg><span class="opacity-0 absolute w-0 h-0 overflow-hidden">Se neste bilde</span>
+                    </div>
+                            </div>
+
+                            <div class="col-span-12 lg:col-span-8 lg:col-start-3 text-center mt-6 lg:mt-10 prose text-[var(--primary-text-color)]">
+                    <p>Pensjonskassen for fylkene Akershus og Buskerud, med tilhørende virksomheter, er en av Norges største offentlige pensjonskasser. Vår viktigste jobb er å sørge for at ansatte i fylkeskommunene, med tilhørende virksomheter, får rett pensjon til rett tid.</p>
+                </div>
+                        
+        </div>
+    </section>
+
+
+					
+			
+
+
+<section id="module-3" class="module module-button pt-5 pb-0 lg:pt-10 lg:pb-0">
+	<div class="grid-container">
+		<div class="col-span-12 mx-auto">
+												  
+        
+            
+                
+
+                
+
+
+            <a  id="" target="_self" href="https://pensjonskassenforfylkene.no/om-oss" class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline   bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Les mer
+        </a>
+    
+									</div>
+	</div>
+</section>
+					
+			
+
+<section id="module-4" class="module module-quicklinks pt-10 pb-0 lg:pt-20 lg:pb-0">
+    <ul class="grid-container gap-y-4 lg:gap-y-5">
+                                            
+            <li class="col-span-12 md:col-span-6 lg:col-span-3 bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] rounded-[16px] p-[18px] flex flex-col gap-y-[44px]">
+                <strong class="text-[20px] leading-[28px]">Om pensjonssystemet</strong>
+
+                <ul class="flex flex-col mt-auto gap-y-[10px]">
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/fa-en-innforing-i-pensjonssystemet" title="Les mer om Få en innføring i pensjonsystemet">Få en innføring i pensjonsystemet</a>
+                                                    </li>
+                                    </ul>
+            </li>
+                                            
+            <li class="col-span-12 md:col-span-6 lg:col-span-3 bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] rounded-[16px] p-[18px] flex flex-col gap-y-[44px]">
+                <strong class="text-[20px] leading-[28px]">Alderspensjon</strong>
+
+                <ul class="flex flex-col mt-auto gap-y-[10px]">
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/alderspensjon-for-deg-fodt-for-1963" title="Les mer om For deg født før 1963">For deg født før 1963</a>
+                                                    </li>
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/alderspensjon-for-deg-fodt-i-1963-eller-senere" title="Les mer om For deg født i 1963 eller senere">For deg født i 1963 eller senere</a>
+                                                    </li>
+                                    </ul>
+            </li>
+                                            
+            <li class="col-span-12 md:col-span-6 lg:col-span-3 bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] rounded-[16px] p-[18px] flex flex-col gap-y-[44px]">
+                <strong class="text-[20px] leading-[28px]">AFP</strong>
+
+                <ul class="flex flex-col mt-auto gap-y-[10px]">
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/afp-for-deg-fodt-for-1962" title="Les mer om For deg født før 1963">For deg født før 1963</a>
+                                                    </li>
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/afp-for-deg-fodt-etter-1963" title="Les mer om For deg født i 1963 eller senere">For deg født i 1963 eller senere</a>
+                                                    </li>
+                                    </ul>
+            </li>
+                                            
+            <li class="col-span-12 md:col-span-6 lg:col-span-3 bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] rounded-[16px] p-[18px] flex flex-col gap-y-[44px]">
+                <strong class="text-[20px] leading-[28px]">Etterlatte og uføre</strong>
+
+                <ul class="flex flex-col mt-auto gap-y-[10px]">
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/etterlattepensjon" title="Les mer om Etterlattepensjon">Etterlattepensjon</a>
+                                                    </li>
+                                            <li class="group flex items-center gap-x-5">
+                            <svg role="none" class="group-hover:translate-x-3 transition-all ease-in-out duration-300 fill-[var(--primary-button-text-color)]" xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10">
+                                <path d="M12.8902 5.41347C13.1258 5.15154 13.1258 4.72685 12.8902 4.46492L9.05227 0.196451C8.81675 -0.0654835 8.43487 -0.0654835 8.19935 0.196451C7.96383 0.458386 7.96383 0.883069 8.19935 1.145L11.6109 4.93919L8.19935 8.73335C7.96383 8.99529 7.96383 9.41999 8.19935 9.68194C8.43487 9.94388 8.81675 9.94388 9.05227 9.68194L12.8902 5.41347ZM12.4638 4.26847H3.91176e-08L0 5.60992H12.4638V4.26847Z"/>
+                            </svg>
+
+                                                            <a href="https://pensjonskassenforfylkene.no/uforepensjon" title="Les mer om Uførepensjon">Uførepensjon</a>
+                                                    </li>
+                                    </ul>
+            </li>
+            </ul>
+</section>
+
+					
+			
+    <section id="module-5" class="module module-centeredText pt-10 pb-0 lg:pt-20 lg:pb-0">
+        <div class="grid-container text-[var(--primary-text-color)]">
+                            <div class="col-span-12 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3 mb-5 md:text-center"><h2>Informasjon til medlemmer</h2></div>
+                                        <div class="col-span-12 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3 md:text-center [&_a]:underline"><p>Medlemskapet i pensjonskassen er kollektivt og obligatorisk. Det betyr at du både har rett og plikt til å være medlem fra den dagen du blir ansatt til den dagen du slutter.</p><br />
+<p>Som medlem opptjener du pensjonsrettigheter fra første dag. Bli kjent med dine medlemsfordeler!</p></div>
+                    </div>
+    </section>
+					
+			
+
+<section id="module-6" class="module module-buttonsLine pt-10 pb-0 lg:pt-20 lg:pb-0">
+	<ul class="grid-container gap-y-5">
+		
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--secondary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/medlemsfordeler" title="Les mer om Medlem" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--secondary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--secondary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="none">
+  <path d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Medlem</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--secondary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--secondary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/logg-inn" title="Les mer om Min side" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--secondary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--secondary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" role="none">
+  <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Min side</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--secondary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--secondary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/utbetaling-av-pensjon" title="Les mer om Utbetaling og skatt" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--secondary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--secondary-button-text-color)] mb-[30px]" width="42" height="42" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42" fill="none" role="none">
+  <path d="M21.0003 41.6667C18.1184 41.6667 15.41 41.1198 12.8753 40.026C10.3406 38.9323 8.13574 37.4479 6.26074 35.5729C4.38574 33.6979 2.90137 31.4931 1.80762 28.9583C0.713867 26.4236 0.166992 23.7153 0.166992 20.8333C0.166992 17.9514 0.713867 15.2431 1.80762 12.7083C2.90137 10.1736 4.38574 7.96875 6.26074 6.09375C8.13574 4.21875 10.3406 2.73438 12.8753 1.64063C15.41 0.546875 18.1184 0 21.0003 0C23.8823 0 26.5906 0.546875 29.1253 1.64063C31.66 2.73438 33.8649 4.21875 35.7399 6.09375C37.6149 7.96875 39.0993 10.1736 40.193 12.7083C41.2868 15.2431 41.8337 17.9514 41.8337 20.8333C41.8337 23.7153 41.2868 26.4236 40.193 28.9583C39.0993 31.4931 37.6149 33.6979 35.7399 35.5729C33.8649 37.4479 31.66 38.9323 29.1253 40.026C26.5906 41.1198 23.8823 41.6667 21.0003 41.6667ZM21.0003 37.5C25.6531 37.5 29.5941 35.8854 32.8232 32.6562C36.0524 29.4271 37.667 25.4861 37.667 20.8333C37.667 16.1806 36.0524 12.2396 32.8232 9.01042C29.5941 5.78125 25.6531 4.16667 21.0003 4.16667C16.3475 4.16667 12.4066 5.78125 9.17741 9.01042C5.94824 12.2396 4.33366 16.1806 4.33366 20.8333C4.33366 25.4861 5.94824 29.4271 9.17741 32.6562C12.4066 35.8854 16.3475 37.5 21.0003 37.5Z" fill="black"></path>
+  <path d="M23.98 13.6333L18.82 19.0733L24.28 27.8333H20.6L16.62 21.3733L14.6 23.5133V27.8333H11.36V13.6333H14.6V19.5333L19.96 13.6333H23.98ZM30.6583 17.2533C31.1983 17.2533 31.7783 17.4133 32.3583 17.6133L31.7983 20.2533C31.1383 20.0933 30.7983 20.0333 30.4383 20.0333C29.0983 20.0333 28.2783 21.1133 28.2783 22.9133V27.8333H25.2783V17.4333H28.0583V18.9133C28.5583 17.9333 29.3383 17.2533 30.6583 17.2533Z" fill="black"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Utbetaling og skatt</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--secondary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--secondary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/soknad-om-pensjon" title="Les mer om Søknader" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--secondary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--secondary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" role="none">
+  <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Søknader</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--secondary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+			</ul>
+</section>
+					
+			
+
+        
+    <section id="module-7" class="module module-featuredNews pt-10 pb-0 lg:pt-20 lg:pb-0">
+        <div class="col-span-12 mb-5 flex items-center justify-center">
+            <div class="mx-auto">
+                <h2>Nyheter</h2>
+            </div>
+        </div>
+        <ul class="grid-container gap-y-5 text-[var(--primary-text-color)]">
+             
+                <li class="col-span-12 md:col-span-6 lg:col-span-4">
+    <a class="block bg-[var(--card-background-color)] p-[22px] rounded-[10px] h-full flex flex-col hover:no-underline" href="https://pensjonskassenforfylkene.no/nyheter/arsrapporten-for-2025-er-klar" title="Les mer om Årsrapporten for 2025 er klar" target="_self">
+        <div>
+            <div class="w-full aspect-[390/290] overflow-hidden mb-5 lg:mb-6 rounded-[10px]">
+                <img class="w-full h-full object-cover rounded-[10px] group-hover:scale-110 ease-in-out duration-500" src="/uploads/local/pensjonskassenforfylkene/feature/_employeeCard/402001/BR7-6.webp" alt="BR7 6" loading="lazy" style="                                
+        
+                object-fit: cover;
+    " width="600" height="600">
+            </div>
+            <div class="flex gap-x-1">
+                            </div>
+            <span class="tag mb-1">07/04/2026</span>
+            <h3 class="lg:pr-[25%]">Årsrapporten for 2025 er klar</h3>
+            <div class="mt-6 lg:mt-10 mb-6 line-clamp-4 lg:pr-[25%]">Pensjonskassen for fylkene kan se tilbake på 2025 som et begivenhetsrikt og positivt år.</div>
+        </div>
+          
+        
+            
+                
+
+                
+
+
+            <div class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline mt-auto bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Les mer
+        </div>
+      
+    </a> 
+</li>             
+                <li class="col-span-12 md:col-span-6 lg:col-span-4">
+    <a class="block bg-[var(--card-background-color)] p-[22px] rounded-[10px] h-full flex flex-col hover:no-underline" href="https://pensjonskassenforfylkene.no/nyheter/utbetaling-av-pensjonen-i-desember-er-fri-for-skattetrekk-om-du-er-alderspensjonist-mottar-afp-eller-ektefellepensjon" title="Les mer om Utbetaling av pensjonen i desember er fri for skattetrekk om du er alderspensjonist, mottar AFP eller ektefellepensjon" target="_self">
+        <div>
+            <div class="w-full aspect-[390/290] overflow-hidden mb-5 lg:mb-6 rounded-[10px]">
+                <img class="w-full h-full object-cover rounded-[10px] group-hover:scale-110 ease-in-out duration-500" src="/uploads/local/pensjonskassenforfylkene/news/feature/_employeeCard/220343/49.-Skatt-i-desember-NTB-Jan-Haas.webp" alt="49 Skatt i desember NTB Jan Haas" loading="lazy" style="                                
+        
+                                                            object-fit: cover; object-position: 48.74% 20.57%
+    " width="600" height="600">
+            </div>
+            <div class="flex gap-x-1">
+                            </div>
+            <span class="tag mb-1">11/12/2025</span>
+            <h3 class="lg:pr-[25%]">Utbetaling av pensjonen i desember er fri for skattetrekk om du er alderspensjonist, mottar AFP eller ektefellepensjon</h3>
+            <div class="mt-6 lg:mt-10 mb-6 line-clamp-4 lg:pr-[25%]">De som er lønnsmottakere, har halv skatt i desember. Men dersom du er alderspensjonist, mottar AFP eller ektefellepensjon er utbetaling i desember fri for skattetrekk. Er du uførepensjonist er det halv skatt i desember. Pensjonsutbetalingen kommer den 12. desember.</div>
+        </div>
+          
+        
+            
+                
+
+                
+
+
+            <div class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline mt-auto bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Les mer
+        </div>
+      
+    </a> 
+</li>             
+                <li class="col-span-12 md:col-span-6 lg:col-span-4">
+    <a class="block bg-[var(--card-background-color)] p-[22px] rounded-[10px] h-full flex flex-col hover:no-underline" href="https://pensjonskassenforfylkene.no/nyheter/svaert-godt-resultat-i-pensjonskassen-per-tredje-kvartal" title="Les mer om Svært godt resultat i pensjonskassen per tredje kvartal" target="_self">
+        <div>
+            <div class="w-full aspect-[390/290] overflow-hidden mb-5 lg:mb-6 rounded-[10px]">
+                <img class="w-full h-full object-cover rounded-[10px] group-hover:scale-110 ease-in-out duration-500" src="/uploads/local/pensjonskassenforfylkene/news/feature/_employeeCard/350090/DSC_0022-3_2025-11-19-100928_tcqd.webp" alt="DSC 0022 3" loading="lazy" style="                                
+        
+                object-fit: cover;
+    " width="600" height="600">
+            </div>
+            <div class="flex gap-x-1">
+                            </div>
+            <span class="tag mb-1">19/11/2025</span>
+            <h3 class="lg:pr-[25%]">Svært godt resultat i pensjonskassen per tredje kvartal</h3>
+            <div class="mt-6 lg:mt-10 mb-6 line-clamp-4 lg:pr-[25%]">Avkastingen på pensjonsmidlene i Pensjonskassen for fylkene per tredje kvartal 2025 ble 6,1 % (verdijustert for kollektivporteføljen). Netto finansinntekter utgjør 658 millioner kroner.</div>
+        </div>
+          
+        
+            
+                
+
+                
+
+
+            <div class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline mt-auto bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Les mer
+        </div>
+      
+    </a> 
+</li>                    </ul>
+    </section>
+					
+			
+
+
+<section id="module-8" class="module module-button pt-10 pb-10 lg:pt-10 lg:pb-10">
+	<div class="grid-container">
+		<div class="col-span-12 mx-auto">
+												  
+        
+            
+                
+
+                
+
+
+            <a  id="" target="_self" href="https://pensjonskassenforfylkene.no/nyheter" class="button gap-x-[12px] w-fit px-4 md:px-5 py-[10px] text-[14px] leading-[17px] font-medium rounded-[48px] transition-all duration-200 ease-in-outhover:no-underline   bg-[var(--primary-button-color)] text-[var(--primary-button-text-color)] hover:bg-[var(--primary-button-hover-color)] hover:text-[var(--primary-button-hover-text-color)]">
+                        
+            Se alle nyheter
+        </a>
+    
+									</div>
+	</div>
+</section>
+					
+			
+
+<section id="module-9" class="module module-buttonsLine pt-10 pb-20 lg:pt-20 lg:pb-32">
+	<ul class="grid-container gap-y-5">
+		
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--primary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/bestill-veiledning" title="Les mer om Bestill veiledning" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--primary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--primary-button-text-color)] mb-[30px]" width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill="none" role="none">
+  <path d="M22.917 43.75V39.5833H39.5837V24.7917C39.5837 20.7292 38.1687 17.283 35.3389 14.4531C32.509 11.6233 29.0628 10.2083 25.0003 10.2083C20.9378 10.2083 17.4916 11.6233 14.6618 14.4531C11.8319 17.283 10.417 20.7292 10.417 24.7917V37.5H8.33366C7.18783 37.5 6.20692 37.092 5.39095 36.276C4.57498 35.4601 4.16699 34.4792 4.16699 33.3333V29.1667C4.16699 28.4375 4.34928 27.7517 4.71387 27.1094C5.07845 26.467 5.5906 25.9549 6.25033 25.5729L6.40658 22.8125C6.68435 20.4514 7.37012 18.2639 8.46387 16.25C9.55762 14.2361 10.9291 12.4826 12.5785 10.9896C14.2278 9.49653 16.1201 8.33333 18.2555 7.5C20.391 6.66667 22.6392 6.25 25.0003 6.25C27.3614 6.25 29.601 6.66667 31.7191 7.5C33.8371 8.33333 35.7295 9.48785 37.3962 10.9635C39.0628 12.4392 40.4344 14.184 41.5107 16.1979C42.5871 18.2118 43.2816 20.3993 43.5941 22.7604L43.7503 25.4688C44.41 25.7812 44.9222 26.25 45.2868 26.875C45.6514 27.5 45.8337 28.1597 45.8337 28.8542V33.6458C45.8337 34.3403 45.6514 35 45.2868 35.625C44.9222 36.25 44.41 36.7188 43.7503 37.0312V39.5833C43.7503 40.7292 43.3423 41.7101 42.5264 42.526C41.7104 43.342 40.7295 43.75 39.5837 43.75H22.917ZM18.7503 29.1667C18.16 29.1667 17.6653 28.967 17.266 28.5677C16.8666 28.1684 16.667 27.6736 16.667 27.0833C16.667 26.4931 16.8666 25.9983 17.266 25.599C17.6653 25.1997 18.16 25 18.7503 25C19.3406 25 19.8354 25.1997 20.2347 25.599C20.634 25.9983 20.8337 26.4931 20.8337 27.0833C20.8337 27.6736 20.634 28.1684 20.2347 28.5677C19.8354 28.967 19.3406 29.1667 18.7503 29.1667ZM31.2503 29.1667C30.66 29.1667 30.1653 28.967 29.766 28.5677C29.3666 28.1684 29.167 27.6736 29.167 27.0833C29.167 26.4931 29.3666 25.9983 29.766 25.599C30.1653 25.1997 30.66 25 31.2503 25C31.8406 25 32.3354 25.1997 32.7347 25.599C33.134 25.9983 33.3337 26.4931 33.3337 27.0833C33.3337 27.6736 33.134 28.1684 32.7347 28.5677C32.3354 28.967 31.8406 29.1667 31.2503 29.1667ZM12.5524 25.9375C12.3094 22.2569 13.4205 19.0972 15.8857 16.4583C18.351 13.8194 21.4239 12.5 25.1045 12.5C28.1948 12.5 30.9118 13.4809 33.2555 15.4427C35.5993 17.4045 37.0142 19.9132 37.5003 22.9688C34.3406 22.934 31.4326 22.0833 28.7764 20.4167C26.1201 18.75 24.0802 16.4931 22.6566 13.6458C22.101 16.4236 20.9291 18.8976 19.141 21.0677C17.3528 23.2378 15.1566 24.8611 12.5524 25.9375Z" fill="#1F3327"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Bestill veiledning</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--primary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--primary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/ofte-stilte-sporsmal" title="Les mer om Ofte stilte spørsmål" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--primary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--primary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="none">
+  <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Ofte stilte spørsmål</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--primary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--primary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/ordbok" title="Les mer om Pensjonsordbok" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--primary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--primary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" role="none">
+  <path d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Pensjonsordbok</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--primary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+														
+			<li class="col-span-12 md:col-span-6 xl:col-span-3 bg-[var(--primary-button-color)] rounded-[16px] px-[18px] py-[16px] min-h-[120px]">
+																
+									
+																										
+				<a
+					 href="https://pensjonskassenforfylkene.no/sjekk-din-pensjon" title="Les mer om Sjekk din pensjon" role="button" target="_self" class="flex flex-col justify-between h-full group text-[var(--primary-button-text-color)] hover:no-underline">
+
+										
+											<svg class="w-[30px] h-[30px] [&amp;_*]:fill-[var(--primary-button-text-color)] mb-[30px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" role="none">
+  <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM96 64H288c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32zm32 160a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM96 352a32 32 0 1 1 0-64 32 32 0 1 1 0 64zM64 416c0-17.7 14.3-32 32-32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H96c-17.7 0-32-14.3-32-32zM192 256a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zm64-64a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm32 64a32 32 0 1 1 -64 0 32 32 0 1 1 64 0zM288 448a32 32 0 1 1 0-64 32 32 0 1 1 0 64z"></path>
+</svg>
+
+					
+					<div class="flex justify-between items-start gap-x-[10px]">
+						<strong>Sjekk din pensjon</strong>
+						<svg role="none" class="group-hover:translate-x-2 transition-all ease-in-out duration-200 ' fill-[var(--primary-button-text-color)] mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="15" viewbox="0 0 20 15">
+							<path d="M19.5734 8.22017C19.931 7.82243 19.931 7.17756 19.5734 6.77983L13.7456 0.298304C13.3879 -0.0994345 12.8081 -0.0994345 12.4504 0.298304C12.0928 0.696043 12.0928 1.34091 12.4504 1.73864L17.6308 7.5L12.4504 13.2613C12.0928 13.659 12.0928 14.3039 12.4504 14.7017C12.8081 15.0994 13.3879 15.0994 13.7456 14.7017L19.5734 8.22017ZM18.9259 6.48152H5.93987e-08L0 8.51847H18.9259V6.48152Z" fill="[var(--primary-text-color)]"/>
+						</svg>
+					</div>
+				</a>
+			</li>
+			</ul>
+</section>
+					
+			
+    <section id="module-10" class="module module-newsletter pt-10 pb-10 lg:pt-10 lg:pb-10">
+        <div class="grid-container">
+            <div class="col-span-12 lg:col-span-10 lg:col-start-2 xl:col-span-8 xl:col-start-3">
+                            
+                <iframe aria-label="Påmelding til nyhetsbrev"  border="0" frameborder="0" style="width:100%;height:800px;" src="https://nyhetsbrev.pensjonskassenforfylkene.no/p/s/MjMxODg6MjVlODhkOTgtYzJkYS00Yjg1LTlhYzItNzgzNzg2NGI1M2Q3"></iframe>
+            </div>
+        </div>
+    </section>
+            
+			</div>    </div>
+
+    <div id="back-top-button" class="fixed bottom-[15px] right-[15px] md:bottom-[5%] md:right-[2%] bg-[var(--secondary-button-color)] w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-[100px] flex items-center justify-center cursor-pointer group transition-all z-[1000] opacity-0 pointer-events-none [&.visible]:opacity-100 [&.visible]:pointer-events-auto ">
+    <svg role="none" class="fill-[var(--secondary-button-text-color)] pb-1 duration-300 ease-in-out group-hover:scale-110" height="28px" width="28px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
+        <path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394
+            l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393
+            C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"/>
+    </svg>
+</div>
+								</main>
+			</div>
+
+						
+
+
+
+<footer id="main-footer" class="bg-[var(--footer-background-color)] text-[var(--footer-text-color)]">
+	<div class="grid-container gap-y-10 lg:gap-y-0 pt-[50px] pb-[50px] lg:pt-[50px] lg:pb-10">
+		<div class="col-span-12 md:col-span-3 lg:col-span-3">
+							<a href="https://pensjonskassenforfylkene.no/" class="block w-[250px] h-auto max-w-full shrink-0 relative" title="Tilbake til hjemmeside" data-eventcategory="menu" data-eventaction="click" data-eventlabel="Logo">
+					<img src="/assets/images/logos/pensjonskassenforfylkene/footerLogo.png" alt="Pensjonskassen for fylkene" class="w-full h-full object-contain">
+				</a>
+					</div>
+		<div class="col-span-12 md:col-span-5 lg:col-span-3 lg:col-start-5">
+			<div class="text-[20px] leading-[23px]">Kontaktinformasjon</div>
+			<div class="mt-6"><p><strong>Telefon</strong>: 08475<br /><a href="mailto:Post@pensjonskassenforfylkene.no">Post@pensjonskassenforfylkene.no</a><br /><br /><strong>Mandag til fredag</strong>: 08 – 15</p><p>Pensjonskassen for fylkene Akershus og Buskerud</p><p>Wergelandsveien 21, 0167 Oslo</p></div>
+
+					</div>
+				<div class="col-span-12 md:col-span-4 lg:col-span-3 lg:col-start-10">
+							<ul class="flex flex-col">
+											<li class="text-[var(--secondary-color)]">
+															
+																																					<a class="text-[var(--footer-link-color)] hover:text-[var(--footer-link-color)] underline" href="https://pensjonskassenforfylkene-no.translate.goog/?_x_tr_sl=no&amp;_x_tr_tl=en&amp;_x_tr_hl=no&amp;_x_tr_pto=wapp" title="Les mer om English (Google Translate)" target="_blank">English (Google Translate)</a>
+																														</li>
+											<li class="text-[var(--secondary-color)]">
+															
+																																					<a class=" [&.active]:font-bold text-[var(--footer-link-color)] hover:text-[var(--footer-link-color)] underline" href="https://pensjonskassenforfylkene.no/personvernerklaering" title="Les mer om " target="_self">Personvernerklæring</a>
+																														</li>
+											<li class="text-[var(--secondary-color)]">
+															
+																																					<a class=" [&.active]:font-bold text-[var(--footer-link-color)] hover:text-[var(--footer-link-color)] underline" href="https://pensjonskassenforfylkene.no/tilgjengelighetserklaering" title="Les mer om " target="_self">Tilgjengelighetserklæring</a>
+																														</li>
+											<li class="text-[var(--secondary-color)]">
+															
+																																					<a class=" [&.active]:font-bold text-[var(--footer-link-color)] hover:text-[var(--footer-link-color)] underline" href="https://pensjonskassenforfylkene.no/cookie-erklaering" title="Les mer om " target="_self">Cookie-erklæring</a>
+																														</li>
+											<li class="text-[var(--secondary-color)]">
+															
+																																					<a class="text-[var(--footer-link-color)] hover:text-[var(--footer-link-color)] underline" href="javascript:cm_displaySettings();" title="Administrer cookies">Administrer cookies</a>
+																														</li>
+									</ul>
+			
+							<div class="mt-6"><p><strong>Orgnr. </strong><br />974 358 603</p><p><strong>EHF</strong><br /><a href="mailto:974358603@invoice.bdo.no">974358603@invoice.bdo.no</a></p></div>
+					</div>
+
+		<div class="col-span-12 mt-10 lg:mt-20 text-center">
+			<span class="text-[14px] leading-[18px]">© Copyright 2026 | Pensjonskassen for fylkene</span>
+		</div>
+	</div>
+</footer>
+		</div>
+		
+						
+		
+		
+						<aside>
+			 
+    <div class="cm__blocked cm__active" style="z-index:99999999"></div>
+ 
+<div class="__cookiemng__ green cm__active  cm__rounded " data-google-consent="1" style="z-index:100000000"  data-site-handle="pensjonskassenforfylkene">
+     <div class="cm__button cm__close" data-cm-action="onClose"></div>
+     <div class="cm__container cm__full cm__active" data-cm-view="default">
+          <div class="cm__content ">
+                <h3>Om informasjonskapsler</h3>
+          </div>
+          <div class="cm__content " style="">
+                Denne nettsiden bruker informasjonskapsler for å lagre samtykkevalg og analysere bruken av nettsiden, slik at vi kan forbedre brukeropplevelsen. Fordi vi respekterer personvernet ditt, kan du velge å ikke akseptere visse typer informasjonskapsler. Klikk på de ulike kategorioverskriftene for å finne ut mer og endre standardinnstillingene. Vær oppmerksom på at blokkering av enkelte typer informasjonskapsler kan påvirke opplevelsen av nettsiden. <br />
+            <br />
+        Les mer om hvordan vi bruker informasjonskapsler i vår <a href="/personvernerklaering" style="text-decoration:underline; font-weight:bold;">Personvernerklæring</a> og <a href="/cookie-erklaering" style="text-decoration:underline; font-weight:bold;">Cookie-erklæring</a>.
+                                     <br/><a href="/personvernerklaering" aria-label=" in a new window" target="_blank" style="margin-top:0.25rem;color:inherit; text-decoration:underline; font-weight:bold;"></a>
+                          </div>
+                    <div class="cm__content cm__inline-button">
+                                     <div class="cm__button " data-cm-action="onFunctional" role="button" tabindex="0" aria-label="Avvis alle">Avvis alle</div>
+                     <div class="cm__button cm__outline" data-cm-action="onCustomize" role="button" tabindex="0" aria-label="Tilpass">Tilpass</div>
+                                                <div class="cm__button cm__outline" data-cm-action="onAll" role="button" tabindex="0" aria-label="Godta alle">Godta alle</div>
+          </div>
+     </div>
+               <div class="cm__container cm__full" data-cm-view="customize">
+                <div class="cm__content">
+                     <h3>Om informasjonskapsler</h3>
+                </div>
+                <div class="cm__content" style="text-align:center;">
+                     Denne nettsiden bruker informasjonskapsler for å lagre samtykkevalg og analysere bruken av nettsiden, slik at vi kan forbedre brukeropplevelsen. Fordi vi respekterer personvernet ditt, kan du velge å ikke akseptere visse typer informasjonskapsler. Klikk på de ulike kategorioverskriftene for å finne ut mer og endre standardinnstillingene. Vær oppmerksom på at blokkering av enkelte typer informasjonskapsler kan påvirke opplevelsen av nettsiden. <br />
+            <br />
+        Les mer om hvordan vi bruker informasjonskapsler i vår <a href="/personvernerklaering" style="text-decoration:underline; font-weight:bold;">Personvernerklæring</a> og <a href="/cookie-erklaering" style="text-decoration:underline; font-weight:bold;">Cookie-erklæring</a>.
+                                             <br/><a href="/personvernerklaering" aria-label=" in a new window" target="_blank" style="margin-top:0.25rem;color:inherit; text-decoration:underline; font-weight:bold;"></a>
+                                    </div>
+                <div class="cm__content">
+                                               <div class="cm__checkbox">
+                                <div class="cm__accordion">
+                                     <div class="cm__acc-header">
+                                          <input disabled type="checkbox" id="cm_functionalCookies" name="functionalCookies" checked value="functional">
+                                          <label for="cm_functionalCookies">Nødvendige (Alltid aktiv)</label>
+                                     </div>
+                                     <div class="cm__button cm__acc-trigger"></div>
+                                     <div class="cm__acc-panel">
+                                          <p>Disse informasjonskapslene er essensielle for at nettsiden skal fungere riktig. De brukes blant annet til å lagre samtykkevalg, slik at brukeren ikke må angi innstillinger på nytt ved hvert besøk. Uten disse informasjonskapslene vil enkelte funksjoner på nettsiden ikke fungere som de skal.</p>
+                                     </div>
+                                </div>
+                          </div>
+                                                                    <div class="cm__checkbox">
+                                <div class="cm__accordion">
+                                     <div class="cm__acc-header">
+                                          <input type="checkbox" id="cm_analyticsCookies" name="analyticsCookies"  value="analytics">
+                                          <label for="cm_analyticsCookies">Statistikk</label>
+                                     </div>
+                                     <div class="cm__button cm__acc-trigger"></div>
+                                     <div class="cm__acc-panel">
+                                          <p>Disse informasjonskapslene hjelper oss med å analysere hvordan nettsiden brukes, slik at vi kan forbedre funksjonalitet og brukeropplevelse. De samler inn anonymisert data om besøk og trafikkmønstre, noe som gir oss innsikt i hvordan innholdet vårt presterer.</p>
+                                     </div>
+                                </div>
+                          </div>
+                                                                               </div>
+                <div class="cm__content cm__inline-button">
+                     <div class="cm__button " data-cm-action="onSave">Lagre mitt valg</div>
+                     <div class="cm__button " data-cm-action="onFunctional">Avvis alle</div>
+                     <div class="cm__button cm__outline" data-cm-action="onAll">Godta alle</div>
+                </div>
+          </div>
+     </div>
+		</aside>
+					<script src="/assets/build/js/main.js?v=1773230644" defer></script>
+<script src="https://pensjonskassenforfylkene.no/cpresources/fef8a2c6/js/cookiemng.js?v=1764171442"></script>
+<script>const menuButton = document.getElementById('menu-button');
+    const mainHeader = document.getElementById('main-header');
+    const mainHeaderNav = document.getElementById('main-header-nav');
+    const submenuItems = mainHeaderNav.querySelectorAll('.submenu-first');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileSubmenuItems = mobileMenu.querySelectorAll('.submenu-first');
+
+    if (mainHeader) {
+        window.addEventListener("scroll", function () {
+            mainHeader.classList.toggle("scrolling", window.scrollY > 0);
+        });
+    }
+
+    if (submenuItems.length > 0) {
+        submenuItems.forEach((menu) => {
+            let submenu = menu.querySelector(".submenu-list");
+            let hideTimeout;
+
+            menu.addEventListener("mouseenter", () =>{
+                clearTimeout(hideTimeout); // Clear any previous timeout
+                submenu.classList.add("visible");
+            });
+
+            menu.addEventListener("mouseleave", (event) =>{
+                if (!event.relatedTarget || !submenu.contains(event.relatedTarget)) {
+                    hideTimeout = setTimeout(() => {
+                        submenu.classList.remove("visible");
+                    }, 50);
+                }
+            });
+
+            submenu.addEventListener("mouseleave", (event) => {
+                if (!event.relatedTarget || !menu.contains(event.relatedTarget)) {
+                    hideTimeout = setTimeout(() => {
+                        submenu.classList.remove("visible");
+                    }, 50);
+                }
+            });
+        });
+    }
+
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+            menuButton.classList.toggle('open');
+            mobileMenu.classList.toggle('open');
+            mainHeader.classList.toggle('open');
+            // document.body.style.overflow = menuButton.classList.contains('open') ? 'hidden' : 'auto';
+        });
+    }
+
+    mobileSubmenuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            
+            mobileSubmenuItems.forEach((otherItem) => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove("open");
+                    
+                    let otherSubmenu = otherItem.querySelector(".submenu-list");
+                    otherSubmenu.classList.remove("open");
+                }
+            });
+
+            item.classList.toggle("open");
+
+            let submenu = item.querySelector(".submenu-list");
+            submenu.classList.toggle("open");
+        });
+    });
+    
+    const searchForms = document.querySelectorAll("form[action='https://pensjonskassenforfylkene.no/search']");
+    
+    
+    searchForms.forEach((form) => {
+        const searchInput = form.querySelector("input[type='search']");
+        
+        form.addEventListener("submit", function(event) {
+            if (searchInput.value.length < 3) {
+                event.preventDefault();
+                alert("Vennligst skriv inn minst 3 tegn for søk.");
+            }
+        });
+    });
+
+    let currentY = window.scrollY;
+    let scrollDiff = 0;
+    let scrollTimer = 0;
+    window.addEventListener("scroll", function () {
+        let newY = window.scrollY;
+        if (newY < currentY || newY < 130) {
+            mainHeader.classList.remove("scroll-down");
+        } else {
+            mainHeader.classList.add("scroll-down");
+        }
+        currentY = newY;
+    });
+const SITE_URL = "https://pensjonskassenforfylkene.no/";</script></body>
+</html>

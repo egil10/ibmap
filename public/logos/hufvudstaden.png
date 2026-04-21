@@ -1,0 +1,1944 @@
+
+
+
+<!DOCTYPE html>
+<html lang="sv" style="">
+<head>
+    <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/54c4db3752d32.js" data-cmp-host="d.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="0"></script>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="Vill du hyra kontor i Stockholm city eller inom vallgraven i G&#xF6;teborg? Hufvudstaden erbjuder moderna kontor i exklusiva fastigheter med b&#xE4;sta l&#xE4;ge.   " />
+
+
+        <meta name="author" content="Hufvudstaden AB" />
+
+
+
+    <link rel="canonical" href="https://hufvudstaden.se/" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+
+
+    <!--AmCharts -->
+    <link rel="stylesheet" href="/assets/js/amcharts/plugins/export/export.css">
+
+    <!-- Include Unite Gallery CSS -->
+    <link href='/assets/unitegallery/css/unite-gallery.css' rel='stylesheet' type='text/css' />
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/assets/css/hufvudstaden-theme.css">
+
+    <!-- Cookie -->
+
+    <script type="text/javascript">(function (c, l, a, r, i, t, y) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) }; t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i; y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y); })(window, document, "clarity", "script", "o8ogc57bhu");</script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+        w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+        }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TQ7RL7G');
+    </script>
+
+    <!-- JavaScript -->
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/143970315.js"></script>
+    <!-- End of HubSpot Embed Code -->
+    <script type="text/javascript" src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="/assets/js/wow.min.js"></script>
+    <script type="text/javascript" src="/assets/js/slick.min.js"></script>
+    <script type="text/javascript" src="/assets/js/hufvudstaden-top.js"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdNLx8dAAAAAEDFgpqIyctFMp0f3WOxaxXZtDJm" async defer></script>
+
+    <title>Hufvudstaden | Fastighetsbolag</title>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-27413292-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body class="pageload m-pinned-sidebar  inverse-header ">
+    <!-- header start -->
+
+    <header class="m-header">
+        <div class="m-header-left">
+            <a href="/sok/" class="d-none d-md-block"><span class="search-icon"></span></a>
+        </div>
+        <div class="m-header-center">
+            <a class="logo" href="/">
+                <div class="m-header-logo">
+                    <svg version="1.1" id="Lager_1" xmlns="http://www.w3.org/2000/svg"
+                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 280.77 24.52"
+                         height="0">
+                        <defs>
+                            <g id="huf-logo">
+                                <path class="st0" d="M0.22,0.59h9.77v1.03C9.35,1.61,8.71,1.67,8.09,1.79C6.94,2.16,6.84,3.23,6.84,4.23v6.62h11.04V4.4
+    c-0.05-2.59-0.78-2.61-3.22-2.74V0.59h9.77v1.07c-0.57,0.02-1.13,0.07-1.69,0.17c-1.27,0.34-1.42,1.29-1.47,2.44v15.86
+    c0,2.44,0.73,2.61,3.27,2.71v1.1H14.54v-1.07c2.96-0.17,3.3-0.22,3.37-2.91v-7.74H6.77v7.74c-0.06,0.7,0.1,1.41,0.44,2.03
+    c0.51,0.64,1.15,0.66,2.86,0.73v1.1H0V22.8c0.65-0.04,1.31-0.11,1.95-0.22c1.07-0.27,1.37-0.76,1.39-2.13V3.62
+    C3.37,3.2,3.24,2.78,2.98,2.45C2.44,1.77,1.59,1.69,0.22,1.59" />
+                                <path class="st0" d="M27.39,0.59h9.77v1.07c-2.44,0-3.1,0.29-3.2,2.81v11.19c-0.13,1.3-0.05,2.61,0.24,3.88
+    c1.03,2.36,3.45,3.8,6.01,3.59c1.94,0.04,3.82-0.69,5.23-2.03c1.31-1.75,1.85-3.95,1.51-6.11V5.33c-0.07-2.88-0.54-3.47-2.98-3.64
+    v-1.1h7.6v1.07c-2.44,0.34-3.08,1-3.15,3.86v9.48c0,3.49-0.12,6.25-3.4,8.18c-1.61,0.93-3.45,1.38-5.3,1.29
+    c-2.68,0.23-5.33-0.66-7.33-2.44c-1.34-1.41-2.03-3.33-1.88-5.28V4.72c0-1.25,0-1.81-0.44-2.44s-1.27-0.68-2.69-0.76" />
+                                <path class="st0"
+                                      d="M54.41,0.59h16.22l0.61,5.69h-0.98c-0.32-1.22-0.87-2.37-1.61-3.4c-0.95-0.9-2.25-1.31-3.54-1.12h-4.23v9.21
+    h2.44c0.72,0.08,1.43-0.16,1.95-0.66c0.54-0.74,0.78-1.65,0.68-2.57h1.05v7.92h-1.05c0.08-0.84-0.08-1.69-0.46-2.44
+    c-0.57-0.76-1.5-1.16-2.44-1.05h-2.32v7.21c0,1.81,0,2.44,0.71,3.01c0.71,0.56,0.76,0.37,2.64,0.46v1.1H54.07V22.8
+    c1.78,0,2.66,0,3.1-0.98c0.26-0.79,0.34-1.62,0.24-2.44V4.11c0.08-0.65-0.11-1.3-0.51-1.81c-0.51-0.49-1.27-0.56-2.64-0.64" />
+                                <path class="st0" d="M71.49,0.57h9.14v1.1c-1.73,0-2.66,0-2.66,1.12c0.04,0.43,0.17,0.85,0.39,1.22l3.96,9.77
+    c1.15,2.91,1.34,3.44,2.25,6.11L90.5,4.36c0.25-0.47,0.4-0.98,0.44-1.51c0-0.39-0.2-0.75-0.54-0.95c-0.29-0.12-0.32-0.12-2.13-0.2
+    V0.57h7.72v1.1c-2.83,0.2-3.15,0.78-3.88,2.86l-7.77,19.77h-1.27L74.69,3.92c-0.66-1.47-1.12-2-3.2-2.25" />
+                                <path class="st0" d="M96.8,0.59h9.77v1.07c-2.44,0-3.1,0.29-3.2,2.81v11.19c-0.12,1.3-0.02,2.61,0.29,3.88
+    c1.02,2.35,3.43,3.79,5.99,3.59c1.94,0,3.8-0.76,5.18-2.13c1.31-1.75,1.86-3.95,1.51-6.11V5.33c0-2.93-0.44-3.47-3.1-3.64v-1.1h7.57
+    v1.07c-2.44,0.34-3.08,1-3.15,3.86v9.48c0,3.49-0.12,6.25-3.4,8.18c-1.61,0.93-3.45,1.38-5.3,1.29c-2.68,0.23-5.33-0.66-7.33-2.44
+    c-1.34-1.41-2.03-3.33-1.88-5.28V4.72c0-1.25,0-1.81-0.44-2.44c-0.44-0.64-1.27-0.68-2.69-0.76" />
+                                <path class="st0" d="M123.84,0.59h10.04c2.22-0.11,4.43,0.38,6.4,1.42c3.8,2.09,6.07,6.15,5.86,10.48c0.1,3.04-0.96,6.01-2.98,8.28
+    c-2.43,2.22-5.66,3.37-8.94,3.18h-10.58v-1.1c1.88-0.12,2.1-0.12,2.44-0.37c0.95-0.49,0.95-1.51,0.95-2.93V4.4
+    c0-2.44-0.95-2.69-3.18-2.69 M130.42,18.82c0,1.71,0,2.44,0.42,2.91c0.42,0.46,1.03,0.88,3.32,0.88c3.08,0.31,5.98-1.51,7.04-4.42
+    c0.69-1.91,1.04-3.93,1.03-5.96c0.19-2.83-0.68-5.62-2.44-7.84c-1.85-1.75-4.35-2.64-6.89-2.44h-2.44L130.42,18.82z" />
+                                <path class="st0" d="M151.67,16.62c0.33,2.3,1.6,4.36,3.49,5.69c0.92,0.52,1.95,0.79,3.01,0.78c2.34,0.19,4.39-1.56,4.58-3.9
+    c0.01-0.12,0.01-0.24,0.01-0.36c0.02-1.61-0.83-3.1-2.22-3.91c-1.44-0.92-2.94-1.73-4.5-2.44c-2.44-1.39-4.89-2.69-4.89-6.38
+    c-0.12-3.25,2.41-5.98,5.66-6.11c0.17-0.01,0.33-0.01,0.5,0c0.79,0.01,1.57,0.14,2.32,0.37c0.99,0.26,1.9,0.74,2.69,1.39
+    c0.28-0.42,0.52-0.87,0.71-1.34h0.66v6.3h-0.98c-0.21-1.18-0.63-2.32-1.25-3.35c-0.93-1.35-2.44-2.18-4.08-2.25
+    c-1.87-0.19-3.53,1.17-3.72,3.04c-0.01,0.11-0.02,0.22-0.02,0.33c0.01,0.76,0.26,1.49,0.71,2.1c0.73,0.95,1.88,1.66,5.91,3.81
+    c2.57,1.39,4.89,2.69,4.89,6.91c0.02,1.12-0.19,2.23-0.61,3.27c-1.03,2.35-3.37,3.86-5.94,3.84c-0.76,0.02-1.51-0.07-2.25-0.27
+    c-1.49-0.4-2.86-1.14-4.01-2.17c-0.42,1-0.44,1.12-0.76,2.03h-0.98v-7.33" />
+                                <path class="st0" d="M167.38,0.57h19.25l0.54,5.91h-0.93c-0.24-1.27-0.79-2.47-1.61-3.47c-0.99-0.9-2.32-1.32-3.64-1.15h-2.32v18.54
+    c0,1.1,0.2,1.95,1.37,2.27c0.63,0.1,1.27,0.16,1.91,0.17v1.1h-10.02v-1.1c2.57-0.12,3.37-0.22,3.37-2.61V1.86h-2.44
+    c-1.95,0-2.76,0.2-3.62,1.29c-0.72,1-1.23,2.14-1.49,3.35h-0.98" />
+                                <path class="st0" d="M196.55,0.3h1.03l7.33,19.03c0.93,2.44,1.37,3.37,3.69,3.54v1.05h-9.36v-1.05c1.61,0,2.88,0,2.88-1.2
+    c-0.05-0.5-0.19-0.99-0.42-1.44l-1.81-4.76h-7.74l-1.59,4.23c-0.22,0.53-0.36,1.09-0.42,1.66c0,1.12,0.95,1.39,2.44,1.51v1.05h-7.33
+    v-1.05c2.2-0.27,2.79-0.86,3.74-3.18 M197.75,9.78c-0.81-2.15-0.93-2.44-1.66-4.89l-3.47,9.38h6.82L197.75,9.78z" />
+                                <path class="st0" d="M209.87,0.59h10.02c2.22-0.11,4.43,0.38,6.4,1.42c3.78,2.1,6.03,6.16,5.81,10.48c0.13,3.03-0.91,6-2.91,8.28
+    c-2.43,2.22-5.66,3.37-8.94,3.18h-10.58v-1.1c1.88-0.12,2.1-0.12,2.44-0.37c0.86-0.54,0.86-1.51,0.88-3.03V4.4
+    c0-2.44-0.95-2.69-3.18-2.69 M216.37,18.82c0,1.71,0,2.44,0.42,2.91c0.42,0.46,1.03,0.88,3.32,0.88c3.08,0.36,6.01-1.42,7.11-4.32
+    c0.7-1.94,1.05-3.99,1.03-6.06c0.19-2.83-0.68-5.62-2.44-7.84c-1.85-1.75-4.35-2.64-6.89-2.44h-2.44L216.37,18.82z" />
+                                <path class="st0" d="M235.69,0.57h16.22l0.64,5.79h-0.9c-1.17-3.76-1.93-4.52-5.01-4.57h-4.47v9.19h2.15c0.9,0.1,1.8-0.2,2.44-0.83
+    c0.5-0.72,0.76-1.57,0.76-2.44h0.98v7.94h-1.03c0.04-0.77-0.11-1.54-0.42-2.25c-0.62-0.88-1.68-1.33-2.74-1.17h-2.13v7.57
+    c0,1.12,0,2.03,1.34,2.44c0.99,0.35,2.05,0.49,3.1,0.39c1.66,0.17,3.32-0.34,4.59-1.42c1.17-1.29,1.89-2.93,2.05-4.67h0.98
+    l-0.42,7.33h-18.32V22.8c2.66,0,3.2-0.22,3.32-2.44V4.28c0.08-0.7-0.09-1.4-0.49-1.98c-0.49-0.54-0.95-0.56-2.66-0.64" />
+                                <path class="st0" d="M273.05,0.59h7.72v1.17c-0.71-0.02-1.42,0.14-2.05,0.46c-0.93,0.59-1.08,1.51-1.15,3.35v18.57h-1.49L264.3,7.04
+    c-0.82-1.17-1.58-2.39-2.27-3.64v15.56c-0.07,0.9,0.08,1.8,0.42,2.64c0.65,0.91,1.75,1.38,2.86,1.22v1.1h-7.99V22.8
+    c0.62,0.01,1.23-0.1,1.81-0.32c1.47-0.66,1.51-2.17,1.56-3.57V3.65c-0.12-1.76-1.03-1.81-3.15-1.95v-1.1h6.33l9.77,14.07
+    c1.17,1.69,1.49,2.17,2.44,3.84V5.26c0-2.64-0.66-3.3-3.18-3.54" />
+                            </g>
+                        </defs>
+                    </svg><svg version="1.1" id="Lager_1" xmlns="http://www.w3.org/2000/svg"
+                               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 280.77 24.52"
+                               height="30px">
+
+                        <use xlink:href="#huf-logo"></use>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="m-header-right">
+            <!-- header right menu start -->
+            <ul class="m-header-navigation">
+                <li class="lang-desktop">
+                    <a href="/en/">English</a>
+                </li>
+                <li class="d-md-none">
+                    <a href="/sok/" class=""><span class="search-icon"></span></a>
+                </li>
+                <li class="d-none d-md-block">
+                    <a href="https://hyresgastportalen.hufvudstaden.se/" target="_blank" class="btn btn-login-primary">Logga in</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Left sidebar menu start -->
+    
+
+
+
+
+
+<!-- Left sidebar menu start -->
+<div class="m-sidebar">
+    <div class="sidebar-login d-md-none">
+
+        <a href="https://hyresgastportalen.hufvudstaden.se/" target="_blank" class="btn btn-login-primary">Logga in</a>
+
+    </div>
+    <div class="m-sidebar-wrapper">
+        <nav class="m-sidebar-navi">
+            <ul>
+                <li class=" ">
+                    <a href="/lediga-lokaler/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Lediga lokaler</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;rt erbjudande</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/service/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Service</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/hallbarhet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/moderna-losningar/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Moderna l&#xF6;sningar</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/redo/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">REDO - Nyckelf&#xE4;rdigt kontor</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/redo/detta-ingar/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Detta ing&#xE5;r i REDO</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vart-erbjudande/redo/teckna-redo/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Teckna REDO</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/coworking/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Coworking</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/vara-butiksomraden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;ra butiksomr&#xE5;den</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/kv-johanna/" target="_blank">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kvarteret Johanna</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/lediga-lokaler/kontakta-uthyrning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kontakta uthyrning</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;r verksamhet</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/var-verksamhet/omraden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Omr&#xE5;den</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/fastigheter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Fastigheter</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/coworking/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Coworking</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/parkering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Parkering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/projekt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Projekt</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/var-verksamhet/vara-varumarken/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;ra varum&#xE4;rken</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Om oss</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/vd-har-ordet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">VD har ordet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/hufvudstaden-i-korthet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Hufvudstaden i korthet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/vision-affarside-och-syfte/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Vision, aff&#xE4;rsid&#xE9; och syfte</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/verksamhetsmal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Verksamhetsm&#xE5;l</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/strategier/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Strategier</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/varderingar/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE4;rderingar</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/vara-affarsomraden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;ra aff&#xE4;rsomr&#xE5;den</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Bolagsstyrning</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/bolagsstyrningsrapport/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Bolagsstyrningsrapport</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/arsstamma/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">&#xC5;rsst&#xE4;mma</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/arsstamma/protokoll-fran-tidigare-arsstammor/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Protokoll fr&#xE5;n &#xE5;rsst&#xE4;mmor</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/styrelsen/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Styrelsen</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/styrelsen/styrelsens-arbete/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Styrelsens arbete</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/styrelsen/ersattningar-till-styrelsen/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Ers&#xE4;ttningar till styrelsen</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/koncernledning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Koncernledning</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/koncernledning/ersattningar-till-koncernledningen/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Ers&#xE4;ttningar till koncernledningen</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/utskott-och-kommitteer/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Utskott och kommitt&#xE9;er</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/revisorer/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Revisorer</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/bolagsstyrning/bolagsordning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Bolagsordning</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;r historia</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1915-1920/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1915-1920</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1921-1932/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1921-1932</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1933-1950/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1933-1950</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1951-1970/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1951-1970</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1971-1997/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1971-1997</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/var-historia/1998-2015/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">1998-2015</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/uppforandekod/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Uppf&#xF6;randekod f&#xF6;r medarbetare</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/visselblasning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Visselbl&#xE5;sning</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/integritet-och-cookies/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Integritet och cookies</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/integritet-och-cookies/integritet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Information om integritet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/integritet-och-cookies/kamerabevakning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kamerabevakning</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/integritet-och-cookies/cookies/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Cookies</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Jobba hos oss</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Lediga jobb</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/spontanansokan/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Spontanans&#xF6;kan</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/forsaljningschef-varuhus-stockholm/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;rs&#xE4;ljningschef Varuhus Stockholm</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/e-mail-marketing-specialist--nk/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">E-mail Marketing Specialist &#x2013; NK</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/service-host--cecil-coworking/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Service Host &#x2013; Cecil Coworking</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/teknisk-arkitekt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Teknisk arkitekt</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/retail-media-ansvarig---kam/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Retail Media Ansvarig - KAM</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/lediga-jobb/pim--foto-redaktor/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">PIM &amp; Foto Redakt&#xF6;r</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Jobba hos Hufvudstaden</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/vad-vi-erbjuder/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Vad vi erbjuder</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/var-kultur/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;r kultur</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/formaner/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;rm&#xE5;ner</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/kompetensutveckling/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kompetensutveckling</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/jobba-hos-hufvudstaden/medarbetarundersokningar/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Medarbetarunders&#xF6;kningar</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/mangfald-och-jamstalldhet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">M&#xE5;ngfald och j&#xE4;mst&#xE4;lldhet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/vara-arbetsomraden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;ra arbetsomr&#xE5;den</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/mot-vara-medarbetare/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">M&#xF6;t v&#xE5;ra medarbetare</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/mot-vara-medarbetare/eva-lotta-lundberg2/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Eva-Lotta Lundberg, F&#xF6;rvaltningschef</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/studenter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Studenter</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/om-oss/jobba-hos-oss/hr-kontakt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">HR Kontakt</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhet</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">V&#xE5;ra fokusomr&#xE5;den</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/minimera/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Minimera</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/minimera/energi-och-klimat/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Energieffektivisering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/minimera/cirkularitet-och-aterbruk/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Cirkularitet och &#xE5;terbruk</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/minimera/avfallshantering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Avfallshantering</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/framtidssakra/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Framtidss&#xE4;kra</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/framtidssakra/energibesparing/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Klimatanpassning</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/framtidssakra/miljocertifierade-fastigheter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Milj&#xF6;certifierade fastigheter</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/samarbeta/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Samarbeta</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/samarbeta/natverk-och-samarbeten/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">N&#xE4;tverk och initiativ</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsplan/samarbeta/gront-hyresavtal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Gr&#xF6;nt hyresavtal</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/social-hallbarhet/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Social h&#xE5;llbarhet</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsmal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhetsm&#xE5;l och resultat</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsmal/hallbarhetsredovisning-gri/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhetsrapportering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsmal/hufvudstadens-intressenter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Intressentdialog</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhetsstyrning</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/hallbarhetspolicy/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhetspolicy</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/globala-ramverk/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Globala ramverk</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/globala-ramverk/validerade-klimatmal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Science&#x202F;Based&#x202F;Targets</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/globala-ramverk/un-global-compact/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">UN Global Compact</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetsstyrning/globala-ramverk/hufvudstaden-och-fn-globala-mal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">FN:s globala m&#xE5;l</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/hallbarhet/hallbarhetskontakt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">H&#xE5;llbarhetskontakt</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/investerare/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Investerare</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/investerare/finansiella-mal/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Finansiella m&#xE5;l</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Aktien</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/investerare/aktien/aktieagarstruktur/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Aktie&#xE4;garstruktur</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/storsta-aktieagarna/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">St&#xF6;rsta aktie&#xE4;garna</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/borsvarde/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">B&#xF6;rsv&#xE4;rde</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/aterkop/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">&#xC5;terk&#xF6;p</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/utdelning/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Utdelning</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/insynshandel/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Insynshandel</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/analytiker/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Aktieanalytiker</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/aktien/omvandling/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Omvandling</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/rapporter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Rapporter och presentationer</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/investerare/rapporter/presentationer/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Presentationer</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/flerarsoversikt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Fler&#xE5;rs&#xF6;versikt</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/fastighetsmarknaden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Fastighetsmarknaden</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/investerare/fastighetsmarknaden/stockholm/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Stockholm</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/fastighetsmarknaden/goteborg/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">G&#xF6;teborg</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/fastighetsmarknaden/transaktionsmarknaden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Transaktionsmarknaden</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/fastighetsvardering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Fastighetsv&#xE4;rdering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/finansiering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Finansiering</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/investerare/finansiering/laneprogram/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">L&#xE5;neprogram</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/finansiering/gron-finansiering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Gr&#xF6;n finansiering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/finansiering/kreditanalytiker/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kreditanalytiker</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/risker-och-riskhantering/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Risker och riskhantering</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/definitioner-och-ordlista/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Definitioner och ordlista</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/kalender/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kalender</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/prenumerera/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Prenumerera</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/investerare/kontakt-ir/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kontakt IR</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/media/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Media</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/media/nyhetsrum/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Nyhetsrum</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/media/kunskap-och-inspiration/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kunskap och inspiration</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/media/pressmeddelanden/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Pressmeddelanden</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/media/mediabank/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Mediabank</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/media/mediakontakter/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Mediakontakter</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/for-vara-hyresgaster/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;r v&#xE5;ra hyresg&#xE4;ster</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/for-vara-hyresgaster/lokalinformation/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Lokalinformation</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/for-vara-hyresgaster/servicetjanster/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Servicetj&#xE4;nster</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/for-vara-leverantorer/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;r v&#xE5;ra leverant&#xF6;rer</span>
+                    </a>
+
+                            <span class="m-seperator"></span>
+                </li>
+                <li class=" ">
+                    <a href="/kontakt/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">Kontakt</span>
+                            <span class="chevron bottom"></span>
+                    </a>
+                        <ul>
+                <li class=" ">
+                    <a href="/kontakt/stockholm/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;rvaltning i Stockholm</span>
+                    </a>
+
+                </li>
+                <li class=" ">
+                    <a href="/kontakt/forvaltning-i-goteborg/" target="_self">
+                        <span class="m-current "></span>
+                        <span class="m-label">F&#xF6;rvaltning i G&#xF6;teborg</span>
+                    </a>
+
+                </li>
+                        </ul>
+
+                </li>
+
+
+                <li class="lang-mobile">
+                    <a href="/en/">
+                        <span class="m-current"></span>
+                        <span class="m-label">In English</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- Left sidebar menu end -->
+
+
+    <div class="m-toggle-sidebar">
+        <div class="hamburger hamburger--squeeze "
+             aria-label="Meny" role="button" aria-controls="navigation">
+            <div class="hamburger-box">
+                <div class="hamburger-inner"></div>
+            </div>
+            <span class="hamburger-label"></span>
+        </div>
+    </div>
+
+    <main class="m-wrapper startpage" role="main">
+        
+
+
+
+
+<!-- Hero -->
+
+
+
+<div class="hero">
+    <div class="overlay" style="background-color: rgba(0,0,0,0.2);"></div>
+
+        <video id="video-background" class="video-content" playsinline autoplay muted loop>
+            <source type="video/mp4" src="/contentassets/2aa02ba81d3f4b6383eb5e16d4ec4fbe/20230213-hufvudstaden_nk_office_detail.mp4">
+        </video>
+        <div class="hero-container h-100">
+            <div class="row align-items-center h-100">
+                <div class="mx-auto text-white text-center">
+                    <h1>Vi erbjuder lokaler i attraktiva l&#xE4;gen</h1>
+                    <a href="/lediga-lokaler/" class="btn btn-primary btn-large"><span>Lediga lokaler</span></a>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="scroll-symbol"><span></span></div>
+<div class="row">
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-right wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center order-md-1 order-2">
+                                <div class="content-wrapper">
+                                    <h3>OM HUFVUDSTADEN</h3>
+                                    <h2>NKI -resultat och  kundnöjdhet</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            Genom att kombinera attraktiva lägen, hög kvalitet i våra fastigheter och ett nära samarbete med våra hyresgäster skapar vi långsiktiga relationer och stabila värden över tid.
+                                        </p>
+                                        <a href="/om-oss/hufvudstaden-i-korthet/kundnojdhet-och-nki/" class="btn btn-secondary">Läs mer</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center right-oob puffcolor-beige order-1">
+                                <img src="/globalassets/hs-sommar-lr-24-foto-maria-cruseman-18-1.jpg?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-left wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center left-oob puffcolor-beige">
+                                <img src="/globalassets/bilder-med-manniskor/hufvudstaden_sommarfotografering_stockholm_2025_emelie-otterbeck_mg_7190.jpg?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center">
+                                <div class="content-wrapper">
+                                    <h3></h3>
+                                    <h2>Rapport Bästa cityläget</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            I en undersökning med över 1 000 yrkesverksamma i Stockholm och Göteborg har Hufvudstaden analyserat hur kontorsläget påverkar vardag, närvaro och trivsel.
+                                        </p>
+                                        <a href="/lediga-lokaler/basta-citylaget/" class="btn btn-secondary">Läs mer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-right wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center order-md-1 order-2">
+                                <div class="content-wrapper">
+                                    <h3>Lediga Lokaler</h3>
+                                    <h2>Toppmoderna kontor i Kvarteret Johanna</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            På Göteborgs mest centrala och attraktiva läge hittar du Kvarteret Johanna. Här, i området Fredstan, skapar vi flexibla och effektiva kontorslokaler med inredning och materialval av bästa möjliga kvalitét.
+                                        </p>
+                                        <a href="/lediga-lokaler/kv-johanna/" class="btn btn-secondary">Kvarteretjohanna.se</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center right-oob puffcolor-pink order-1">
+                                <img src="/contentassets/f6adc5449bba439fb5cf48642d768cf4/231017_flygvy3.jpg?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-right wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center order-md-1 order-2">
+                                <div class="content-wrapper">
+                                    <h3></h3>
+                                    <h2>Vi ger dig ett helt team på gångavstånd</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            Hos oss får du inte bara en kontaktperson, du får ett helt team som finns på gångavstånd. Vårt fokus ligger på att leverera hög kvalitet på både fastigheter och service. Vi vill finnas tillhands för våra kunder i både stort och smått - dygnet runt.
+                                        </p>
+                                        <a href="/for-vara-hyresgaster/" class="btn btn-secondary">Kundservice</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center right-oob puffcolor- order-1">
+                                <img src="/contentassets/c42814fd370c49de96ebd943940c9e5e/703_544_byta-lampa_beskuren-opacity.webp?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-left wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center left-oob puffcolor-beige">
+                                <img src="/contentassets/b2d35e3a47354566aea0e9e4e9cd2193/hs_sommarfoto_8_juni_lr_foto_maria_cruseman-4.jpg?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center">
+                                <div class="content-wrapper">
+                                    <h3>Om Hufvudstaden</h3>
+                                    <h2>Vi tror på en ljus & hållbar framtid</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            Ett ansvarsfullt företagande är en förutsättning för att uppnå långsiktig lönsamhet. Hufvudstaden strävar mot en hållbar utveckling med hänsyn till såväl ekonomiska som miljömässiga och sociala faktorer.
+                                        </p>
+                                        <a href="/om-oss/" class="btn btn-secondary">Om oss</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div>
+
+
+
+
+
+
+<section class="focus-grey">
+
+    <div class="large-container">
+        <h3 class="text-center section-header">I fokus</h3>
+        <div class="slick-contextual slider">
+            <div class="relative-block">
+                    <a href="/media/pressmeddelanden/2026/kvarteret-johanna-starker-fredstans-utbud-och-attraktivitet/">
+                        <div class="col-12 p-0 media-cell">
+                            <div class="overlay">
+                                <div class="row align-items-center h-100 slide-arrow"><span></span></div>
+                            </div>
+
+                            <img src="/contentassets/167f09578b994af1929afb12344bd481/hornan-fredsgatan_drottninggatan_16-9.jpg?width=768&height=540&mode=crop&scale=both&anchor=center" width="800" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-12 col-md-auto">
+                            <span class="list-type">Pressmeddelande <span></span>15 apr. 2026</span>
+                            <h3>Kvarteret Johanna stärker Fredstans utbud och attraktivitet</h3>
+                            <p>Kvarteret Johanna stärker Fredstans utbud och attraktivitet.<span class="list-arrow"></span></p>
+                        </div>
+                    </a>
+            </div>
+
+                    <div class="relative-block">
+                        <a href="/media/kunskap-och-inspiration/svardfisken/">
+                            <div class="col-12 p-0 media-cell">
+                                    <div class="overlay">
+                                        <div class="row align-items-center h-100 slide-arrow"><span></span></div>
+                                    </div>
+                                    <img src="/contentassets/8f74f70ca8944531ae1fea1a9fbb02c9/11474_svardfisken-entre-fasad-2-2.jpg?width=517&height=362&scale=both&mode=crop&anchor=center" width="800" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-12 col-md-auto">
+                                            <span data-selector="category" class="list-type">V&#xE5;ra fastigheter</span>
+                                <h3>Svärdfisken Drottninggatan</h3>
+                                <p>Vi har många fantastiska fastigheter och bakom flera av dem finns intressanta historier och detaljer. Följ med till Svärdfisken, en klassiker på...<span class="list-arrow"></span></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="relative-block">
+                        <a href="/media/kunskap-och-inspiration/packarhuset.norrmalmstorg">
+                            <div class="col-12 p-0 media-cell">
+                                    <div class="overlay">
+                                        <div class="row align-items-center h-100 slide-arrow"><span></span></div>
+                                    </div>
+                                    <img src="/contentassets/60ed7b8a5d3848f68c81adc4f770000d/11690_norrmalmstorg1-4-2-2005-2-2.jpg?width=517&height=362&scale=both&mode=crop&anchor=center" width="800" class="img-fluid" alt="">
+                            </div>
+                            <div class="col-12 col-md-auto">
+                                            <span data-selector="category" class="list-type">V&#xE5;ra fastigheter</span>
+                                <h3>Packarhuset Norrmalmstorg</h3>
+                                <p>Vid Norrmalmstorg, mitt i hjärtat av Stockholm, ligger Hufvudstadens fastighet Packarhuset. Men vad är det egentligen som gör Packarhuset så...<span class="list-arrow"></span></p>
+                            </div>
+                        </a>
+                    </div>
+
+        </div>
+    </div>
+
+    <div class="btn-bottom">
+        <div class="column-adjustment text-center">
+            <a href="/media/" class="btn btn-outline-primary">Till media</a>
+        </div>
+    </div>
+</section>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script>
+    window.addEventListener('load', function () {
+        var players = [];
+        var videos = document.querySelectorAll("[data-video]");
+
+        videos.forEach(function (video) {
+            players.push({
+                player: new Vimeo.Player(video)
+            });
+        });
+
+        document.addEventListener('scroll', function () {
+            var videos = document.querySelectorAll("[data-video]")
+            var i = 0;
+
+            videos.forEach(function (video) {
+                if (isInViewport(video)) {
+                    players[i].player.play();
+                } else {
+                    players[i].player.pause();
+                }
+                i++;
+            });
+        }, {
+            passive: true
+        });
+    }, false);
+
+    function isInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+</script></div>
+
+    <div>
+        <section>
+            <div class="large-container">
+                <div class="two-column-puff puff-image-left wow fadeInUp">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-12 align-self-center left-oob puffcolor-beige">
+                                <img src="/contentassets/d8497e488cd949f7b127ee08921e5888/hufvudstaden_kontor_023-2.jpg?width=768&height=570&mode=crop&scale=both" class="img-fluid" data-cmp-info="10">
+                            </div>
+                            <div class="col-md-6 col-12 align-self-center">
+                                <div class="content-wrapper">
+                                    <h3>Finansiell information</h3>
+                                    <h2>Årsredovisning 2025</h2>
+                                    <div class="two-column-padding two-column-lead">
+                                        <p>
+                                            "Vår starka finansiella ställning möjliggör att vi kan fortsätta utveckla fastigheterna och stärka vårt erbjudande för att vara ett förstahandsval på marknaden"
+                                        </p>
+                                        <a href="/globalassets/finansiell-information/delarsrapporter/2025/uppdaterade-rapporter-svenska-mars-2026/svenska/hufvudstaden_arsredovisning-2025_v2.pdf" class="btn btn-secondary">Läs årsredovisningen 2025</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>
+</div>
+
+
+        
+<footer id="footer">
+        <div class="container footer-content">
+            <div class="row">
+                <!-- Adressuppgifter för Desktop -->
+                <div class="col-xl-8 col-12 d-none d-lg-block">
+                    <div class="row">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>Stockholm</h4>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5>Telefon</h5>
+                                                <a href="tel:08 762 90 00">08 762 90 00</a>
+                                                <div class="hide-mobile"><br></div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5>Besöksadress</h5>
+                                                <p>Regeringsgatan 38</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto"></div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>Göteborg</h4>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5>Telefon</h5>
+                                                <a href="tel:031 710 21 00">031 710 21 00</a>
+                                                <div class="hide-mobile"><br></div>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5>Besöksadress</h5>
+                                                <p>Före kl 10: Kyrkogatan 54<br />Efter kl 10: Fredsgatan 5-7</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto"></div>
+                    </div>
+                    <div class="row">
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <h5>Kundservice</h5>
+                                                <a href="tel:08 762 90 10">08 762 90 10</a>
+                                            </div>
+                                            <div class="col-6">
+                                                <h5>Postadress</h5>
+                                                <p>Hufvudstaden<br />NK 100<br />111 77 Stockholm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto"></div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <h5>Kundservice</h5>
+                                                <a href="tel:031 710 21 10">031 710 21 10</a>
+                                            </div>
+                                            <div class="col-md-6 d-none d-lg-block">
+                                                <h5>Postadress</h5>
+                                                <p>Hufvudstaden<br />NK 100<br />111 77 Stockholm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-auto"></div>
+                    </div>
+                    <span> </span>
+                </div>
+
+                <!-- Adressuppgifter för Mobilvy -->
+                <div class="col-12 d-lg-none contact-mobile">
+                    <div class="row">
+                                    <div class="col-sm-6 col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>Stockholm</h4>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="inline-mobile">
+                                                    <h5>Telefon<span></span></h5>
+                                                    <a href="tel:08 762 90 00">08 762 90 00</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="inline-mobile">
+                                                    <h5>Kundservice<span></span></h5>
+                                                    <a href="tel:08 762 90 10">08 762 90 10</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4>Göteborg</h4>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="inline-mobile">
+                                                    <h5>Telefon<span></span></h5>
+                                                    <a href="tel:031 710 21 00">031 710 21 00</a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="inline-mobile">
+                                                    <h5>Kundservice<span></span></h5>
+                                                    <a href="tel:031 710 21 10">031 710 21 10</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 align-self-center">
+                    <div class="col-12">
+                        E-post:&nbsp;<a href="mailto:info@hufvudstaden.se">info@hufvudstaden.se</a>
+                    </div>
+                        <div class="col-12">
+                            <a href="/for-vara-leverantorer/">Fakturering för leverantörer<span></span></a>
+                        </div>
+                        <div class="col-12">
+                            <a href="/kontakt/">Alla kontakter<span></span></a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr>
+            </div>
+        </div>
+        <div id="subscribe-footer" class="container">
+            <div class="row footer-subscribe">
+                <form id="subscription-footer-form">
+                    <div id="subscriptionFailureModal" class="mt-5" style="display: none">
+                        <h3 class="text-center" id="errorMessage"></h3>
+                        <br />
+                    </div>
+                    <div class="col-12">
+                        <h3></h3>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="reports" value="rdv,kmk,rpt" id="reports" />
+                                    <label class="form-check-label" for="reports" id="reports">Rapporter</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="press" value="prm" id="press" />
+                                    <label class="form-check-label" for="press" id="press">Pressreleaser</label>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <input class="form-control" size="30" type="email" required name="email" id="email" placeholder="Ange e-postadress" />
+                                    </div>
+
+                                    <div class="col-auto">
+                                        <input type="submit"
+                                               id="pressbutton-footer"
+                                               value="Prenumerera"
+                                               class="btn btn-outline-success" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row align-items-center">
+                                    <div class="col-md-auto col-12 footer-bottom-content align-self-center order-lg-1 order-2">
+                                        När du anmäler dig till våra prenumerationstjänster kommer Hufvudstaden att lagra din e-postadress.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="language" value="sv" id="language" />
+                </form>
+            </div>
+            <div class="subscription-wrapper" id="subscriptionSuccessModal" style="display: none">
+                <h3 class="text-center" id="heading"></h3>
+                <h3 class="text-center" id="message"></h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row footer-bottom justify-content-between">
+                    <div class="col-md-auto col-12 footer-bottom-content align-self-center order-lg-1 order-2">
+                        © Hufvudstaden 2026&nbsp;&nbsp;&nbsp;&nbsp;
+                        Organisationsnummer:&nbsp;556012-8240&nbsp; &nbsp; &nbsp; &nbsp;
+                            <a href="/om-oss/integritet-och-cookies/">Integritet&nbsp;och&nbsp;cookies</a>
+                        &nbsp;
+                    </div>
+
+                <div class="col-md-auto col-12 social-links order-lg-2 order-1">
+                    <!-- <a href=><i class="icon-facebook"></i></a> -->
+                    <a href=https://se.linkedin.com/company/hufvudstaden><i class="icon-linkedin"></i></a>
+                    <a href=https://www.instagram.com/hufvudstadenab/ title="Instagram">
+                        <span class="icon-instagram"></span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+</footer>
+
+<script>
+    $('#subscription-footer-form').submit(function (e) {
+        onSubmitForm(e);
+    });
+
+    function onSubmitForm(e) {
+        var email = $("#email").val();
+        newsletterSthlm = "";
+        if ($("#newsletterSthlm").prop('checked')) {
+            newsletterSthlm = $("#newsletterSthlm").val();
+        }
+        newsletterGbg = "";
+        if ($("#newsletterGbg").prop('checked')) {
+            newsletterGbg = $("#newsletterGbg").val();
+        }
+        press = "";
+        if ($("#press").prop('checked')) {
+            press = $("#press").val();
+        }
+        reports = "";
+        if ($("#reports").prop('checked')) {
+            reports = $("#reports").val();
+        }
+
+        e.preventDefault();
+              
+        grecaptcha.ready(function () {
+            grecaptcha.execute('6LdNLx8dAAAAAEDFgpqIyctFMp0f3WOxaxXZtDJm', { action: 'submit' }).then(function (token) {
+                $.ajax({
+                    type: "POST",
+                    url: '/SubscriptionBlock/Subscribe',
+                    data: {
+                        "token": token,
+                        "contentGuid": "25d641f8-c039-4743-b3f6-3c87b7c1c1b2",
+                        "reports": reports,
+                        "press": press,
+                        "newsletterSthlm": newsletterSthlm,
+                        "newsletterGbg": newsletterGbg,
+                        "email": email,
+                        "language": 'sv'
+                    },                    
+                    success: function (response) {
+                        ga('send', 'event', 'Prenumeration', 'Sent');
+                        subcriptionFooterSuccess(response);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+            });
+        });
+
+        return false;
+    }
+
+    function subcriptionFooterSuccess(result) {
+        if (result.success) {
+            $("#subscription-footer-form").hide();
+            $("#subscriptionSuccessModal").show();
+            document.getElementById("heading").innerHTML = result.heading;
+            document.getElementById("message").innerHTML = result.message;
+        } else {
+            $("#subscriptionFailureModal").show();
+            document.getElementById("errorMessage").innerHTML = result.message;
+        }
+    }
+</script>
+    </main>
+
+    <div class="m-overlay"></div>
+
+    <div class="modal fade" id="subscriptionModal" tabindex="-1" role="dialog" aria-labelledby="subscriptionModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-message">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <h2 class="modal-title" id="subscriptionModalTitle">Tack för ert intresse!</h2>
+                <div id="subcriptionSuccess">
+                    Din prenumeration är nu aktiverad.
+                </div>
+                <div id="subcriptionFailure">
+                    <p>Prenumerationen misslyckades, försök igen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js></script>
+
+    <!-- include Unite Gallery Theme Files -->
+    <script src='/assets/unitegallery/js/unitegallery.js' type='text/javascript'></script>
+    <script src='/assets/unitegallery/themes/tiles/ug-theme-tiles.js' type='text/javascript'></script>
+
+
+    <script type="text/javascript" src="/assets/js/excellentexport.min.js"></script>
+    <script type="text/javascript" src="/assets/js/nav.js"></script>
+    <script type="text/javascript" src="/assets/js/sly.js"></script>
+    <script type="text/javascript" src="/assets/js/hufvudstaden.js"></script>
+
+    <script type="text/javascript">
+        _linkedin_data_partner_id = "196948";
+    </script>
+    <script type="text/javascript">
+        (function () {
+            var s = document.getElementsByTagName("script")[0];
+            var b = document.createElement("script");
+            b.type = "text/javascript"; b.async = true;
+            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+            s.parentNode.insertBefore(b, s);
+        })();
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=196948&fmt=gif" />
+    </noscript>
+
+    <script type="text/javascript">
+        _linkedin_data_partner_id = "266162";
+    </script>
+    <script type="text/javascript">
+        (function () {
+            var s = document.getElementsByTagName("script")[0];
+            var b = document.createElement("script");
+            b.type = "text/javascript"; b.async = true;
+            b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+            s.parentNode.insertBefore(b, s);
+        })();
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=266162&fmt=gif" />
+    </noscript>
+
+    <link rel="preconnect" href=https://fonts.googleapis.com>
+    <link rel="preconnect" href=https://fonts.gstatic.com crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+
+
+
+</body>
+</html>
