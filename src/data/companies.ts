@@ -367,8 +367,7 @@ export const companies: Company[] = [
     lat: 58.8697,
     lng: 5.7173,
     offices: [
-      { city: "Oslo",         country: "Norway",  lat: 59.9082, lng: 10.7237, label: "Oslo office" ,
-    address: "Trim Towers, Larsamyrå 18, 4313 Sandnes, Norway"},
+      { city: "Oslo",         country: "Norway",  lat: 59.9082, lng: 10.7237, label: "Oslo office" },
       { city: "Bergen",       country: "Norway",  lat: 60.3974, lng: 5.3222,  label: "Bergen office" },
       { city: "Kristiansand", country: "Norway",  lat: 58.1465, lng: 7.9956,  label: "Kristiansand office" },
       { city: "Trondheim",    country: "Norway",  lat: 63.4302, lng: 10.3959, label: "Trondheim office" },
@@ -376,6 +375,7 @@ export const companies: Company[] = [
       { city: "Ålesund",      country: "Norway",  lat: 62.4723, lng: 6.1541,  label: "Ålesund office" },
       { city: "Stockholm",    country: "Sweden",  lat: 59.3316, lng: 18.0822, label: "Stockholm office" },
     ],
+    address: "Trim Towers, Larsamyrå 18, 4313 Sandnes, Norway",
     description: "Norwegian asset manager based in Sandnes, specialising in power and energy."},
   {  id: "landkreditt",
     name: "Landkreditt Forvaltning",
@@ -4562,8 +4562,7 @@ export const companies: Company[] = [
     lat: 60.3908,
     lng: 5.3229,
     offices: [
-      { city: "Alta",         country: "Norway", lat: 69.9689, lng: 23.2716 ,
-    address: "Dronning Eufemias gate 16, 0191 Oslo, Norway"},
+      { city: "Alta",         country: "Norway", lat: 69.9689, lng: 23.2716 },
       { city: "Bodø",         country: "Norway", lat: 67.2803, lng: 14.3953 },
       { city: "Drammen",      country: "Norway", lat: 59.7440, lng: 10.2047 },
       { city: "Finnsnes",     country: "Norway", lat: 69.2285, lng: 17.9845 },
@@ -4586,6 +4585,7 @@ export const companies: Company[] = [
       { city: "Tønsberg",     country: "Norway", lat: 59.2677, lng: 10.4046 },
       { city: "Ålesund",      country: "Norway", lat: 62.4722, lng: 6.1495  },
     ],
+    address: "Dronning Eufemias gate 16, 0191 Oslo, Norway",
     description: "Norwegian accounting and advisory firm with offices across the country."},
 
   {  id: "rieber-son",
@@ -4779,9 +4779,9 @@ export const companies: Company[] = [
     lat: 59.954491,
     lng: 10.762027,
     offices: [
-      { city: "Bergen", country: "Norway", lat: 60.3938, lng: 5.3244, label: "Bergen (historical roots)" ,
-    address: "C. Sundts gate 37, 5004 Bergen, Norway"},
+      { city: "Bergen", country: "Norway", lat: 60.3938, lng: 5.3244, label: "Bergen (historical roots)" },
     ],
+    address: "C. Sundts gate 37, 5004 Bergen, Norway",
     description: "Historic family office with Bergen shipping roots; Oslo headquarters on Maridalsveien with long-term investments across real estate, equities, and private assets."},
 
   {  id: "crowberry-capital",
