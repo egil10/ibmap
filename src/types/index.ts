@@ -33,6 +33,7 @@ export type CompanyCategory =
   | 'Holding'
   | 'Real Estate'
   | 'Shipping'
+  | 'Government'
 
 export const CATEGORY_SHORT: Record<CompanyCategory, string> = {
   'Asset Management':   'AM',
@@ -46,6 +47,7 @@ export const CATEGORY_SHORT: Record<CompanyCategory, string> = {
   'Holding':            'HL',
   'Real Estate':        'RE',
   'Shipping':           'SH',
+  'Government':         'GV',
 }
 
 export const CATEGORY_COLORS: Record<CompanyCategory, { bg: string; text: string; pin: string; border: string }> = {
@@ -60,6 +62,7 @@ export const CATEGORY_COLORS: Record<CompanyCategory, { bg: string; text: string
   'Holding':            { bg: 'bg-orange-50',  text: 'text-orange-700',  pin: '#EA580C', border: 'border-orange-200' },
   'Real Estate':        { bg: 'bg-lime-50',    text: 'text-lime-700',    pin: '#65A30D', border: 'border-lime-200'   },
   'Shipping':           { bg: 'bg-cyan-50',    text: 'text-cyan-700',    pin: '#0891B2', border: 'border-cyan-200'   },
+  'Government':         { bg: 'bg-slate-50',   text: 'text-slate-700',   pin: '#475569', border: 'border-slate-200'  },
 }
 
 export interface CompanyOffice {

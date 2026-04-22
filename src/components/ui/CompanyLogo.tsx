@@ -32,11 +32,12 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
       list.push(`/logos/${company.id}-wide.svg`)
       list.push(`/logos/${company.id}-wide.jpg`)
     }
-    // Try all stored extensions: .png, .svg, .jpg, .webp
+    // Try all stored extensions: .png, .svg, .jpg, .webp, .ico
     list.push(`/logos/${company.id}.png`)
     list.push(`/logos/${company.id}.svg`)
     list.push(`/logos/${company.id}.jpg`)
     list.push(`/logos/${company.id}.webp`)
+    list.push(`/logos/${company.id}.ico`)
     if (domain) list.push(`https://logo.clearbit.com/${domain}?size=128`)
     return list
   }, [company.id, wide, domain])
