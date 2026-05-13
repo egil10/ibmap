@@ -124,6 +124,7 @@ export default function Header({
   const cityDrop = useDropdown()
   const searchDrop = useDropdown()
   const [searchQuery, setSearchQuery] = useState('')
+  const [searchHighlight, setSearchHighlight] = useState(0)
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
@@ -142,6 +143,17 @@ export default function Header({
       )
       .slice(0, 8)
   }, [searchQuery])
+
+  useEffect(() => { setSearchHighlight(0) }, [searchQuery])
+
+  const selectSearchResult = useCallback((idx: number) => {
+    const company = searchResults[idx]
+    if (!company) return
+    if (company.lat != null && company.lng != null) {
+      onCitySelect(company.lat, company.lng, 15)
+    }
+    searchDrop.setOpen(false)
+  }, [searchResults, onCitySelect, searchDrop])
 
   const activeColors = filter !== 'ALL' ? CATEGORY_COLORS[filter as CompanyCategory] : null
   const activeLabel = filter === 'ALL' ? 'All' : CATEGORY_SHORT[filter as CompanyCategory]
@@ -348,6 +360,21 @@ export default function Header({
                       type="text"
                       value={searchQuery}
                       onChange={e => setSearchQuery(e.target.value)}
+                      onKeyDown={e => {
+                        if (e.key === 'ArrowDown') {
+                          e.preventDefault()
+                          if (searchResults.length > 0) setSearchHighlight(i => (i + 1) % searchResults.length)
+                        } else if (e.key === 'ArrowUp') {
+                          e.preventDefault()
+                          if (searchResults.length > 0) setSearchHighlight(i => (i - 1 + searchResults.length) % searchResults.length)
+                        } else if (e.key === 'Enter') {
+                          e.preventDefault()
+                          if (searchResults.length > 0) selectSearchResult(searchHighlight)
+                        } else if (e.key === 'Escape') {
+                          e.preventDefault()
+                          searchDrop.setOpen(false)
+                        }
+                      }}
                       placeholder="Search companies…"
                       className={`w-full rounded-xl px-3 py-1.5 text-[13px] outline-none transition-colors ${dm
                         ? 'bg-white/[0.07] text-slate-100 placeholder:text-slate-600 border border-white/[0.08] focus:border-white/[0.18]'
@@ -356,16 +383,12 @@ export default function Header({
                     />
                     {searchResults.length > 0 && (
                       <div className="mt-1.5 space-y-0.5">
-                        {searchResults.map(company => (
+                        {searchResults.map((company, idx) => (
                           <button
                             key={company.id}
-                            onClick={() => {
-                              if (company.lat != null && company.lng != null) {
-                                onCitySelect(company.lat, company.lng, 15)
-                              }
-                              searchDrop.setOpen(false)
-                            }}
-                            className={itemClass(false)}
+                            onClick={() => selectSearchResult(idx)}
+                            onMouseEnter={() => setSearchHighlight(idx)}
+                            className={itemClass(idx === searchHighlight)}
                           >
                             <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: CATEGORY_COLORS[company.category]?.pin ?? '#cbd5e1' }} />
                             <span className="flex-1 truncate text-left">{company.name}</span>
