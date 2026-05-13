@@ -1,6 +1,6 @@
 'use client'
 
-import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle } from 'lucide-react'
+import { Map, LayoutList, Github, ChevronDown, Check, Navigation, Sun, Moon, ScanLine, AlignJustify, Sparkles, Shuffle, Search } from 'lucide-react'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { companies, FilterCategory, FILTER_CATEGORIES } from '@/data/companies'
 import { CATEGORY_COLORS, CATEGORY_SHORT, CompanyCategory, MapStyleKey, MAP_STYLES } from '@/types'
@@ -122,6 +122,27 @@ export default function Header({
 }: Props) {
   const filterDrop = useDropdown()
   const cityDrop = useDropdown()
+  const searchDrop = useDropdown()
+  const [searchQuery, setSearchQuery] = useState('')
+  const searchInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (searchDrop.open) setTimeout(() => searchInputRef.current?.focus(), 30)
+    else setSearchQuery('')
+  }, [searchDrop.open])
+
+  const searchResults = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase()
+    if (!q) return []
+    return companies
+      .filter(c =>
+        c.name.toLowerCase().includes(q) ||
+        c.city.toLowerCase().includes(q) ||
+        c.category.toLowerCase().includes(q)
+      )
+      .slice(0, 8)
+  }, [searchQuery])
+
   const activeColors = filter !== 'ALL' ? CATEGORY_COLORS[filter as CompanyCategory] : null
   const activeLabel = filter === 'ALL' ? 'All' : CATEGORY_SHORT[filter as CompanyCategory]
 
@@ -192,7 +213,7 @@ export default function Header({
           boxShadow: navShadow,
         }}
       >
-        <div className="px-2 py-2 md:flex md:h-12 md:items-center md:gap-1 md:px-3 md:py-0">
+        <div className="px-2 py-2 md:flex md:h-12 md:items-center md:gap-0.5 md:px-3 md:py-0">
           <div className="flex items-center gap-1 md:contents">
             <div className={`flex min-w-0 flex-1 items-center md:mr-1 md:flex-none md:shrink-0 md:border-r md:pr-3 ${brandBdr}`}>
               <a
@@ -248,11 +269,11 @@ export default function Header({
 
             <div className="relative hidden shrink-0 md:block" ref={cityDrop.ref}>
               <button
-                onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false) }}
+                onClick={() => { cityDrop.setOpen(o => !o); filterDrop.setOpen(false); searchDrop.setOpen(false) }}
                 className={desktopDropBtn(cityDrop.open)}
+                title="Jump to city"
               >
                 <Navigation size={12} strokeWidth={2.5} className="flex-shrink-0" />
-                <span className="hidden sm:inline">Go to</span>
                 <ChevronDown size={11} strokeWidth={2.5} className={`flex-shrink-0 transition-transform duration-200 ${cityDrop.open ? 'rotate-180' : ''}`} />
               </button>
 
@@ -276,7 +297,7 @@ export default function Header({
 
             <div className="relative hidden shrink-0 md:block" ref={filterDrop.ref}>
               <button
-                onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false) }}
+                onClick={() => { filterDrop.setOpen(o => !o); cityDrop.setOpen(false); searchDrop.setOpen(false) }}
                 className={`${desktopDropBtn(filterDrop.open)} w-[4.5rem] justify-between cursor-pointer`}
               >
                 <div className="flex items-center gap-1.5 min-w-0">
@@ -305,6 +326,57 @@ export default function Header({
                         </button>
                       )
                     })}
+                  </div>
+                </DropdownPanel>
+              )}
+            </div>
+
+            <div className="relative hidden shrink-0 md:block" ref={searchDrop.ref}>
+              <button
+                onClick={() => { searchDrop.setOpen(o => !o); filterDrop.setOpen(false); cityDrop.setOpen(false) }}
+                className={iconBtn}
+                title="Search companies"
+              >
+                <Search size={14} strokeWidth={2} />
+              </button>
+
+              {searchDrop.open && (
+                <DropdownPanel dropBg={dropBg} dropBdr={dropBdr} dropShadow={dropShadow} className="right-0 w-72">
+                  <div className="p-2">
+                    <input
+                      ref={searchInputRef}
+                      type="text"
+                      value={searchQuery}
+                      onChange={e => setSearchQuery(e.target.value)}
+                      placeholder="Search companies…"
+                      className={`w-full rounded-xl px-3 py-1.5 text-[13px] outline-none transition-colors ${dm
+                        ? 'bg-white/[0.07] text-slate-100 placeholder:text-slate-600 border border-white/[0.08] focus:border-white/[0.18]'
+                        : 'bg-slate-50 text-slate-900 placeholder:text-slate-400 border border-slate-200 focus:border-slate-300'
+                      }`}
+                    />
+                    {searchResults.length > 0 && (
+                      <div className="mt-1.5 space-y-0.5">
+                        {searchResults.map(company => (
+                          <button
+                            key={company.id}
+                            onClick={() => {
+                              if (company.lat != null && company.lng != null) {
+                                onCitySelect(company.lat, company.lng, 15)
+                              }
+                              searchDrop.setOpen(false)
+                            }}
+                            className={itemClass(false)}
+                          >
+                            <span className="h-2 w-2 rounded-full flex-shrink-0" style={{ backgroundColor: CATEGORY_COLORS[company.category]?.pin ?? '#cbd5e1' }} />
+                            <span className="flex-1 truncate text-left">{company.name}</span>
+                            <span className={`text-[10px] font-normal flex-shrink-0 ${subText}`}>{company.city}</span>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    {searchQuery.trim() !== '' && searchResults.length === 0 && (
+                      <p className={`px-3 py-2 text-[12px] ${subText}`}>No results</p>
+                    )}
                   </div>
                 </DropdownPanel>
               )}
