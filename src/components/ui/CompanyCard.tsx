@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { X, ExternalLink, MapPin, BarChart3, Users, Building2, ChevronLeft, ChevronRight, Shuffle } from 'lucide-react'
 import { Company, CATEGORY_SHORT } from '@/types'
 import CompanyLogo from './CompanyLogo'
@@ -25,6 +26,15 @@ export default function CompanyCard({
 }: Props) {
   const dm = darkMode
   const hqAddress = company.address ?? `${company.city}, ${company.country}`
+
+  // Keyboard: Esc closes the card. (Arrow keys are left to the map for panning.)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
 
   const cardBg   = dm ? 'rgba(0,0,0,0.96)'   : 'rgba(255,255,255,0.94)'
   const cardBdr  = dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.07)'

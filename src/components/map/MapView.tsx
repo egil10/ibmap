@@ -353,15 +353,24 @@ export default function MapView({
     )
   }, [filters, filteredCompanies])
 
-  const flyTo = useCallback((lat: number, lng: number) => {
-    mapRef.current?.flyTo({ center: [lng, lat], zoom: 15, duration: 900, essential: true })
+  /* Pan/zoom helper.
+     - preserveZoom: stay exactly at the user's current zoom (direct pin clicks)
+     - otherwise: zoom in to MIN_FOCUS_ZOOM only if the user is below it; never pull them out */
+  const flyTo = useCallback((lat: number, lng: number, opts: { preserveZoom?: boolean } = {}) => {
+    const map = mapRef.current
+    if (!map) return
+    const currentZ: number = map.getZoom()
+    const MIN_FOCUS_ZOOM = 12
+    const targetZoom = opts.preserveZoom ? currentZ : Math.max(currentZ, MIN_FOCUS_ZOOM)
+    const duration = Math.abs(targetZoom - currentZ) < 0.05 ? 500 : 900
+    map.flyTo({ center: [lng, lat], zoom: targetZoom, duration, essential: true })
   }, [])
 
-  const selectCompany = useCallback((company: Company, pinned = false, resetNavigationAnchor = false) => {
+  const selectCompany = useCallback((company: Company, pinned = false, resetNavigationAnchor = false, preserveZoom = false) => {
     setSelected(company)
     if (resetNavigationAnchor) setNavigationAnchorId(company.id)
     setBannerPinned(pinned)
-    if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng)
+    if (company.lat != null && company.lng != null) flyTo(company.lat, company.lng, { preserveZoom })
   }, [flyTo])
 
   const selectRelativeCompany = useCallback((direction: 1 | -1) => {
@@ -390,14 +399,15 @@ export default function MapView({
   }, [onRegisterRandomCompany, selectRandomCompany])
 
   const handleMarkerClick = useCallback((company: Company) => {
-    selectCompany(company, false, true)
+    // Direct pin click — don't disturb the user's current zoom level
+    selectCompany(company, false, true, true)
   }, [selectCompany])
 
   const handleOfficeClick = useCallback((company: Company, office: CompanyOffice) => {
     setSelected(company)
     setNavigationAnchorId(company.id)
     setBannerPinned(false)
-    flyTo(office.lat, office.lng)
+    flyTo(office.lat, office.lng, { preserveZoom: true })
   }, [flyTo])
 
   const handleBannerClick = useCallback((company: Company) => {
@@ -614,12 +624,12 @@ const CompanyBanner = memo(function CompanyBanner({
   onSelect: (c: Company) => void
   darkMode: boolean
 }) {
-  if (list.length === 0) return null
-
-  /* Only duplicate if we have enough to scroll. For very large lists, cap at 80 items total. */
-  const cappedList = list.length > 40 ? list.slice(0, 40) : list
+  /* Only duplicate if we have enough to scroll. For very large lists, cap at 40 items. */
+  const cappedList = useMemo(() => (list.length > 40 ? list.slice(0, 40) : list), [list])
   const doubled = useMemo(() => [...cappedList, ...cappedList], [cappedList])
   const duration = Math.max(60, cappedList.length * 3)
+
+  if (list.length === 0) return null
 
   const bannerBg = darkMode ? 'rgba(0,0,0,0.94)' : 'rgba(255,255,255,0.94)'
   const bannerBdr = darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'

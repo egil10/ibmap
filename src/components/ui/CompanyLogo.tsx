@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, memo, useEffect, useMemo } from 'react'
+import { useState, memo, useEffect, useMemo, useRef } from 'react'
 import { Globe } from 'lucide-react'
 import { Company, CATEGORY_COLORS } from '@/types'
 
@@ -43,13 +43,39 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
   }, [company.id, wide, domain])
 
   const cacheKey = `${company.id}-${wide ? 'wide' : 'square'}`
-  
+
   const [failed, setFailed] = useState<boolean>(false)
   const [currentSrc, setCurrentSrc] = useState<string>('')
+
+  // Defer network probing until the logo is on/near the screen. Logos already
+  // resolved earlier this session are known instantly, so they skip the wait.
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [inView, setInView] = useState<boolean>(() => bestSourceCache.has(cacheKey))
+
+  useEffect(() => {
+    if (inView) return
+    const el = containerRef.current
+    if (!el) return
+    if (typeof IntersectionObserver === 'undefined') { setInView(true); return }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some(e => e.isIntersecting)) {
+          setInView(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '300px' }   // start loading a little before it scrolls in
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [inView])
 
   // The engine background-evaluates every link completely outside the DOM.
   // It only commits a URL to the DOM state natively if it flawlessly loaded beforehand.
   useEffect(() => {
+    if (!inView) return
+
     const cachedBest = bestSourceCache.get(cacheKey)
     if (cachedBest !== undefined) {
       if (cachedBest === null) {
@@ -103,7 +129,7 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
     attemptLoad(0)
 
     return () => { isSubscribed = false }
-  }, [cacheKey, sources])
+  }, [cacheKey, sources, inView])
 
   const iconSize = Math.max(10, Math.round(size * 0.45))
 
@@ -112,6 +138,7 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
   if (failed || !currentSrc) {
     return (
       <div
+        ref={containerRef}
         className={`flex flex-shrink-0 items-center justify-center ${rounded}`}
         style={{
           width: wide ? size * 1.5 : size,
@@ -133,6 +160,7 @@ export default memo(function CompanyLogo({ company, size = 40, rounded = 'rounde
   // to avoid sending broken HTTP URLs that flash as ugly DOM square failures.
   return (
     <div
+      ref={containerRef}
       className={`relative flex flex-shrink-0 items-center justify-center bg-white ${rounded} overflow-hidden`}
       style={{
         width: actualWidth,

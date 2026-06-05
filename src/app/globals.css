@@ -127,6 +127,14 @@ html, body {
   box-shadow: 0 8px 32px rgba(0,0,0,0.24), 0 2px 8px rgba(0,0,0,0.12);
 }
 
+/* ── Table row virtualization via content-visibility ──
+   Skips rendering/layout for off-screen rows in the (large) company table,
+   keeping scroll smooth even with ~900+ rows. */
+.cv-row {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 92px;
+}
+
 /* Thin scrollbar for table */
 .thin-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
 .thin-scroll::-webkit-scrollbar-track { background: transparent; }
@@ -231,4 +239,22 @@ html, body {
 /* Active/selected item always shows color */
 .banner-item--active img {
   filter: grayscale(0) opacity(1);
+}
+
+/* ── Respect users who prefer reduced motion ──
+   Stops the infinite banner scroll, marker pulses and entrance animations
+   for people with vestibular sensitivities (and saves a little battery). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .banner-track {
+    animation: none !important;
+    transform: none !important;
+  }
 }

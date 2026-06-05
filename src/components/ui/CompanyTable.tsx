@@ -334,6 +334,7 @@ function Row({ company, onViewOnMap }: { company: Company; onViewOnMap?: (c: Com
 
   return (
     <tr
+      className="cv-row"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
