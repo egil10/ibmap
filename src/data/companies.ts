@@ -10828,7 +10828,27 @@ export const companies: Company[] = [
     lat: 64.1466,
     lng: -21.9426,
     address: "Borgartún 27, 105 Reykjavík, Iceland",
-    description: "Icelandic investment banking and advisory firm specialising in equity capital markets, M&A advisory, and corporate finance for listed and private companies."}
+    description: "Icelandic investment banking and advisory firm specialising in equity capital markets, M&A advisory, and corporate finance for listed and private companies."},
+  {  id: "longfarm-capital",
+    name: "Longfarm Capital",
+    category: "Asset Management",
+    website: "https://www.longfarm.no/",
+    city: "Oslo",
+    country: "Norway",
+    lat: 59.9139,
+    lng: 10.7398,
+    description: "Oslo-based boutique founded in 2024, focused on portfolio and fund management.",
+    isNordic: true},
+  {  id: "middelborg",
+    name: "Middelborg",
+    category: "Holding",
+    website: "https://middelborg.no/",
+    city: "Oslo",
+    country: "Norway",
+    lat: 59.9145,
+    lng: 10.7280,
+    description: "Norwegian private investment and holding company with long-term equity stakes across Nordic businesses.",
+    isNordic: true}
 ]
 
 export const FILTER_CATEGORIES = [
